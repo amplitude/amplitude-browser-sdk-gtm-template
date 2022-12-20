@@ -16,7 +16,7 @@ ___INFO___
   "categories": [
     "ANALYTICS"
   ],
-  "displayName": "Amplitude Analytics",
+  "displayName": "Amplitude Analytics Browser SDK",
   "brand": {
     "id": "github.com_amplitude",
     "displayName": "amplitude",
