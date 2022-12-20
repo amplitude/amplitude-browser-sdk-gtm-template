@@ -1,5 +1,5 @@
 homepage: "https://www.amplitude.com/"
-documentation: "https://developers.amplitude.com/docs/javascript"
+documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
   - sha: ba6d373e8f17dee0302d4587fc591a7596f30643
     changeNotes: Initial release
