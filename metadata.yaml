@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 56bd6a06d8e2b24edb52b0c5fb9eca322bc4e1fa
+    changeNotes: Add template version metadata automatically to Amplitude requests.
   - sha: 23d4a7926d575f4cd5dfc7071f8436f6f2a4b434
     changeNotes: Fix template name.
   - sha: ba6d373e8f17dee0302d4587fc591a7596f30643
