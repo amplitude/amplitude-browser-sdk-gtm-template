@@ -46,6 +46,13 @@ ___TEMPLATE_PARAMETERS___
     "alwaysInSummary": true
   },
   {
+    "type": "TEXT",
+    "name": "instanceName",
+    "displayName": "Instance Name",
+    "simpleValueType": true,
+    "valueHint": "Default (blank)",
+  },
+  {
     "type": "SELECT",
     "name": "type",
     "displayName": "Tag Type",
@@ -862,7 +869,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.0.1';
+const WRAPPER_VERSION = '3.0.2';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -957,11 +964,12 @@ const onsuccess = () => {
 
   _amplitude = copyFromWindow(WRAPPER_NAMESPACE);
   if (!_amplitude) return fail('Failed to load the Amplitude namespace');
+  var instanceName = data.instanceName || '$default_instance';
     
   switch (data.type) {
       
     case 'init':
-      _amplitude('init', data.apiKey, initUserId, generateConfiguration());
+      _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
       break;
 
     case 'track':
@@ -979,24 +987,24 @@ const onsuccess = () => {
         eventOptions.time = normalize(data.trackTimestamp);
       }
       
-      _amplitude('track', data.eventType, eventProperties, eventOptions);
+      _amplitude(instanceName, 'track', data.eventType, eventProperties, eventOptions);
       break;
       
     case 'identify':
       const userProps = data.userPropertyOperations || [];
-      _amplitude('identify', userProps.map(op => {
+      _amplitude(instanceName, 'identify', userProps.map(op => {
         return [op.command, op.userProperty, normalize(op.value)];
       }));
       break;
       
     case 'setGroup':
       const groupName = data.groupName.indexOf(',') > -1 ? stringToArrayAndTrim(data.groupName) : data.groupName;
-      _amplitude('setGroup', data.groupType, groupName);
+      _amplitude(instanceName, 'setGroup', data.groupType, groupName);
       break;
       
     case 'groupIdentify':
       const groupUserProps = data.userPropertyOperations || [];
-      _amplitude('groupIdentify', data.identifyGroupType, data.identifyGroupName, groupUserProps.map(op => {
+      _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, data.identifyGroupName, groupUserProps.map(op => {
         return [op.command, op.userProperty, normalize(op.value)];
       }));
       break;
@@ -1019,11 +1027,11 @@ const onsuccess = () => {
       revenueObject.productId = makeString(revenueObject.productId);
       revenueObject.price = makeNumber(revenueObject.price);
       revenueObject.quantity = makeNumber(revenueObject.quantity);
-      _amplitude('revenue', revenueObject);
+      _amplitude(instanceName, 'revenue', revenueObject);
       break;
 
     default:
-      _amplitude(data.type, normalize(data[data.type]));
+      _amplitude(instanceName, data.type, normalize(data[data.type]));
       break;
   }
 
@@ -1156,5 +1164,3 @@ setup: ''
 ___NOTES___
 
 Created on 27/10/2021, 18:34:01
-
-
