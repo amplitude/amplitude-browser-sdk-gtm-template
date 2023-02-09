@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: ec8c7f94d3a6b5a2431ccd5169f217e5906b0c0f
+    changeNotes: Improve setting up multiple Amplitude Analytics instances.
   - sha: b8743516910447af06b9359662de97333083d157
     changeNotes: Add support for (optionally) setting up multiple Amplitude Analytics instances on the page.
   - sha: a9f10cd944af95ba5d50d527c411fce698198ece
