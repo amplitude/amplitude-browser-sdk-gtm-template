@@ -966,7 +966,7 @@ const onsuccess = () => {
   _amplitude = copyFromWindow(WRAPPER_NAMESPACE);
   if (!_amplitude) return fail('Failed to load the Amplitude namespace');
   
-  const instanceName = data.instanceName || '$default_instance';
+  const instanceName = data.instanceName;
     
   switch (data.type) {
       
