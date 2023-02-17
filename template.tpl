@@ -105,7 +105,7 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "displayName": "Tag Type",
-    "defaultValue": "track",
+    "defaultValue": "init",
     "simpleValueType": true,
     "name": "type",
     "type": "SELECT"
