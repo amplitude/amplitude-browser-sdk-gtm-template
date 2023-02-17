@@ -870,7 +870,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.1.1';
+const WRAPPER_VERSION = '3.1.3';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -966,7 +966,7 @@ const onsuccess = () => {
   _amplitude = copyFromWindow(WRAPPER_NAMESPACE);
   if (!_amplitude) return fail('Failed to load the Amplitude namespace');
   
-  const instanceName = data.instanceName || '$default_instance';
+  const instanceName = data.instanceName;
     
   switch (data.type) {
       
