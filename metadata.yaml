@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: f99bc8ce73f9c346ef02dd9db1dcd984a809610f
+    changeNotes: Fix tracking events with groups.
   - sha: 61984dd2fc5735217cbef817603dcb81056077b1
     changeNotes: Set init as the default tag type.
   - sha: b17f8c1f17a8fd1278379745bffc408eb452d90c
