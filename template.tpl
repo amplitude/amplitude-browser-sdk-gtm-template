@@ -978,18 +978,23 @@ const onsuccess = () => {
       const eventProperties = makeTableMap(data.eventProperties || [], 'name', 'value');
 
       // Convert comma-separated groupName into an array of groupNames
-      const eventOptions = makeTableMap((data.trackEventGroups || []).map(group => {
+      const groups = makeTableMap((data.trackEventGroups || []).map(group => {
         return {
           eventGroupType: group.eventGroupType,
           eventGroupName: group.eventGroupName && group.eventGroupName.indexOf(',') > -1 ? stringToArrayAndTrim(group.eventGroupName) : group.eventGroupName
         };
       }), 'eventGroupType', 'eventGroupName') || {};
       
+      const eventOptions = {};
+      
       if (data.trackTimestamp) {
         eventOptions.time = normalize(data.trackTimestamp);
       }
       
-      _amplitude(instanceName, 'track', data.eventType, eventProperties, eventOptions);
+      _amplitude(instanceName, 'track', {
+        event_type: data.eventType, 
+        groups: groups
+      }, eventProperties, eventOptions);
       break;
       
     case 'identify':
