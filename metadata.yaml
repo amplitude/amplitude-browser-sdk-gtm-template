@@ -1,8 +1,10 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 377c7ff695e71659faa99297a73bb75c9ea58dfe
+    changeNotes: Fix the issue of using a customized instance name.
   - sha: 885e9ffbc62c9f56a9449574ea989556bf1e69be
-    changeNotes: Resolve the issue of legacy SDK and browser SDK GTM template collision
+    changeNotes: Resolve the issue of legacy SDK and browser SDK GTM template collision.
   - sha: 61984dd2fc5735217cbef817603dcb81056077b1
     changeNotes: Set init as the default tag type.
   - sha: b17f8c1f17a8fd1278379745bffc408eb452d90c
