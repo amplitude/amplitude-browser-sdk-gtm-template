@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: b2742b2da3f6d444aada18b657cb74f791e36902
+    changeNotes: Fix tracking events with groups.
   - sha: 377c7ff695e71659faa99297a73bb75c9ea58dfe
     changeNotes: Fix the issue of using a customized instance name.
   - sha: 885e9ffbc62c9f56a9449574ea989556bf1e69be
