@@ -421,6 +421,21 @@ ___TEMPLATE_PARAMETERS___
             "type": "TEXT"
           },
           {
+            "valueValidators": [
+              {
+                "args": [
+                  "^\\d+(\\.\\d+)?$"
+                ],
+                "errorMessage": "Enter price as a number with decimals separated by a period (e.g. 15.99).",
+                "type": "REGEX"
+              }
+            ],
+            "displayName": "Revenue",
+            "simpleValueType": true,
+            "name": "revenue",
+            "type": "TEXT"
+          },
+          {
             "displayName": "Revenue Type",
             "simpleValueType": true,
             "name": "revenueType",
@@ -870,7 +885,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.1.5';
+const WRAPPER_VERSION = '3.2.0';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1021,6 +1036,7 @@ const onsuccess = () => {
         productId: data.revenueId,
         price: data.revenuePrice,
         quantity: data.revenueQuantity || 1,
+        revenue: data.revenue,
         revenueType: data.revenueType,
         eventProperties: makeTableMap(data.revenueEventProperties || [], 'name', 'value')
       };
@@ -1034,6 +1050,7 @@ const onsuccess = () => {
       revenueObject.productId = makeString(revenueObject.productId);
       revenueObject.price = makeNumber(revenueObject.price);
       revenueObject.quantity = makeNumber(revenueObject.quantity);
+      revenueObject.revenue = makeNumber(revenueObject.revenue);
       _amplitude(instanceName, 'revenue', revenueObject);
       break;
 
