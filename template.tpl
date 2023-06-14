@@ -885,7 +885,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.4.0';
+const WRAPPER_VERSION = '3.3.0';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
