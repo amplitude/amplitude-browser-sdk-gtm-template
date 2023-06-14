@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 2c09684e5a84032505891263f5dde6e52ac1418d
+    changeNodes: Fix identify/groupIdentify value field type
   - sha: bde379e355ff28b55bf8ae59e778873e9f8b3386
     changeNodes: persist last event id
   - sha: aa8e9c16b2903e7c005d0d65b9c72326930a7a16
