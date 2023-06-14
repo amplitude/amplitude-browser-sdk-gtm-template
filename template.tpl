@@ -527,7 +527,7 @@ ___TEMPLATE_PARAMETERS___
         "type": "TEXT"
       },
       {
-        "displayName": "Add individual user property operations each as its own row in the table. You can add as many as you like, but note that you can only include a specific User Property in a single operation. The operations are executed in order. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/typescript-browser/#user-properties\"\u003eMore information\u003c/a\u003e.\u003cbr/\u003e\u003cbr/\u003e",
+        "displayName": "Add individual user property operations each as its own row in the table. You can add as many as you like, but note that you can only include a specific User Property in a single operation. The operations are executed in order. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/typescript-browser/#user-properties\"\u003eMore information\u003c/a\u003e.\u003cbr/\u003e Please note that a hardcoded value in the `Value` field will always convert an input into a string. If you want to use other types, please create a GTM variable, specifically a Data Layer Variable. This will accurately capture the types you've specified.\u003cbr/\u003e\u003cbr/\u003e",
         "name": "identifyLabel",
         "type": "LABEL"
       },
@@ -885,7 +885,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.3.0';
+const WRAPPER_VERSION = '3.4.0';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1015,7 +1015,7 @@ const onsuccess = () => {
     case 'identify':
       const userProps = data.userPropertyOperations || [];
       _amplitude(instanceName, 'identify', userProps.map(op => {
-        return [op.command, op.userProperty, normalize(op.value)];
+        return [op.command, op.userProperty, op.value];
       }));
       break;
       
@@ -1027,7 +1027,7 @@ const onsuccess = () => {
     case 'groupIdentify':
       const groupUserProps = data.userPropertyOperations || [];
       _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, data.identifyGroupName, groupUserProps.map(op => {
-        return [op.command, op.userProperty, normalize(op.value)];
+        return [op.command, op.userProperty, op.value];
       }));
       break;
 
