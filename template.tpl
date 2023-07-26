@@ -527,7 +527,7 @@ ___TEMPLATE_PARAMETERS___
         "type": "TEXT"
       },
       {
-        "displayName": "Add individual user property operations each as its own row in the table. You can add as many as you like, but note that you can only include a specific User Property in a single operation. The operations are executed in order. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/typescript-browser/#user-properties\"\u003eMore information\u003c/a\u003e.\u003cbr/\u003e Please note that a hardcoded value in the `Value` field will always convert an input into a string. If you want to use other types, please create a GTM variable, specifically a Data Layer Variable. This will accurately capture the types you've specified.\u003cbr/\u003e\u003cbr/\u003e",
+        "displayName": "Add individual user property operations each as its own row in the table. You can add as many as you like, but note that you can only include a specific User Property in a single operation. The operations are executed in order. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/typescript-browser/#user-properties\"\u003eMore information\u003c/a\u003e.\u003cbr/\u003e Please note that a hardcoded value in the `Value` field will always convert an input into a string. If you want to use other types, please create a GTM variable, specifically a Data Layer Variable. This will accurately capture the types you\u0027ve specified.\u003cbr/\u003e\u003cbr/\u003e",
         "name": "identifyLabel",
         "type": "LABEL"
       },
@@ -617,14 +617,6 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "name": "euData",
         "checkboxText": "EU Data Residency",
-        "type": "CHECKBOX"
-      },
-      {
-        "help": "Check this box to enable \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#configuration\"\u003eadditional configuration options for attribution\u003c/a\u003e.",
-        "defaultValue": true,
-        "simpleValueType": true,
-        "name": "attribution",
-        "checkboxText": "Enable attribution tracking",
         "type": "CHECKBOX"
       },
       {
@@ -767,104 +759,217 @@ ___TEMPLATE_PARAMETERS___
         "newRowButtonText": "Add configuration"
       },
       {
-        "enablingConditions": [
-          {
-            "paramName": "attribution",
-            "type": "EQUALS",
-            "paramValue": true
-          }
-        ],
-        "displayName": "Attribution Options",
-        "name": "attributionOptions",
-        "groupStyle": "ZIPPY_OPEN",
-        "type": "GROUP",
+        "help": "Wether to use client side user agent enrichment. Enable client side user agent to make the changes compatible with previous GTM template version.",
+        "defaultValue": false,
+        "simpleValueType": true,
+        "name": "uaParser",
+        "checkboxText": "Enable client side user agent enrichment",
+        "type": "CHECKBOX",
         "subParams": [
           {
-            "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#exclude-the-referrers-from-specific-domain\"\u003eRead more\u003c/a\u003e.",
-            "displayName": "Exclude Referrers",
-            "simpleValueType": true,
-            "name": "attributionExcludeReferrers",
-            "type": "TEXT",
-            "valueHint": "e.g. www.mydomain.com,www.myotherdomain.com"
-          },
-          {
-            "help": "Reset the session when a new campaign is detected. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#reset-the-session-on-a-new-campaign\"\u003eRead more\u003c/a\u003e.",
-            "defaultValue": false,
-            "simpleValueType": true,
-            "name": "attributionResetSession",
-            "checkboxText": "Reset the session on a new campaign",
-            "type": "CHECKBOX"
-          },
-          {
-            "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#multi-touch-attribution\"\u003eRead more\u003c/a\u003e.",
-            "displayName": "Initial empty value",
-            "simpleValueType": true,
-            "name": "attributionInitialEmptyValue",
-            "type": "TEXT",
-            "valueHint": "e.g. none"
-          },
-          {
-            "help": "Track page views automatically when the page loads or when history changes are detected. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#page-view\"\u003eRead more\u003c/a\u003e.",
-            "defaultValue": false,
-            "simpleValueType": true,
-            "name": "attributionPageViewTracking",
-            "checkboxText": "Page View tracking",
-            "type": "CHECKBOX"
-          },
-          {
-            "help": "Select \"Page Loads\" for default behavior: Page Views are tracked with page loads and history events.\u003cbr/\u003e\u003cbr/\u003eSelect \"Only with attribution changes\" to track Page Views only when an attribution change is detected.\u003cbr/\u003e\u003cbr/\u003eAlternatively, select a GTM variable that \u003cstrong\u003ereturns a function\u003c/strong\u003e with a \u003cstrong\u003etrue\u003c/strong\u003e or \u003cstrong\u003efalse\u003c/strong\u003e return value. If the function returns \u003cstrong\u003etrue\u003c/strong\u003e, then Page Views are tracked automatically, if it returns \u003cstrong\u003efalse\u003c/strong\u003e then Page Views are not tracked.\u003cbr/\u003e\u003cbr/\u003e\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#page-view\"\u003eRead more here\u003c/a\u003e.",
-            "macrosInSelect": true,
-            "selectItems": [
+            "type": "GROUP",
+            "name": "uaPaserOptions",
+            "displayName": "User Agent Options",
+            "groupStyle": "NO_ZIPPY",
+            "subParams": [
               {
-                "displayValue": "Page Loads (default)",
-                "value": "pageLoads"
+                "type": "CHECKBOX",
+                "name": "osName",
+                "checkboxText": "Enrich us_name using client user agent enrichment",
+                "simpleValueType": true,
+                "defaultValue": true
               },
               {
-                "displayValue": "Only with attribution changes",
-                "value": "attribution"
+                "type": "CHECKBOX",
+                "name": "osVersion",
+                "checkboxText": "Enrich os_version using client user agent enrichment",
+                "simpleValueType": true,
+                "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "deviceManufacturer",
+                "checkboxText": "Enrich device_manufacturer using client user agent enrichment",
+                "simpleValueType": true,
+                "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "deviceModel",
+                "checkboxText": "Enrich device_model using client user agent enrichment",
+                "simpleValueType": true,
+                "defaultValue": true
               }
             ],
             "enablingConditions": [
               {
-                "paramName": "attributionPageViewTracking",
-                "type": "EQUALS",
-                "paramValue": true
+                "paramName": "uaParser",
+                "paramValue": true,
+                "type": "EQUALS"
               }
-            ],
-            "displayName": "Page View trigger",
-            "defaultValue": "pageLoads",
-            "simpleValueType": true,
-            "name": "attributionPageViewTrackOn",
-            "type": "SELECT"
-          },
+            ]
+          }
+        ]
+      },
+      {
+        "help": "Check this box to enable default event tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events\"\u003eRead more\u003c/a\u003e.",
+        "defaultValue": true,
+        "simpleValueType": true,
+        "name": "defaultEventTracking",
+        "checkboxText": "Enable default event tracking",
+        "type": "CHECKBOX",
+        "subParams": [
           {
-            "help": "Choose whether to disable automatic Page View tracking upon history changes, to track \u003cstrong\u003eall\u003c/strong\u003e history events (pushState, popstate...), or to collect Page Views only when the page path changes. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/#single-page-app-page-view-tracking\"\u003eRead more\u003c/a\u003e.",
-            "selectItems": [
+            "type": "GROUP",
+            "name": "defaultEventTrackingOptions",
+            "displayName": "Default Event Tracking Options",
+            "groupStyle": "NO_ZIPPY",
+            "subParams": [
               {
-                "displayValue": "Do not track history changes",
-                "value": "none"
+                "type": "CHECKBOX",
+                "name": "detAttribution",
+                "checkboxText": "Enable attribution tracking",
+                "simpleValueType": true,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "attributionOptions",
+                    "displayName": "",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "TEXT",
+                        "name": "attributionInitialEmptyValue",
+                        "displayName": "Initial empty value",
+                        "simpleValueType": true,
+                        "defaultValue": "EMPTY",
+                        "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#advanced-configuration-for-tracking-marketing-attribution\" \u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "attributionExcludeReferrers",
+                        "displayName": "Exclude Referrers",
+                        "simpleValueType": true,
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. \u003ca href\u003d\"\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "CHECKBOX",
+                        "name": "attributionResetSession",
+                        "checkboxText": "Reset the session on a new campaign",
+                        "simpleValueType": true
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "detAttribution",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ],
+                "enablingConditions": [],
+                "help": "Check this box to enable attribution tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-marketing-attribution\"\u003eRead more\u003c/a\u003e."
               },
               {
-                "displayValue": "All history changes",
-                "value": "all"
+                "type": "CHECKBOX",
+                "name": "detPageViews",
+                "checkboxText": "Enable page views tracking",
+                "simpleValueType": true,
+                "subParams": [
+                  {
+                    "type": "TEXT",
+                    "name": "pageViewType",
+                    "displayName": "Page View Type",
+                    "simpleValueType": true,
+                    "defaultValue": "[Amplitude]  Page Viewed",
+                    "help": "The event type for page view event. The default value has been change from \u003cstrong\u003ePage View\u003c/strong\u003e to \u003cstrong\u003e[Amplitude]  Page Viewed\u003c/strong\u003e. If you want to keep it consistent, please use \u003cstrong\u003ePage View\u003c/strong\u003e as the default value."
+                  },
+                  {
+                    "type": "GROUP",
+                    "name": "pageViewOptions",
+                    "displayName": "",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "SELECT",
+                        "name": "pageViewTrackOn",
+                        "displayName": "Page View trigger",
+                        "macrosInSelect": true,
+                        "selectItems": [
+                          {
+                            "value": "pageTrackOnPageLoads",
+                            "displayValue": "Page Loads (default)"
+                          },
+                          {
+                            "value": "pageTrackOnAttribution",
+                            "displayValue": "Only with attribution changes"
+                          }
+                        ],
+                        "simpleValueType": true
+                      },
+                      {
+                        "type": "SELECT",
+                        "name": "pageHistoryTracking",
+                        "displayName": "",
+                        "macrosInSelect": true,
+                        "selectItems": [
+                          {
+                            "value": "none",
+                            "displayValue": "Do not track history changes"
+                          },
+                          {
+                            "value": "all",
+                            "displayValue": "All history changes"
+                          },
+                          {
+                            "value": "path",
+                            "displayValue": "Only when page path changes"
+                          }
+                        ],
+                        "simpleValueType": true
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "detPageViews",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ],
+                "help": "Check this box to enable page views tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-page-views\"\u003eRead more\u003c/a\u003e."
               },
               {
-                "displayValue": "Only when page path changes",
-                "value": "path"
+                "type": "CHECKBOX",
+                "name": "detSession",
+                "checkboxText": "Enable session tracking",
+                "simpleValueType": true,
+                "help": "Check this box to enable session tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-sessions\"\u003eRead more\u003c/a\u003e."
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "detFormInteraction",
+                "checkboxText": "Enable form interaction tracking",
+                "simpleValueType": true,
+                "help": "Check this box to enable form interaction tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-form-interactions\"\u003eRead more\u003c/a\u003e."
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "detFileDownlowd",
+                "checkboxText": "Enable file download tracking",
+                "simpleValueType": true,
+                "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e."
               }
             ],
             "enablingConditions": [
               {
-                "paramName": "attributionPageViewTracking",
-                "type": "EQUALS",
-                "paramValue": true
+                "paramName": "defaultEventTracking",
+                "paramValue": true,
+                "type": "EQUALS"
               }
-            ],
-            "displayName": "Track history events automatically",
-            "defaultValue": "none",
-            "simpleValueType": true,
-            "name": "attributionHistoryTracking",
-            "type": "SELECT"
+            ]
           }
         ]
       }
@@ -885,7 +990,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.3.0';
+const WRAPPER_VERSION = '3.4.0';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -915,6 +1020,7 @@ const initUserId = data.initUserId || null;
 let _amplitude;
 
 const generateConfiguration = () => {
+  return {};
   // Build and normalize initialization options map, if manual configuration was selected
   const manualOptions = data.initManualOptions && data.initManualOptions.length ? 
         data.initManualOptions.map(opt => {
@@ -927,46 +1033,84 @@ const generateConfiguration = () => {
   // Use manual configuration if it exists – otherwise use what was passed in the variable or an empty object
   const initOptions = (data.initOptions === 'manual' ? makeTableMap(manualOptions, 'key', 'value') : data.initOptions) || {};
 
-  // Configure for EU Data Residency
+  // Configuration for EU Data Residency
   if (data.euData) {
     initOptions.serverZone = 'EU';
   }
   
-  initOptions.attribution = {};
+  // Configuration for user agent enrichment plugin
+  if (!!data.uaParser) {
+    initOptions.uaParser = {
+      osName: data.osName,
+      osVersion: data.osVersion,
+      deviceManufacturer: data.deviceManufacturer,
+      deviceModel: data.deviceModel,
+    };
+  }
   
-  // Add attribution options
-  if (!!data.attribution) {
-    
-    if (!!data.attributionExcludeReferrers) {
-      initOptions.attribution.excludeReferrers = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
+  if (!!data.defaultEventTracking) {
+    initOptions.defaultTracking = {};
+    if (!!data.detAttribution) {
+      initOptions.defaultTracking.attribution = {};
+        
+      if (!!data.attributionExcludeReferrers) {
+        // TODO: How to deal with regular expression input
+        initOptions.defaultTracking.attribution.excludeReferrers = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
+      }
+      initOptions.defaultTracking.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
+      initOptions.defaultTracking.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
+    } else {
+       initOptions.defaultTracking.attribution = false;
     }
-    
-    initOptions.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
-    
-    initOptions.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
-    
-    if (!!data.attributionPageViewTracking) {
-    
-      initOptions.pageViewTracking = {
-        trackOn: undefined
+
+    if (!!data.detPageView) {
+      initOptions.defaultTracking.pageViews = {};
+      
+      if (!!data.detPageViewEventType) {
+         initOptions.defaultTracking.pageViews.eventType = data.pageViewType;
+      }
+
+      if (data.pageViewTrackOn !== 'pageTrackOnPageLoads') {
+        initOptions.defaultTracking.pageViews = {
+          trackOn: undefined
+        };
+        initOptions.defaultTracking.pageViews.trackOn = data.pageViewTrackOn;
+      }
+
+      initOptions.defaultTracking.pageViews = {
+        trackHistoryChanges: undefined
       };
-      
-      if (data.attributionPageViewTrackOn !== 'pageLoads') initOptions.pageViewTracking.trackOn = data.attributionPageViewTrackOn;
-      
-      switch (data.attributionHistoryTracking) {
+        
+      switch (data.pageHistoryTracking) {
         case 'all':
-          initOptions.pageViewTracking.trackHistoryChanges = 'all';
+          initOptions.defaultTracking.pageViews.trackHistoryChanges = 'all';
           break;
         case 'path':
-          initOptions.pageViewTracking.trackHistoryChanges = 'pathOnly';
+          initOptions.defaultTracking.pageViews.trackHistoryChanges = 'pathOnly';
           break;
         default:
           break;
       }
+    } else {
+      initOptions.defaultTracking.pageViews = false;
+    }
 
+    // Session events are enable by default
+    if (!data.detSession) {
+      initOptions.defaultTracking.session = false;
+    }
+
+    // fileDownloads events are enable by default
+    if (!data.detFileDownload) {
+       initOptions.defaultTracking.fileDownloads = false;
+    }
+
+    // fileDownloads events are enable by default
+    if (!data.detFormInteraction) {
+      initOptions.defaultTracking.formInteractions = false;
     }
   } else {
-    initOptions.attribution.disabled = true;
+    initOptions.defaultEventTrackig = false;
   }
 
   return initOptions;
