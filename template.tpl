@@ -895,7 +895,7 @@ ___TEMPLATE_PARAMETERS___
                         "name": "pageViewType",
                         "displayName": "Page View Type",
                         "simpleValueType": true,
-                        "help": "The event type for page view event. The default value has been change from \u003cstrong\u003ePage View\u003c/strong\u003e to \u003cstrong\u003e[Amplitude]  Page Viewed\u003c/strong\u003e. If you want to keep it consistent, please use \u003cstrong\u003ePage View\u003c/strong\u003e as the default value.",
+                        "help": "The event type for page view event. The default value has been change from \u003cstrong\u003ePage View\u003c/strong\u003e to \u003cstrong\u003e[Amplitude]  Page Viewed\u003c/strong\u003e.",
                         "enablingConditions": [
                           {
                             "paramName": "pageViewLegacy",
@@ -972,7 +972,7 @@ ___TEMPLATE_PARAMETERS___
               },
               {
                 "type": "CHECKBOX",
-                "name": "detFileDownlowd",
+                "name": "detFileDownload",
                 "checkboxText": "Enable file download tracking",
                 "simpleValueType": true,
                 "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
@@ -1036,7 +1036,6 @@ const initUserId = data.initUserId || null;
 let _amplitude;
 
 const generateConfiguration = () => {
-  return {};
   // Build and normalize initialization options map, if manual configuration was selected
   const manualOptions = data.initManualOptions && data.initManualOptions.length ? 
         data.initManualOptions.map(opt => {
