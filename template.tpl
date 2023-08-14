@@ -93,7 +93,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "initDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#init\"\u003einit\u003c/a\u003e - This tag sets up Amplitude on the page. You likely only need one init tag, and it should be triggered on All Pages or a similar trigger that fires consistently on each page load. See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#initialize-the-sdk\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#init\"\u003eInitialize\u003c/a\u003e - This tag sets up Amplitude on the page. You only need one Initialize tag, and it should be triggered on All Pages or a similar trigger that fires consistently on each page load.",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -105,7 +105,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "trackDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#track\"\u003etrack\u003c/a\u003e - This tag sends an \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#events\"\u003eevent\u003c/a\u003e to Amplitude. Events are actions that users take in your product, such as clicking a button, making a purchase, or signing up for an account. See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-an-event\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#track\"\u003eTrack Event\u003c/a\u003e - This tag sends an \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#events\"\u003eevent\u003c/a\u003e to Amplitude. Events are actions that users take in your product, such as clicking a button, making a purchase, or signing up for an account.",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -117,7 +117,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "identifyDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#identify\"\u003eidentify\u003c/a\u003e - This tag sets properties on the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#users\"\u003euser\u003c/a\u003e viewing the page. For example, you could set a user property that indicates whether they\u0027re on a paid or free plan. See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#user-properties\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#identify\"\u003eSet User Properties\u003c/a\u003e - This tag sets properties on the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#users\"\u003euser\u003c/a\u003e viewing the page. For example, you could set a user property that indicates whether they\u0027re on a paid or free plan.",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -129,7 +129,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setGroupDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setgroup\"\u003esetGroup\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#user-groups\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setgroup\"\u003eSet Group\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#user-groups\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -141,7 +141,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "groupIdentifyDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#groupidentify\"\u003egroupIdentify\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#group-properties\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#groupidentify\"\u003eSet Group Properties\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#group-properties\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -153,7 +153,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "revenueDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#revenue\"\u003erevenue\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#revenue-tracking\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#revenue\"\u003eTrack Revenue\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#revenue-tracking\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -165,7 +165,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "flushDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#flush\"\u003eflush\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#flush-the-event-buffer\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#flush\"\u003eFlush Events\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#flush-the-event-buffer\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -177,7 +177,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setDeviceIdDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setdeviceid\"\u003esetDeviceId\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-device-id\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setdeviceid\"\u003eSet Device Id\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-device-id\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -189,7 +189,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setSessionIdDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setsessionid\"\u003esetSessionId\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-session-id\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setsessionid\"\u003eSet Session Id\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-session-id\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -201,7 +201,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "resetDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#reset\"\u003ereset\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#reset-when-user-logs-out\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#reset\"\u003eReset User\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#reset-when-user-logs-out\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -213,7 +213,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setOptOutDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setoptout\"\u003esetOptOut\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#opt-users-out-of-tracking\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setoptout\"\u003eSet Opt-Out\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#opt-users-out-of-tracking\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -225,7 +225,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "setUserIdDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setuserid\"\u003esetUserId\u003c/a\u003e - This tag sets the ID of the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#users\"\u003euser\u003c/a\u003e viewing the page. Setting a user\u0027s id allows them to be tracked across devices. Trigger this tag once the user can be uniquely identified, e.g. once they login. See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-user-id\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setuserid\"\u003eSet User Id\u003c/a\u003e - This tag sets the ID of the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#users\"\u003euser\u003c/a\u003e viewing the page. Setting a user\u0027s id allows them to be tracked across devices. Trigger this tag once the user can be uniquely identified, e.g. once they login. See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-user-id\"\u003eSDK Reference\u003c/a\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
@@ -756,19 +756,11 @@ ___TEMPLATE_PARAMETERS___
     "type": "GROUP",
     "subParams": [
       {
-        "help": "Configure Amplitude to use EU Data Residency server zone. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#eu-data-residency\"\u003eRead more here\u003c/a\u003e.",
-        "defaultValue": false,
-        "simpleValueType": true,
-        "name": "euData",
-        "checkboxText": "EU Data Residency",
-        "type": "CHECKBOX"
-      },
-      {
         "help": "Check this box to enable default event tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events\"\u003eRead more\u003c/a\u003e.",
         "defaultValue": true,
         "simpleValueType": true,
         "name": "defaultEventTracking",
-        "checkboxText": "Enable default event tracking",
+        "checkboxText": "Track default Amplitude events",
         "type": "CHECKBOX",
         "subParams": [
           {
@@ -780,7 +772,7 @@ ___TEMPLATE_PARAMETERS___
               {
                 "type": "CHECKBOX",
                 "name": "detAttribution",
-                "checkboxText": "Enable attribution tracking",
+                "checkboxText": "Track marketing attribution",
                 "simpleValueType": true,
                 "subParams": [
                   {
@@ -791,7 +783,7 @@ ___TEMPLATE_PARAMETERS___
                       {
                         "type": "TEXT",
                         "name": "attributionInitialEmptyValue",
-                        "displayName": "Initial empty value",
+                        "displayName": "Initial Empty Value",
                         "simpleValueType": true,
                         "defaultValue": "EMPTY",
                         "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#advanced-configuration-for-tracking-marketing-attribution\" \u003eRead more\u003c/a\u003e."
@@ -825,7 +817,7 @@ ___TEMPLATE_PARAMETERS___
               {
                 "type": "CHECKBOX",
                 "name": "detPageView",
-                "checkboxText": "Enable page views tracking",
+                "checkboxText": "Track page views",
                 "simpleValueType": true,
                 "subParams": [
                   {
@@ -855,7 +847,7 @@ ___TEMPLATE_PARAMETERS___
                             "type": "EQUALS"
                           }
                         ],
-                        "defaultValue": "[Amplitude] Page Viewed"
+                        "valueHint": "[Amplitude] Page Viewed"
                       },
                       {
                         "type": "SELECT",
@@ -892,7 +884,7 @@ ___TEMPLATE_PARAMETERS___
               {
                 "type": "CHECKBOX",
                 "name": "detSession",
-                "checkboxText": "Enable session tracking",
+                "checkboxText": "Track sessions",
                 "simpleValueType": true,
                 "help": "Check this box to enable session tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-sessions\"\u003eRead more\u003c/a\u003e.",
                 "defaultValue": true
@@ -900,7 +892,7 @@ ___TEMPLATE_PARAMETERS___
               {
                 "type": "CHECKBOX",
                 "name": "detFormInteraction",
-                "checkboxText": "Enable form interaction tracking",
+                "checkboxText": "Track form interactions",
                 "simpleValueType": true,
                 "help": "Check this box to enable form interaction tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-form-interactions\"\u003eRead more\u003c/a\u003e.",
                 "defaultValue": true
@@ -908,7 +900,7 @@ ___TEMPLATE_PARAMETERS___
               {
                 "type": "CHECKBOX",
                 "name": "detFileDownload",
-                "checkboxText": "Enable file download tracking",
+                "checkboxText": "Track file downloads",
                 "simpleValueType": true,
                 "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
                 "defaultValue": true
@@ -923,6 +915,14 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ]
+      },
+      {
+        "help": "Configure Amplitude to use EU Data Residency server zone. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#eu-data-residency\"\u003eRead more here\u003c/a\u003e.",
+        "defaultValue": false,
+        "simpleValueType": true,
+        "name": "euData",
+        "checkboxText": "EU Data Residency",
+        "type": "CHECKBOX"
       },
       {
         "help": "If you want, you can initialize the instance with a User ID, if already available. You can also use the \u003cstrong\u003esetUserId\u003c/strong\u003e command to initialize the User ID at a later time. For more details, \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-user-id\"\u003esee this page\u003c/a\u003e.",
@@ -1129,7 +1129,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "instanceName",
         "displayName": "Instance Name",
         "simpleValueType": true,
-        "valueHint": "Default (blank)",
+        "valueHint": "Main (default)",
         "help": "If you want to run more than one Amplitude instance (with different API keys or different initialization options), you can provide an \u003cstrong\u003eInstance Name\u003c/strong\u003e here. Make sure that all the Amplitude tags that should reference this instance have the Instance Name configured in the tag settings."
       }
     ]
