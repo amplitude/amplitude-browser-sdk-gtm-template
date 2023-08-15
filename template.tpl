@@ -33,74 +33,53 @@ ___TEMPLATE_PARAMETERS___
 
 [
   {
-    "help": "You can find the API Key by browsing to Settings for your organization in the Amplitude user interface. By creating or selecting a created project, you can find the API key for copy-pasting in the project settings. See \u003ca href\u003d\"https://help.amplitude.com/hc/en-us/articles/207108137-Quick-start-guide-Create-your-organization-and-first-project\"\u003ethis page\u003c/a\u003e for more information.",
-    "alwaysInSummary": true,
-    "valueValidators": [
-      {
-        "type": "NON_EMPTY"
-      }
-    ],
-    "displayName": "API Key",
-    "simpleValueType": true,
-    "name": "apiKey",
-    "type": "TEXT"
-  },
-  {
-    "displayName": "Instance Name",
-    "simpleValueType": true,
-    "name": "instanceName",
-    "type": "TEXT",
-    "valueHint": "Default (blank)",
-    "help": "If you want to run more than one Amplitude instance (with different API keys or different initialization options), you can provide an \u003cstrong\u003eInstance Name\u003c/strong\u003e here. Make sure that all the Amplitude tags that should reference this instance have the Instance Name configured in the tag settings."
-  },
-  {
     "selectItems": [
       {
-        "displayValue": "init",
+        "displayValue": "Initialize (init)",
         "value": "init"
       },
       {
-        "displayValue": "track",
+        "displayValue": "Track Event (track)",
         "value": "track"
       },
       {
-        "displayValue": "identify",
+        "displayValue": "Set User Properties (identify)",
         "value": "identify"
       },
       {
-        "displayValue": "setGroup",
-        "value": "setGroup"
-      },
-      {
-        "displayValue": "groupIdentify",
-        "value": "groupIdentify"
-      },
-      {
-        "displayValue": "revenue",
-        "value": "revenue"
-      },
-      {
-        "displayValue": "flush",
-        "value": "flush"
-      },
-      {
-        "displayValue": "setUserId",
+        "displayValue": "Set User ID (setUserId)",
         "value": "setUserId"
       },
       {
-        "displayValue": "setDeviceId",
+        "displayValue": "Set Group (setGroup)",
+        "value": "setGroup"
+      },
+      {
+        "displayValue": "Set Group Properties (groupIdentify)",
+        "value": "groupIdentify"
+      },
+      {
+        "displayValue": "Track Revenue (revenue)",
+        "value": "revenue"
+      },
+      {
+        "displayValue": "Flush Events (flush)",
+        "value": "flush"
+      },
+      {
+        "displayValue": "Set Device ID (setDeviceId)",
         "value": "setDeviceId"
       },
       {
-        "displayValue": "setSessionId",
+        "displayValue": "Set Session ID (setSessionId)",
         "value": "setSessionId"
       },
       {
-        "displayValue": "reset",
+        "displayValue": "Reset User (reset)",
         "value": "reset"
       },
       {
-        "displayValue": "setOptOut",
+        "displayValue": "Set Opt-Out (setOptOut)",
         "value": "setOptOut"
       }
     ],
@@ -108,7 +87,172 @@ ___TEMPLATE_PARAMETERS___
     "defaultValue": "init",
     "simpleValueType": true,
     "name": "type",
-    "type": "SELECT"
+    "type": "SELECT",
+    "alwaysInSummary": true
+  },
+  {
+    "type": "LABEL",
+    "name": "initDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#init\"\u003eInitialize\u003c/a\u003e - This tag sets up Amplitude on the page. You only need one Initialize tag, and it should be triggered on All Pages or a similar trigger that fires consistently on each page load.",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "init",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "trackDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#track\"\u003eTrack Event\u003c/a\u003e - This tag sends an \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#events\"\u003eevent\u003c/a\u003e to Amplitude. Events are actions that users take in your product, such as clicking a button, making a purchase, or signing up for an account.",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "track",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "identifyDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#identify\"\u003eSet User Properties\u003c/a\u003e - This tag sets properties on the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#users\"\u003euser\u003c/a\u003e viewing the page. For example, you could set a user property that indicates whether they\u0027re on a paid or free plan.",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "identify",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "setGroupDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setgroup\"\u003eSet Group\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#user-groups\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "setGroup",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "groupIdentifyDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#groupidentify\"\u003eSet Group Properties\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#group-properties\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "groupIdentify",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "revenueDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#revenue\"\u003eTrack Revenue\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#revenue-tracking\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "revenue",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "flushDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#flush\"\u003eFlush Events\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#flush-the-event-buffer\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "flush",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "setDeviceIdDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setdeviceid\"\u003eSet Device Id\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-device-id\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "setDeviceId",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "setSessionIdDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setsessionid\"\u003eSet Session Id\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-session-id\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "setSessionId",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "resetDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#reset\"\u003eReset User\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#reset-when-user-logs-out\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "reset",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "setOptOutDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setoptout\"\u003eSet Opt-Out\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#opt-users-out-of-tracking\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "setOptOut",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "type": "LABEL",
+    "name": "setUserIdDescription",
+    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#setuserid\"\u003eSet User Id\u003c/a\u003e - This tag sets the ID of the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/analytics/what-is-amplitude/#users\"\u003euser\u003c/a\u003e viewing the page. Setting a user\u0027s id allows them to be tracked across devices. Trigger this tag once the user can be uniquely identified, e.g. once they login. See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#custom-user-id\"\u003eSDK Reference\u003c/a\u003e",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "setUserId",
+        "type": "EQUALS"
+      }
+    ]
+  },
+  {
+    "help": "You can find the API Key by browsing to Settings for your organization in the Amplitude user interface. By creating or selecting a created project, you can find the API key for copy-pasting in the project settings. See \u003ca href\u003d\"https://help.amplitude.com/hc/en-us/articles/207108137-Quick-start-guide-Create-your-organization-and-first-project\"\u003ethis page\u003c/a\u003e for more information.",
+    "alwaysInSummary": true,
+    "valueValidators": [
+      {
+        "type": "NON_EMPTY"
+      }
+    ],
+    "displayName": "API Key*",
+    "simpleValueType": true,
+    "name": "apiKey",
+    "type": "TEXT",
+    "enablingConditions": [
+      {
+        "paramName": "type",
+        "paramValue": "init",
+        "type": "EQUALS"
+      }
+    ]
   },
   {
     "help": "Uncheck the box to cancel any existing opt-out for the current user. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#opt-users-out-of-tracking\"\u003eMore information\u003c/a\u003e.",
@@ -537,6 +681,14 @@ ___TEMPLATE_PARAMETERS___
           {
             "selectItems": [
               {
+                "displayValue": "Set",
+                "value": "set"
+              },
+              {
+                "displayValue": "Set Once",
+                "value": "setOnce"
+              },
+              {
                 "displayValue": "Add",
                 "value": "add"
               },
@@ -547,14 +699,6 @@ ___TEMPLATE_PARAMETERS___
               {
                 "displayValue": "Prepend",
                 "value": "prepend"
-              },
-              {
-                "displayValue": "Set",
-                "value": "set"
-              },
-              {
-                "displayValue": "Set Once",
-                "value": "setOnce"
               },
               {
                 "displayValue": "Remove",
@@ -573,7 +717,7 @@ ___TEMPLATE_PARAMETERS___
                 "value": "clearAll"
               }
             ],
-            "defaultValue": "add",
+            "defaultValue": "set",
             "displayName": "Method Call",
             "name": "command",
             "type": "SELECT"
@@ -594,7 +738,7 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "type": "SIMPLE_TABLE",
-        "newRowButtonText": "Add Operation"
+        "newRowButtonText": "Add Property"
       }
     ]
   },
@@ -608,9 +752,170 @@ ___TEMPLATE_PARAMETERS___
     ],
     "displayName": "Initialization",
     "name": "initGroup",
-    "groupStyle": "ZIPPY_OPEN",
+    "groupStyle": "ZIPPY_CLOSED",
     "type": "GROUP",
     "subParams": [
+      {
+        "help": "Check this box to enable default event tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events\"\u003eRead more\u003c/a\u003e.",
+        "defaultValue": true,
+        "simpleValueType": true,
+        "name": "defaultEventTracking",
+        "checkboxText": "Track default Amplitude events",
+        "type": "CHECKBOX",
+        "subParams": [
+          {
+            "type": "GROUP",
+            "name": "defaultEventTrackingOptions",
+            "displayName": "Default Event Tracking Options",
+            "groupStyle": "ZIPPY_CLOSED",
+            "subParams": [
+              {
+                "type": "CHECKBOX",
+                "name": "detAttribution",
+                "checkboxText": "Track marketing attribution",
+                "simpleValueType": true,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "attributionOptions",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "TEXT",
+                        "name": "attributionInitialEmptyValue",
+                        "displayName": "Initial Empty Value",
+                        "simpleValueType": true,
+                        "defaultValue": "EMPTY",
+                        "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#advanced-configuration-for-tracking-marketing-attribution\" \u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "attributionExcludeReferrers",
+                        "displayName": "Exclude Referrers",
+                        "simpleValueType": true,
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. \u003ca href\u003d\"\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "CHECKBOX",
+                        "name": "attributionResetSession",
+                        "checkboxText": "Reset the session on a new campaign",
+                        "simpleValueType": true
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "detAttribution",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ],
+                "help": "Check this box to enable attribution tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-marketing-attribution\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "detPageView",
+                "checkboxText": "Track page views",
+                "simpleValueType": true,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "pageViewOptions",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "CHECKBOX",
+                        "name": "pageViewLegacy",
+                        "checkboxText": "Use the legacy page view properties",
+                        "simpleValueType": true,
+                        "subParams": [],
+                        "help": "Enable this to use legacy page view event type (\u003cstrong\u003ePage View\u003c/strong\u003e) and event properties (\u003cstrong\u003epage_location\u003c/strong\u003e, \u003cstrong\u003epage_path\u003c/strong\u003e, \u003cstrong\u003epage_title\u003c/strong\u003e, \u003cstrong\u003epage_url\u003c/strong\u003e). By default it will use the `Page View Type` input as the event type and \u003cstrong\u003e[Amplitude] Page Domain\u003c/strong\u003e, \u003cstrong\u003e[Amplitude] Page Location\u003c/strong\u003e, \u003cstrong\u003e[Amplitude] Page Path\u003c/strong\u003e, \u003cstrong\u003e[Amplitude] Page Title\u003c/strong\u003e. \u003cstrong\u003e[Amplitude] Page URL\u003c/strong\u003e as the event properties for the page view event.",
+                        "defaultValue": false
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "pageViewType",
+                        "displayName": "Page View Type",
+                        "simpleValueType": true,
+                        "help": "The event type for page view event. The default value has been change from \u003cstrong\u003ePage View\u003c/strong\u003e to \u003cstrong\u003e[Amplitude]  Page Viewed\u003c/strong\u003e.",
+                        "enablingConditions": [
+                          {
+                            "paramName": "pageViewLegacy",
+                            "paramValue": false,
+                            "type": "EQUALS"
+                          }
+                        ],
+                        "valueHint": "[Amplitude] Page Viewed"
+                      },
+                      {
+                        "type": "SELECT",
+                        "name": "pageHistoryTracking",
+                        "displayName": "Page History Tracking",
+                        "macrosInSelect": true,
+                        "selectItems": [
+                          {
+                            "value": "all",
+                            "displayValue": "All history changes"
+                          },
+                          {
+                            "value": "path",
+                            "displayValue": "Only when page path changes"
+                          }
+                        ],
+                        "simpleValueType": true,
+                        "help": "Provides advanced control for single page application on when page views are tracked. \u003ca href\u003d\"#advanced-configuration-for-tracking-page-views\"\u003eRead more\u003c/a\u003e.",
+                        "defaultValue": "all"
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "detPageView",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ],
+                "help": "Check this box to enable page views tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-page-views\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "detSession",
+                "checkboxText": "Track sessions",
+                "simpleValueType": true,
+                "help": "Check this box to enable session tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-sessions\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "detFormInteraction",
+                "checkboxText": "Track form interactions",
+                "simpleValueType": true,
+                "help": "Check this box to enable form interaction tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-form-interactions\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "detFileDownload",
+                "checkboxText": "Track file downloads",
+                "simpleValueType": true,
+                "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": true
+              }
+            ],
+            "enablingConditions": [
+              {
+                "paramName": "defaultEventTracking",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ]
+          }
+        ]
+      },
       {
         "help": "Configure Amplitude to use EU Data Residency server zone. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#eu-data-residency\"\u003eRead more here\u003c/a\u003e.",
         "defaultValue": false,
@@ -763,7 +1068,7 @@ ___TEMPLATE_PARAMETERS___
         "defaultValue": false,
         "simpleValueType": true,
         "name": "userAgentEnrichment",
-        "checkboxText": "Enable client side user agent enrichment",
+        "checkboxText": "(Legacy) Enable client side user agent enrichment",
         "type": "CHECKBOX",
         "subParams": [
           {
@@ -810,185 +1115,22 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    "type": "GROUP",
+    "name": "advanced",
+    "displayName": "Advanced",
+    "groupStyle": "NO_ZIPPY",
+    "subParams": [
       {
-        "help": "Check this box to enable default event tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events\"\u003eRead more\u003c/a\u003e.",
-        "defaultValue": true,
+        "type": "TEXT",
+        "name": "instanceName",
+        "displayName": "Instance Name",
         "simpleValueType": true,
-        "name": "defaultEventTracking",
-        "checkboxText": "Enable default event tracking",
-        "type": "CHECKBOX",
-        "subParams": [
-          {
-            "type": "GROUP",
-            "name": "defaultEventTrackingOptions",
-            "displayName": "Default Event Tracking Options",
-            "groupStyle": "NO_ZIPPY",
-            "subParams": [
-              {
-                "type": "CHECKBOX",
-                "name": "detAttribution",
-                "checkboxText": "Enable attribution tracking",
-                "simpleValueType": true,
-                "subParams": [
-                  {
-                    "type": "GROUP",
-                    "name": "attributionOptions",
-                    "groupStyle": "NO_ZIPPY",
-                    "subParams": [
-                      {
-                        "type": "TEXT",
-                        "name": "attributionInitialEmptyValue",
-                        "displayName": "Initial empty value",
-                        "simpleValueType": true,
-                        "defaultValue": "EMPTY",
-                        "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#advanced-configuration-for-tracking-marketing-attribution\" \u003eRead more\u003c/a\u003e."
-                      },
-                      {
-                        "type": "TEXT",
-                        "name": "attributionExcludeReferrers",
-                        "displayName": "Exclude Referrers",
-                        "simpleValueType": true,
-                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. \u003ca href\u003d\"\"\u003eRead more\u003c/a\u003e."
-                      },
-                      {
-                        "type": "CHECKBOX",
-                        "name": "attributionResetSession",
-                        "checkboxText": "Reset the session on a new campaign",
-                        "simpleValueType": true
-                      }
-                    ],
-                    "enablingConditions": [
-                      {
-                        "paramName": "detAttribution",
-                        "paramValue": true,
-                        "type": "EQUALS"
-                      }
-                    ]
-                  }
-                ],
-                "help": "Check this box to enable attribution tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-marketing-attribution\"\u003eRead more\u003c/a\u003e.",
-                "defaultValue": true
-              },
-              {
-                "type": "CHECKBOX",
-                "name": "detPageView",
-                "checkboxText": "Enable page views tracking",
-                "simpleValueType": true,
-                "subParams": [
-                  {
-                    "type": "GROUP",
-                    "name": "pageViewOptions",
-                    "groupStyle": "NO_ZIPPY",
-                    "subParams": [
-                      {
-                        "type": "CHECKBOX",
-                        "name": "pageViewLegacy",
-                        "checkboxText": "Use the legacy page view properties",
-                        "simpleValueType": true,
-                        "subParams": [],
-                        "help": "Enable this to use legacy page view event type (\u003cstrong\u003ePage View\u003c/strong\u003e) and event properties (\u003cstrong\u003epage_location\u003c/strong\u003e, \u003cstrong\u003epage_path\u003c/strong\u003e, \u003cstrong\u003epage_title\u003c/strong\u003e, \u003cstrong\u003epage_url\u003c/strong\u003e). By default it will use the `Page View Type` input as the event type and \u003cstrong\u003e[Amplitude] Page Domain\u003c/strong\u003e, \u003cstrong\u003e[Amplitude] Page Location\u003c/strong\u003e, \u003cstrong\u003e[Amplitude] Page Path\u003c/strong\u003e, \u003cstrong\u003e[Amplitude] Page Title\u003c/strong\u003e. \u003cstrong\u003e[Amplitude] Page URL\u003c/strong\u003e as the event properties for the page view event.",
-                        "defaultValue": false
-                      },
-                      {
-                        "type": "TEXT",
-                        "name": "pageViewType",
-                        "displayName": "Page View Type",
-                        "simpleValueType": true,
-                        "help": "The event type for page view event. The default value has been change from \u003cstrong\u003ePage View\u003c/strong\u003e to \u003cstrong\u003e[Amplitude]  Page Viewed\u003c/strong\u003e.",
-                        "enablingConditions": [
-                          {
-                            "paramName": "pageViewLegacy",
-                            "paramValue": false,
-                            "type": "EQUALS"
-                          }
-                        ],
-                        "defaultValue": "[Amplitude] Page Viewed"
-                      },
-                      {
-                        "type": "SELECT",
-                        "name": "pageViewTrackOn",
-                        "displayName": "Page View Trigger",
-                        "macrosInSelect": true,
-                        "selectItems": [
-                          {
-                            "value": "pageLoads",
-                            "displayValue": "Page Loads (default)"
-                          },
-                          {
-                            "value": "attribution",
-                            "displayValue": "Only with attribution changes"
-                          }
-                        ],
-                        "simpleValueType": true,
-                        "defaultValue": "pageLoads"
-                      },
-                      {
-                        "type": "SELECT",
-                        "name": "pageHistoryTracking",
-                        "displayName": "Page History Tracking",
-                        "macrosInSelect": true,
-                        "selectItems": [
-                          {
-                            "value": "all",
-                            "displayValue": "All history changes"
-                          },
-                          {
-                            "value": "path",
-                            "displayValue": "Only when page path changes"
-                          }
-                        ],
-                        "simpleValueType": true,
-                        "help": "Provides advanced control for single page application on when page views are tracked. \u003ca href\u003d\"#advanced-configuration-for-tracking-page-views\"\u003eRead more\u003c/a\u003e.",
-                        "defaultValue": "all"
-                      }
-                    ],
-                    "enablingConditions": [
-                      {
-                        "paramName": "detPageView",
-                        "paramValue": true,
-                        "type": "EQUALS"
-                      }
-                    ]
-                  }
-                ],
-                "help": "Check this box to enable page views tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-page-views\"\u003eRead more\u003c/a\u003e.",
-                "defaultValue": true
-              },
-              {
-                "type": "CHECKBOX",
-                "name": "detSession",
-                "checkboxText": "Enable session tracking",
-                "simpleValueType": true,
-                "help": "Check this box to enable session tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-sessions\"\u003eRead more\u003c/a\u003e.",
-                "defaultValue": true
-              },
-              {
-                "type": "CHECKBOX",
-                "name": "detFormInteraction",
-                "checkboxText": "Enable form interaction tracking",
-                "simpleValueType": true,
-                "help": "Check this box to enable form interaction tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-form-interactions\"\u003eRead more\u003c/a\u003e.",
-                "defaultValue": true
-              },
-              {
-                "type": "CHECKBOX",
-                "name": "detFileDownload",
-                "checkboxText": "Enable file download tracking",
-                "simpleValueType": true,
-                "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
-                "defaultValue": true
-              }
-            ],
-            "enablingConditions": [
-              {
-                "paramName": "defaultEventTracking",
-                "paramValue": true,
-                "type": "EQUALS"
-              }
-            ]
-          }
-        ]
+        "valueHint": "Main (default)",
+        "help": "If you want to run more than one Amplitude instance (with different API keys or different initialization options), you can provide an \u003cstrong\u003eInstance Name\u003c/strong\u003e here. Make sure that all the Amplitude tags that should reference this instance have the Instance Name configured in the tag settings."
       }
     ]
   }
@@ -1095,10 +1237,6 @@ const generateConfiguration = () => {
       initOptions.defaultTracking.pageViews = {
         trackOn: undefined
       };
-
-      if (data.pageViewTrackOn !== 'pageLoads') {
-        initOptions.defaultTracking.pageViews.trackOn = data.pageViewTrackOn;
-      }
 
       switch (data.pageHistoryTracking) {
         case 'path':
