@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 240a7700f791e8881c01f1fc1f751cd132488419
+    changenotes: Upgade to Browser SDK 2.0 - See breaking changes list in documentation
   - sha: c7361640a3944da43815b6f53497be9c865cc50c
     changeNodes: Fix the wrapper version
   - sha: 2c09684e5a84032505891263f5dde6e52ac1418d
