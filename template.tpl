@@ -1149,7 +1149,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.7.0';
+const WRAPPER_VERSION = '3.7.1';
 const JS_URL = 'https://cdn.jsdelivr.net/npm/@amplitude/amplitude-js-gtm@' + WRAPPER_VERSION + '/dist/index.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1180,14 +1180,14 @@ let _amplitude;
 
 const generateConfiguration = () => {
   // Build and normalize initialization options map, if manual configuration was selected
-  const manualOptions = data.initManualOptions && data.initManualOptions.length ? 
+  const manualOptions = data.initManualOptions && data.initManualOptions.length ?
         data.initManualOptions.map(opt => {
           return {
             key: opt.key,
             value: normalize(opt.value)
           };
         }) : [];
-  
+
   // Use manual configuration if it exists – otherwise use what was passed in the variable or an empty object
   const initOptions = (data.initOptions === 'manual' ? makeTableMap(manualOptions, 'key', 'value') : data.initOptions) || {};
 
@@ -1195,7 +1195,7 @@ const generateConfiguration = () => {
   if (data.euData) {
     initOptions.serverZone = 'EU';
   }
-  
+
   // Configuration for user agent enrichment plugin
   if (!!data.userAgentEnrichment) {
     initOptions.userAgentEnrichmentOptions = {
@@ -1205,13 +1205,13 @@ const generateConfiguration = () => {
       deviceModel: data.deviceModel,
     };
   }
-  
+
   if (!!data.defaultEventTracking) {
     initOptions.defaultTracking = {};
 
     if (!!data.detAttribution) {
       initOptions.defaultTracking.attribution = {};
-        
+
       if (!!data.attributionExcludeReferrers) {
         // TODO: How to deal with regular expression input
         initOptions.defaultTracking.attribution.excludeReferrers = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
@@ -1224,7 +1224,7 @@ const generateConfiguration = () => {
 
     if (!!data.detPageView) {
       initOptions.defaultTracking.pageViews = {};
-      
+
       if (!!data.pageViewLegacy) {
         // pass the pageViewLegacy option into the SDK wrapper and use plugin in to make the page view event using legacy properties.
         initOptions.pageViewLegacy = true;
@@ -1279,11 +1279,11 @@ const onsuccess = () => {
 
   _amplitude = copyFromWindow(WRAPPER_NAMESPACE);
   if (!_amplitude) return fail('Failed to load the Amplitude namespace');
-  
+
   const instanceName = data.instanceName;
-    
+
   switch (data.type) {
-      
+
     case 'init':
       _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
       break;
@@ -1298,31 +1298,31 @@ const onsuccess = () => {
           eventGroupName: group.eventGroupName && group.eventGroupName.indexOf(',') > -1 ? stringToArrayAndTrim(group.eventGroupName) : group.eventGroupName
         };
       }), 'eventGroupType', 'eventGroupName') || {};
-      
+
       const eventOptions = {};
 
       if (data.trackTimestamp) {
         eventOptions.time = normalize(data.trackTimestamp);
       }
-      
+
       _amplitude(instanceName, 'track', {
-        event_type: data.eventType, 
+        event_type: data.eventType,
         groups: groups
       }, eventProperties, eventOptions);
       break;
-      
+
     case 'identify':
       const userProps = data.userPropertyOperations || [];
       _amplitude(instanceName, 'identify', userProps.map(op => {
         return [op.command, op.userProperty, op.value];
       }));
       break;
-      
+
     case 'setGroup':
       const groupName = data.groupName.indexOf(',') > -1 ? stringToArrayAndTrim(data.groupName) : data.groupName;
       _amplitude(instanceName, 'setGroup', data.groupType, groupName);
       break;
-      
+
     case 'groupIdentify':
       const groupUserProps = data.userPropertyOperations || [];
       _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, data.identifyGroupName, groupUserProps.map(op => {
@@ -1339,10 +1339,10 @@ const onsuccess = () => {
         revenueType: data.revenueType,
         eventProperties: makeTableMap(data.revenueEventProperties || [], 'name', 'value')
       };
-      
+
       // Allow for legacy format
       if (revenueObject.id) revenueObject.productId = revenueObject.id;
-      
+
       // Validate revenueObject
       if (!revenueObject.productId || !revenueObject.price) return fail('Missing required "productId" and/or "price" from the Revenue object');
 
