@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: d53219f99954bf9bf196ff751c9b5441cd3def6f
+    changenotes: Fix setUserId in snippet proxy.
   - sha: 9e71a8204d409e7072de282aab08272a5be14528
     changenotes: Capture the web attribution updates while no referrer.
   - sha: a5028f68922cad46f077279a701410d843cd49ce
