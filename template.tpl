@@ -1265,7 +1265,7 @@ const generateConfiguration = () => {
       initOptions.defaultTracking.formInteractions = false;
     }
   } else {
-    initOptions.defaultEventTrackig = false;
+    initOptions.defaultTracking = false;
   }
 
   return initOptions;
