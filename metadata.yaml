@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: a8c3fe822f4557a44dc89a6eedb8bbeb4ebdb3a4
+  - changeNodes: Fix default event tracking options
   - sha: c7361640a3944da43815b6f53497be9c865cc50c
     changeNodes: Fix the wrapper version
   - sha: 2c09684e5a84032505891263f5dde6e52ac1418d
