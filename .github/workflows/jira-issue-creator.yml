@@ -11,7 +11,7 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: amplitude/amplitude-browser-sdk-gtm-template/.github/workflows/jira-issue-create-template.yml@main
+    uses: amplitude/Amplitude-TypeScript/.github/workflows/jira-issue-create-template.yml@main
     with:
       label: "gtm-client-ts-template"
       subcomponent: "dx_gtm_client_ts_template"
