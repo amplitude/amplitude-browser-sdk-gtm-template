@@ -1252,7 +1252,7 @@ const generateConfiguration = () => {
 
     // Session events are enable by default
     if (!data.detSession) {
-      initOptions.defaultTracking.session = false;
+      initOptions.defaultTracking.sessions = false;
     }
 
     // fileDownloads events are enable by default
