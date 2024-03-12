@@ -1149,7 +1149,7 @@ const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
 
 // Constants
-const WRAPPER_VERSION = '3.7.3';
+const WRAPPER_VERSION = '3.7.4';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
