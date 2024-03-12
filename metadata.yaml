@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: c1415cb8ae964de94ea05a23aa20073c6db7fa33
+    changeNodes: Update the wrapper version to include landing page analysis support
   - sha: 1aa0f0571d4266a86045366743921e9e42fc0933
     changeNodes: Update the template to use Amplitude CDN
   - sha: 784e2ad8817588e22816d6feb242552cf512b036
