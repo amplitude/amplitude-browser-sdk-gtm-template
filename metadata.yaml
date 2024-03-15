@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 26b60deff0e2d70b358fce79da015b851189544e
+    changeNodes: Add script compression and fix missing session event issue
   - sha: c1415cb8ae964de94ea05a23aa20073c6db7fa33
     changeNodes: Update the wrapper version to include landing page analysis support
   - sha: 1aa0f0571d4266a86045366743921e9e42fc0933
