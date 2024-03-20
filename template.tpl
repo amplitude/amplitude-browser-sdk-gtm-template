@@ -998,24 +998,8 @@ ___TEMPLATE_PARAMETERS___
                 "value": "deviceId"
               },
               {
-                "displayValue": "cookieExpiration",
-                "value": "cookieExpiration"
-              },
-              {
-                "displayValue": "cookieSameSite",
-                "value": "cookieSameSite"
-              },
-              {
-                "displayValue": "cookieSecure",
-                "value": "cookieSecure"
-              },
-              {
-                "displayValue": "disableCookies",
-                "value": "disableCookies"
-              },
-              {
-                "displayValue": "domain",
-                "value": "domain"
+                "displayValue": "identityStorage",
+                "value": "identityStorage"
               },
               {
                 "displayValue": "partnerId",
@@ -1036,10 +1020,6 @@ ___TEMPLATE_PARAMETERS___
               {
                 "displayValue": "transport",
                 "value": "transport"
-              },
-              {
-                "displayValue": "trackingOptions",
-                "value": "trackingOptions"
               }
             ],
             "valueValidators": [
@@ -1062,6 +1042,97 @@ ___TEMPLATE_PARAMETERS___
         ],
         "type": "SIMPLE_TABLE",
         "newRowButtonText": "Add configuration"
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "initTrackingOptions",
+        "displayName": "",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Configuration.trackingOptions name",
+            "name": "key",
+            "type": "SELECT",
+            "selectItems": [
+              {
+                "value": "ipAddress",
+                "displayValue": "ipAddress"
+              },
+              {
+                "value": "language",
+                "displayValue": "language"
+              },
+              {
+                "value": "platform",
+                "displayValue": "platform"
+              }
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Configuration.trackingOptions value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ],
+        "newRowButtonText": "Add configuration.trackingOptions",
+        "enablingConditions": [
+          {
+            "paramName": "initOptions",
+            "paramValue": "manual",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "By default, the SDK tracks these properties automatically. You can override this behavior by setting the corresponding options to \"false\"."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "initCookieOptions",
+        "displayName": "",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Configuration.cookieOptions name",
+            "name": "key",
+            "type": "SELECT",
+            "selectItems": [
+              {
+                "value": "domain",
+                "displayValue": "domain"
+              },
+              {
+                "value": "expiration",
+                "displayValue": "expiration"
+              },
+              {
+                "value": "sameSite",
+                "displayValue": "sameSite"
+              },
+              {
+                "value": "secure",
+                "displayValue": "secure"
+              },
+              {
+                "value": "upgrade",
+                "displayValue": "upgrade"
+              }
+            ]
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Configuration.cookieOptions value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ],
+        "newRowButtonText": "Add configuration.cookieOptions",
+        "enablingConditions": [
+          {
+            "paramName": "initOptions",
+            "paramValue": "manual",
+            "type": "EQUALS"
+          }
+        ]
       },
       {
         "help": "Wether to use client side user agent enrichment. Enable client side user agent to make the changes compatible with previous GTM template version.",
@@ -1147,6 +1218,7 @@ const log = require('logToConsole');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
+const JSON = require('JSON');
 
 // Constants
 const WRAPPER_VERSION = '3.7.6';
@@ -1160,6 +1232,17 @@ const WRAPPER_NAMESPACE = '_amplitude';
 const fail = msg => {
   log(LOG_PREFIX + 'Error: ' + msg);
   return data.gtmOnFailure();
+};
+
+// Normalize options' values
+const normalizeOptionsValues = options => {
+  return options && options.length ?
+      options.map(opt => {
+        return {
+          key: opt.key,
+          value: normalize(opt.value)
+        };
+      }) : [];
 };
 
 // Normalize the input and return it
@@ -1180,16 +1263,20 @@ let _amplitude;
 
 const generateConfiguration = () => {
   // Build and normalize initialization options map, if manual configuration was selected
-  const manualOptions = data.initManualOptions && data.initManualOptions.length ?
-        data.initManualOptions.map(opt => {
-          return {
-            key: opt.key,
-            value: normalize(opt.value)
-          };
-        }) : [];
+  const manualOptions = normalizeOptionsValues(data.initManualOptions);
 
   // Use manual configuration if it exists – otherwise use what was passed in the variable or an empty object
   const initOptions = (data.initOptions === 'manual' ? makeTableMap(manualOptions, 'key', 'value') : data.initOptions) || {};
+  
+  // Configuration for trackingOptions
+  if (!!data.initTrackingOptions) {
+    initOptions.trackingOptions = makeTableMap(normalizeOptionsValues(data.initTrackingOptions), 'key', 'value');
+  }
+  
+  // Configuration for cookieOptions
+  if (!!data.initCookieOptions) {
+    initOptions.cookieOptions = makeTableMap(normalizeOptionsValues(data.initCookieOptions), 'key', 'value');
+  }
 
   // Configuration for EU Data Residency
   if (data.euData) {
@@ -1268,6 +1355,10 @@ const generateConfiguration = () => {
     initOptions.defaultTracking = false;
   }
 
+  if(initOptions.logLevel == 4){
+    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by configuration: " + JSON.stringify(initOptions));
+  }
+  
   return initOptions;
 };
 
