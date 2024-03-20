@@ -1050,7 +1050,7 @@ ___TEMPLATE_PARAMETERS___
         "simpleTableColumns": [
           {
             "defaultValue": "",
-            "displayName": "Configuration.trackingOptions name",
+            "displayName": "TrackingOptions name",
             "name": "key",
             "type": "SELECT",
             "selectItems": [
@@ -1070,12 +1070,12 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "defaultValue": "",
-            "displayName": "Configuration.trackingOptions value",
+            "displayName": "TrackingOptions value",
             "name": "value",
             "type": "TEXT"
           }
         ],
-        "newRowButtonText": "Add configuration.trackingOptions",
+        "newRowButtonText": "Add trackingOption",
         "enablingConditions": [
           {
             "paramName": "initOptions",
@@ -1092,7 +1092,7 @@ ___TEMPLATE_PARAMETERS___
         "simpleTableColumns": [
           {
             "defaultValue": "",
-            "displayName": "Configuration.cookieOptions name",
+            "displayName": "CookieOptions name",
             "name": "key",
             "type": "SELECT",
             "selectItems": [
@@ -1120,12 +1120,12 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "defaultValue": "",
-            "displayName": "Configuration.cookieOptions value",
+            "displayName": "CookieOptions value",
             "name": "value",
             "type": "TEXT"
           }
         ],
-        "newRowButtonText": "Add configuration.cookieOptions",
+        "newRowButtonText": "Add cookieOption",
         "enablingConditions": [
           {
             "paramName": "initOptions",
