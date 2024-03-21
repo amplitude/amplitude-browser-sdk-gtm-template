@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 5b387eab7d5935a62b5f365be5ac9992a3e3c148
+    changeNotes: Fix configuration options - trackingOptions and cookieOptions
   - sha: 26b60deff0e2d70b358fce79da015b851189544e
     changeNodes: Add script compression and fix missing session event issue
   - sha: c1415cb8ae964de94ea05a23aa20073c6db7fa33
