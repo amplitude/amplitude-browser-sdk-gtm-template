@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - metadata.yaml  # The workflow should only trigger on changes to metadata.yaml
 
 jobs:
   update-metadata:
