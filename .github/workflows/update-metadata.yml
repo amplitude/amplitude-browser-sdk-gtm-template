@@ -1,0 +1,33 @@
+name: Update Metadata
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - template.tpl  # The workflow should only trigger on changes to template.tpl
+
+jobs:
+  update-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+        # Qutoes in message are not allowed
+      - name: Update metadata.yaml
+        run: |
+          SHA=$(git rev-parse HEAD)
+          MESSAGE=$(git log -1 --pretty=%B)
+          NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
+          echo "New version info to be added: \n"
+          echo "$NEW_VERSION"
+          sed -i "s/versions:/versions:\n$NEW_VERSION/" metadata.yaml       
+
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email amplitude-sdk-bot@users.noreply.github.com
+          git config --local user.name amplitude-sdk-bot
+          git add metadata.yaml
+          git commit -m "Update metadata.yaml" || exit 0  # Exit 0 if no changes
+          git push
