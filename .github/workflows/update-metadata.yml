@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - metadata.yaml  # The workflow should only trigger on changes to metadata.yaml
+      - template.tpl  # The workflow should only trigger on changes to template.tpl
 
 jobs:
   update-metadata:
