@@ -401,27 +401,6 @@ ___TEMPLATE_PARAMETERS___
         "type": "TEXT"
       },
       {
-        "displayName": "Event Properties",
-        "name": "eventProperties",
-        "simpleTableColumns": [
-          {
-            "defaultValue": "",
-            "displayName": "Property Name",
-            "name": "name",
-            "isUnique": true,
-            "type": "TEXT"
-          },
-          {
-            "defaultValue": "",
-            "displayName": "Property Value",
-            "name": "value",
-            "type": "TEXT"
-          }
-        ],
-        "type": "SIMPLE_TABLE",
-        "newRowButtonText": "Add Property"
-      },
-      {
         "help": "Add a custom timestamp in UNIX time (milliseconds). Leave empty to use current time.",
         "valueValidators": [
           {
@@ -472,6 +451,49 @@ ___TEMPLATE_PARAMETERS___
         ],
         "type": "SIMPLE_TABLE",
         "newRowButtonText": "Add Group"
+      },
+      {
+        "type": "SELECT",
+        "name": "eventPropertiesSelector",
+        "displayName": "Event Properties",
+        "macrosInSelect": true,
+        "selectItems": [
+          {
+            "value": "eventPropertiesManual",
+            "displayValue": "Set EventProperties Manually"
+          }
+        ],
+        "simpleValueType": true,
+        "valueValidators": [],
+        "help": "Manually add key-value pair or assign a nested object from GTM variables as an Event Properties"
+      },
+      {
+        "displayName": "",
+        "name": "eventProperties",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Property Name",
+            "name": "name",
+            "isUnique": true,
+            "type": "TEXT"
+          },
+          {
+            "defaultValue": "",
+            "displayName": "Property Value",
+            "name": "value",
+            "type": "TEXT"
+          }
+        ],
+        "type": "SIMPLE_TABLE",
+        "newRowButtonText": "Add Property",
+        "enablingConditions": [
+          {
+            "paramName": "eventPropertiesSelector",
+            "paramValue": "eventPropertiesManual",
+            "type": "EQUALS"
+          }
+        ]
       }
     ]
   },
@@ -998,8 +1020,24 @@ ___TEMPLATE_PARAMETERS___
                 "value": "deviceId"
               },
               {
-                "displayValue": "identityStorage",
-                "value": "identityStorage"
+                "displayValue": "cookieExpiration",
+                "value": "cookieExpiration"
+              },
+              {
+                "displayValue": "cookieSameSite",
+                "value": "cookieSameSite"
+              },
+              {
+                "displayValue": "cookieSecure",
+                "value": "cookieSecure"
+              },
+              {
+                "displayValue": "disableCookies",
+                "value": "disableCookies"
+              },
+              {
+                "displayValue": "domain",
+                "value": "domain"
               },
               {
                 "displayValue": "partnerId",
@@ -1020,6 +1058,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "displayValue": "transport",
                 "value": "transport"
+              },
+              {
+                "displayValue": "trackingOptions",
+                "value": "trackingOptions"
               }
             ],
             "valueValidators": [
@@ -1042,97 +1084,6 @@ ___TEMPLATE_PARAMETERS___
         ],
         "type": "SIMPLE_TABLE",
         "newRowButtonText": "Add configuration"
-      },
-      {
-        "type": "SIMPLE_TABLE",
-        "name": "initTrackingOptions",
-        "displayName": "",
-        "simpleTableColumns": [
-          {
-            "defaultValue": "",
-            "displayName": "TrackingOptions name",
-            "name": "key",
-            "type": "SELECT",
-            "selectItems": [
-              {
-                "value": "ipAddress",
-                "displayValue": "ipAddress"
-              },
-              {
-                "value": "language",
-                "displayValue": "language"
-              },
-              {
-                "value": "platform",
-                "displayValue": "platform"
-              }
-            ]
-          },
-          {
-            "defaultValue": "",
-            "displayName": "TrackingOptions value",
-            "name": "value",
-            "type": "TEXT"
-          }
-        ],
-        "newRowButtonText": "Add trackingOption",
-        "enablingConditions": [
-          {
-            "paramName": "initOptions",
-            "paramValue": "manual",
-            "type": "EQUALS"
-          }
-        ],
-        "help": "By default, the SDK tracks these properties automatically. You can override this behavior by setting the corresponding options to \"false\"."
-      },
-      {
-        "type": "SIMPLE_TABLE",
-        "name": "initCookieOptions",
-        "displayName": "",
-        "simpleTableColumns": [
-          {
-            "defaultValue": "",
-            "displayName": "CookieOptions name",
-            "name": "key",
-            "type": "SELECT",
-            "selectItems": [
-              {
-                "value": "domain",
-                "displayValue": "domain"
-              },
-              {
-                "value": "expiration",
-                "displayValue": "expiration"
-              },
-              {
-                "value": "sameSite",
-                "displayValue": "sameSite"
-              },
-              {
-                "value": "secure",
-                "displayValue": "secure"
-              },
-              {
-                "value": "upgrade",
-                "displayValue": "upgrade"
-              }
-            ]
-          },
-          {
-            "defaultValue": "",
-            "displayName": "CookieOptions value",
-            "name": "value",
-            "type": "TEXT"
-          }
-        ],
-        "newRowButtonText": "Add cookieOption",
-        "enablingConditions": [
-          {
-            "paramName": "initOptions",
-            "paramValue": "manual",
-            "type": "EQUALS"
-          }
-        ]
       },
       {
         "help": "Wether to use client side user agent enrichment. Enable client side user agent to make the changes compatible with previous GTM template version.",
@@ -1218,10 +1169,9 @@ const log = require('logToConsole');
 const makeNumber = require('makeNumber');
 const makeString = require('makeString');
 const makeTableMap = require('makeTableMap');
-const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.7.6';
+const WRAPPER_VERSION = '3.7.7';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1232,17 +1182,6 @@ const WRAPPER_NAMESPACE = '_amplitude';
 const fail = msg => {
   log(LOG_PREFIX + 'Error: ' + msg);
   return data.gtmOnFailure();
-};
-
-// Normalize options' values
-const normalizeOptionsValues = options => {
-  return options && options.length ?
-      options.map(opt => {
-        return {
-          key: opt.key,
-          value: normalize(opt.value)
-        };
-      }) : [];
 };
 
 // Normalize the input and return it
@@ -1263,20 +1202,16 @@ let _amplitude;
 
 const generateConfiguration = () => {
   // Build and normalize initialization options map, if manual configuration was selected
-  const manualOptions = normalizeOptionsValues(data.initManualOptions);
+  const manualOptions = data.initManualOptions && data.initManualOptions.length ?
+        data.initManualOptions.map(opt => {
+          return {
+            key: opt.key,
+            value: normalize(opt.value)
+          };
+        }) : [];
 
   // Use manual configuration if it exists – otherwise use what was passed in the variable or an empty object
   const initOptions = (data.initOptions === 'manual' ? makeTableMap(manualOptions, 'key', 'value') : data.initOptions) || {};
-  
-  // Configuration for trackingOptions
-  if (!!data.initTrackingOptions) {
-    initOptions.trackingOptions = makeTableMap(normalizeOptionsValues(data.initTrackingOptions), 'key', 'value');
-  }
-  
-  // Configuration for cookieOptions
-  if (!!data.initCookieOptions) {
-    initOptions.cookieOptions = makeTableMap(normalizeOptionsValues(data.initCookieOptions), 'key', 'value');
-  }
 
   // Configuration for EU Data Residency
   if (data.euData) {
@@ -1355,10 +1290,6 @@ const generateConfiguration = () => {
     initOptions.defaultTracking = false;
   }
 
-  if(initOptions.logLevel == 4){
-    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by configuration: " + JSON.stringify(initOptions));
-  }
-  
   return initOptions;
 };
 
@@ -1380,6 +1311,7 @@ const onsuccess = () => {
       break;
 
     case 'track':
+      //TODO
       const eventProperties = makeTableMap(data.eventProperties || [], 'name', 'value');
 
       // Convert comma-separated groupName into an array of groupNames
