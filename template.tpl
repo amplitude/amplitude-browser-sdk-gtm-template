@@ -1,12 +1,4 @@
-﻿___TERMS_OF_SERVICE___
-
-By creating or modifying this file you agree to Google Tag Manager's Community
-Template Gallery Developer Terms of Service available at
-https://developers.google.com/tag-manager/gallery-tos (or such other URL as
-Google may provide), as modified from time to time.
-
-
-___INFO___
+﻿___INFO___
 
 {
   "type": "TAG",
@@ -401,8 +393,8 @@ ___TEMPLATE_PARAMETERS___
         "type": "TEXT"
       },
       {
-        "displayName": "Event Properties",
-        "name": "eventProperties",
+        "displayName": "Event Properties Basic",
+        "name": "eventPropertiesBasic",
         "simpleTableColumns": [
           {
             "defaultValue": "",
@@ -420,6 +412,15 @@ ___TEMPLATE_PARAMETERS___
         ],
         "type": "SIMPLE_TABLE",
         "newRowButtonText": "Add Property"
+      },
+      {
+        "type": "SELECT",
+        "name": "eventPropertiesObject",
+        "displayName": "Event Properties Object",
+        "macrosInSelect": true,
+        "selectItems": [],
+        "simpleValueType": true,
+        "help": "Please provide object format GTM variables. This will overwrite the previous event properties if there has any duplicate key."
       },
       {
         "help": "Add a custom timestamp in UNIX time (milliseconds). Leave empty to use current time.",
@@ -1213,6 +1214,7 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 // APIs
 const copyFromWindow = require('copyFromWindow');
 const getType = require('getType');
+const Object = require('Object');
 const injectScript = require('injectScript');
 const log = require('logToConsole');
 const makeNumber = require('makeNumber');
@@ -1232,6 +1234,30 @@ const WRAPPER_NAMESPACE = '_amplitude';
 const fail = msg => {
   log(LOG_PREFIX + 'Error: ' + msg);
   return data.gtmOnFailure();
+};
+
+// Merge two Objects
+const mergeObject = (obj1, obj2) => {
+  if (!obj1 || Object.keys(obj1).length == 0) return obj2;
+  if (!obj2 || Object.keys(obj2).length == 0) return obj1;
+
+  // Clone
+  const newObject = JSON.parse(JSON.stringify(obj1));
+
+  if (newObject == undefined)
+    return obj2;
+
+  Object.entries(obj2).forEach((entry) => {
+    const key = entry[0];
+    const value = entry[1];
+    newObject[key] = value;
+  });
+
+  return newObject;
+};
+
+const isValidObject = (input) => {
+  return getType(input) == 'object';
 };
 
 // Normalize options' values
@@ -1380,8 +1406,9 @@ const onsuccess = () => {
       break;
 
     case 'track':
-      const eventProperties = makeTableMap(data.eventProperties || [], 'name', 'value');
-
+      const eventPropertiesBaisc = makeTableMap(data.eventPropertiesBasic || [], 'name', 'value');
+      const eventProperties = isValidObject(data.eventPropertiesObject) ? mergeObject(eventPropertiesBaisc, data.eventPropertiesObject) : eventPropertiesBaisc;
+      
       // Convert comma-separated groupName into an array of groupNames
       const groups = makeTableMap((data.trackEventGroups || []).map(group => {
         return {
@@ -1578,5 +1605,3 @@ setup: ''
 ___NOTES___
 
 Created on 27/10/2021, 18:34:01
-
-
