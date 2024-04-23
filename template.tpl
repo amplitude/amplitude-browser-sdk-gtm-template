@@ -428,7 +428,8 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Please provide object format GTM variables. This will overwrite the previous event properties if there has any duplicate key."
+        "help": "Select a GTM variable that returns a valid event properties object. This will overwrite the previous event properties if there has any duplicate key. \u003ca href\u003d\"\"\u003e Click here for an example\u003c/a\u003e.",
+        "notSetText": "Don\u0027t set an Event Property Object"
       },
       {
         "help": "Add a custom timestamp in UNIX time (milliseconds). Leave empty to use current time.",
@@ -1418,7 +1419,7 @@ const onsuccess = () => {
 
     case 'track':
       const eventPropertiesBaisc = makeTableMap(data.eventPropertiesBasic || [], 'name', 'value');
-      const eventProperties = isValidObject(data.eventPropertiesObject) ? mergeObject(eventPropertiesBaisc, data.eventPropertiesObject) : eventPropertiesBaisc;
+      const eventProperties = data.eventPropertiesObject && isValidObject(data.eventPropertiesObject) ? mergeObject(eventPropertiesBaisc, data.eventPropertiesObject) : eventPropertiesBaisc;
       
       // Convert comma-separated groupName into an array of groupNames
       const groups = makeTableMap((data.trackEventGroups || []).map(group => {
