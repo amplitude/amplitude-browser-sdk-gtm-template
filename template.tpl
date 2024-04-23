@@ -1240,22 +1240,23 @@ const WRAPPER_NAMESPACE = '_amplitude';
 
 // Print a log message and set the tag to failed state
 const fail = msg => {
-  log(LOG_PREFIX + 'Error: ' + msg);
   return data.gtmOnFailure();
 };
 
 // Merge two Objects
-const mergeObject = (obj1, obj2) => {
-  if (!obj1 || Object.keys(obj1).length == 0) return obj2;
-  if (!obj2 || Object.keys(obj2).length == 0) return obj1;
+const mergeObject = (basedObject, overwriteObject) => {
+  if (!basedObject || Object.keys(basedObject).length == 0) return overwriteObject;
+  if (!basedObject || Object.keys(overwriteObject).length == 0) return basedObject;
 
   // Clone
-  const newObject = JSON.parse(JSON.stringify(obj1));
+  const newObject = JSON.parse(JSON.stringify(basedObject));
 
-  if (newObject == undefined)
-    return obj2;
+  if (newObject == undefined) {
+    log(LOG_PREFIX + 'Error: Input has been dropped because it\'s an unexpected Object type.');
+    return overwriteObject;
+  }
 
-  Object.entries(obj2).forEach((entry) => {
+  Object.entries(overwriteObject).forEach((entry) => {
     const key = entry[0];
     const value = entry[1];
     newObject[key] = value;
@@ -1265,7 +1266,9 @@ const mergeObject = (obj1, obj2) => {
 };
 
 const isValidObject = (input) => {
-  return getType(input) == 'object';
+  const isObject = getType(input) == 'object';
+  log(LOG_PREFIX + 'Error: In valid object input.');
+  return isObject;
 };
 
 // Normalize options' values
@@ -1613,4 +1616,5 @@ setup: ''
 ___NOTES___
 
 Created on 27/10/2021, 18:34:01
+
 
