@@ -1267,7 +1267,7 @@ const mergeObject = (basedObject, overwriteObject) => {
 
 const isValidObject = (input) => {
   const isObject = getType(input) == 'object';
-  log(LOG_PREFIX + 'Error: In valid object input.');
+  log(LOG_PREFIX + 'Error: Invalid object input.');
   return isObject;
 };
 
