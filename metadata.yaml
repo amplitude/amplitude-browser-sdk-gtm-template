@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 0146f9e79ded2f1cfe8c01c0b991a4443dd9ea1e
+    changeNotes: Bump up the SDK wrapper to fix issue of the missing events while closing the page
   - sha: 89382e7ca8ff517364a678e643c3894040d1f609
     changeNotes: Revert the wrapper SDK back to 2.5.2
   - sha: 5b387eab7d5935a62b5f365be5ac9992a3e3c148
