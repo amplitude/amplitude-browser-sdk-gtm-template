@@ -22,7 +22,7 @@ jobs:
           NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
           echo "New version info to be added: \n"
           echo "$NEW_VERSION"
-          sed -i "s/versions:/versions:\n$NEW_VERSION/" metadata.yaml       
+          sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml       
 
       - name: Commit and push if changed
         run: |
