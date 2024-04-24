@@ -758,7 +758,8 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Choose object format variable to set multiple user properties at once. This bulk operation only supports the \u0027set\u0027 action. This will overwrite the previous event properties if there has any duplicate key. The key and value pairs for user properties must be nested under the `user_properties` key. i.e. : {user_properties: {\u0027userIdentifyKey\u0027: \u0027userIdentifyValue\u0027}}."
+        "help": "Select a GTM variable that returns a valid User Properties object to set multiple user properties at once. The key and value pairs for user properties must be nested under the `user_properties` key. i.e. : {user_properties: {\u0027userIdentifyKey\u0027: \u0027userIdentifyValue\u0027}}. \u003ca href\u003d\"\"\u003eClick here for an example\u003c/a\u003e. This bulk operation only supports the \u0027set\u0027 action. This will overwrite the previous event properties if there has any duplicate key.",
+        "notSetText": "Don\u0027t set an User Properties Object"
       }
     ]
   },
@@ -1425,8 +1426,13 @@ const getAllUserProps = (data) => {
 
 const getUserPropsBulkSetObject = (data) => {
   const userPropsObject = data.userPropertyOperationsObject;
+  if (!userPropsObject) {
+    return [];
+  }
+
   if (Object.entries(userPropsObject).length != 0 && !userPropsObject.user_properties) {
     log(LOG_PREFIX + 'Error: The bulk set operation for user properties was ignored because the expected`user_properties` key is missing in the identify input.');
+    return [];
   }
 
   const userPropsBulk = [];
