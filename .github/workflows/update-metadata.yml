@@ -18,7 +18,7 @@ jobs:
       - name: Update metadata.yaml
         run: |
           SHA=$(git rev-parse HEAD)
-          MESSAGE=$(git log -1 --pretty=%B)
+          MESSAGE=$(git log --skip=1 --max-count=1 --pretty=%B)
           NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
           echo "New version info to be added: \n"
           echo "$NEW_VERSION"
