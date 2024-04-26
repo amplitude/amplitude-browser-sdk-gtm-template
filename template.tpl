@@ -758,8 +758,7 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Select a GTM variable that returns a valid User Properties object to set multiple user properties at once. The key and value pairs for user properties must be nested under the `user_properties` key. i.e. : {user_properties: {\u0027userIdentifyKey\u0027: \u0027userIdentifyValue\u0027}}. \u003ca href\u003d\"//www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object
-\"\u003eClick here for an example\u003c/a\u003e. This bulk operation only supports the \u0027set\u0027 operation. This bulk operation only supports the `set` operation. This will overwrite the <strong>Individual operation</strong> user properties if there has any duplicate key.",
+        "help": "Select a GTM variable that returns a valid User Properties object to set multiple user properties at once. Only the values nested under the `user_properties` key are considered for the user properties. This bulk operation only supports the `set` operation. This overwrites the \u003cstrong\u003eIndividual operation\u003c/strong\u003e user properties if there are any duplicate keys. \u003ca href\u003d\"//www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\n\"\u003eClick here for an example\u003c/a\u003e.",
         "notSetText": "Don\u0027t set an User Properties Object"
       }
     ]
