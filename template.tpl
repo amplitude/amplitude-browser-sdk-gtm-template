@@ -428,7 +428,7 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Select a GTM variable that returns a valid event properties object. This will overwrite the event properties in <strong>Event Properties Basic</strong> if there has any duplicate key. \u003ca href\u003d\"www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\"\u003e Click here for an example\u003c/a\u003e.",
+        "help": "Select a GTM variable that returns a valid event properties object. This overwrites the event properties in \u003cstrong\u003eEvent Properties Basic\u003c/strong\u003e if there has any duplicate keys. Amplitude ignores any inputs not in the object format and any value under user_properties key. \u003ca href\u003d\"www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\"\u003e Click here for an example\u003c/a\u003e.",
         "notSetText": "Don\u0027t set an Event Property Object"
       },
       {
@@ -1418,8 +1418,15 @@ const onsuccess = () => {
       break;
 
     case 'track':
-      const eventPropertiesBaisc = makeTableMap(data.eventPropertiesBasic || [], 'name', 'value');
-      const eventProperties = data.eventPropertiesObject && isValidObject(data.eventPropertiesObject) ? mergeObject(eventPropertiesBaisc, data.eventPropertiesObject) : eventPropertiesBaisc;
+      const propertiesBaisc = makeTableMap(data.eventPropertiesBasic || [], 'name', 'value');
+      const isValidPropertiesObject = data.eventPropertiesObject && isValidObject(data.eventPropertiesObject);
+      let eventProperties = propertiesBaisc;
+      if (isValidPropertiesObject) {
+        const cleanedPropertiesObject = JSON.parse(JSON.stringify(data.eventPropertiesObject));
+        // remove the user_properties
+        Object.delete(cleanedPropertiesObject, 'user_properties');
+        eventProperties = mergeObject(propertiesBaisc, cleanedPropertiesObject);
+      }
       
       // Convert comma-separated groupName into an array of groupNames
       const groups = makeTableMap((data.trackEventGroups || []).map(group => {
