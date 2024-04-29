@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 2c4d5030193d608c14759343736eaf6a51c6d074
+    changeNotes: Bump up the SDK wrapper to fix issue of session start sending wrong utm values and page counter bug
   - sha: 0e83df5bcc5a6172ad1828e3eca49f54cc95ff0c
     changeNotes: Fix failed to load Amplitude namespace issue
   - sha: 0146f9e79ded2f1cfe8c01c0b991a4443dd9ea1e
