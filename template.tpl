@@ -428,7 +428,7 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Select a GTM variable that returns a valid event properties object. This overwrites the event properties in \u003cstrong\u003eEvent Properties Basic\u003c/strong\u003e if there has any duplicate keys. Amplitude ignores any inputs not in the object format and any value under user_properties key. \u003ca href\u003d\"www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\"\u003e Click here for an example\u003c/a\u003e.",
+        "help": "Select a GTM variable that returns a valid event properties object. This overwrites the event properties in \u003cstrong\u003eEvent Properties Basic\u003c/strong\u003e if there are any duplicate keys. Amplitude ignores any inputs not in the object format and any value under user_properties key. \u003ca href\u003d\"www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\"\u003e Click here for an example\u003c/a\u003e.",
         "notSetText": "Don\u0027t set an Event Property Object"
       },
       {
@@ -1245,17 +1245,13 @@ const fail = msg => {
 };
 
 // Merge two Objects
-const mergeObject = (basedObject, overwriteObject) => {
-  if (!basedObject || Object.keys(basedObject).length == 0) return overwriteObject;
-  if (!basedObject || Object.keys(overwriteObject).length == 0) return basedObject;
+const mergeObject = (baseObject, overwriteObject) => {
+  if (!isValidObject(baseObject) || !isValidObject(overwriteObject)) return {};
+  if (!baseObject || Object.keys(baseObject).length == 0) return overwriteObject;
+  if (!overwriteObject || Object.keys(overwriteObject).length == 0) return baseObject;
 
   // Clone
-  const newObject = JSON.parse(JSON.stringify(basedObject));
-
-  if (newObject == undefined) {
-    log(LOG_PREFIX + 'Error: Input has been dropped because it\'s an unexpected Object type.');
-    return overwriteObject;
-  }
+  const newObject = JSON.parse(JSON.stringify(baseObject));
 
   Object.entries(overwriteObject).forEach((entry) => {
     const key = entry[0];
@@ -1422,6 +1418,7 @@ const onsuccess = () => {
       const isValidPropertiesObject = data.eventPropertiesObject && isValidObject(data.eventPropertiesObject);
       let eventProperties = propertiesBaisc;
       if (isValidPropertiesObject) {
+        // Clone
         const cleanedPropertiesObject = JSON.parse(JSON.stringify(data.eventPropertiesObject));
         // remove the user_properties
         Object.delete(cleanedPropertiesObject, 'user_properties');
