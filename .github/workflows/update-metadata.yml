@@ -1,11 +1,7 @@
 name: Update Metadata
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - template.tpl  # The workflow should only trigger on changes to template.tpl
+  workflow_dispatch:
 
 jobs:
   update-metadata:
