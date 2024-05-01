@@ -1246,9 +1246,13 @@ const fail = msg => {
 
 // Merge two Objects
 const mergeObject = (baseObject, overwriteObject) => {
-  if (!isValidObject(baseObject) || !isValidObject(overwriteObject)) return {};
-  if (!baseObject || Object.keys(baseObject).length == 0) return overwriteObject;
-  if (!overwriteObject || Object.keys(overwriteObject).length == 0) return baseObject;
+  if (!baseObject || !isValidObject(baseObject) || Object.keys(baseObject).length == 0) {
+    return  isValidObject(overwriteObject) ? overwriteObject : {};
+  }
+
+  if (!overwriteObject ||  !isValidObject(overwriteObject) || Object.keys(overwriteObject).length == 0) {
+    return baseObject;
+  }
 
   // Clone
   const newObject = JSON.parse(JSON.stringify(baseObject));
