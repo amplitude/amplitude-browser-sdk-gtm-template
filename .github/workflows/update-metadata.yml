@@ -2,6 +2,10 @@ name: Update Metadata
 
 on:
   workflow_dispatch:
+    inputs:
+      releaseDescription:
+        required: true
+        default: $(git log --max-count=1 --pretty=%B)
 
 jobs:
   update-metadata:
@@ -14,7 +18,7 @@ jobs:
       - name: Update metadata.yaml
         run: |
           SHA=$(git rev-parse HEAD)
-          MESSAGE=$(git log --skip=1 --max-count=1 --pretty=%B)
+          MESSAGE=${{ github.event.inputs.releaseDescription }}
           NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
           echo "New version info to be added: \n"
           echo "$NEW_VERSION"
