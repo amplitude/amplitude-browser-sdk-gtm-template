@@ -1426,7 +1426,7 @@ const getAllUserProps = (data) => {
 
 const getUserPropsBulkSetObject = (data) => {
   const userPropsObject = data.userPropertyOperationsObject;
-  if (!userPropsObject) {
+  if (!userPropsObject || !isValidObject(userPropsObject)) {
     return [];
   }
 
@@ -1456,7 +1456,6 @@ const onsuccess = () => {
   const instanceName = data.instanceName;
 
   switch (data.type) {
-
     case 'init':
       _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
       break;
@@ -1504,7 +1503,7 @@ const onsuccess = () => {
       break;
 
     case 'groupIdentify':
-      const mergedGroupUserProps = getAllUserProps(data.userPropertyOperations);
+      const mergedGroupUserProps = getAllUserProps(data);
       _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, mergedGroupUserProps);
       break;
 
