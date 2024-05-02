@@ -748,7 +748,18 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "type": "SIMPLE_TABLE",
-        "newRowButtonText": "Add Property"
+        "newRowButtonText": "Add Property",
+        "displayName": "Individual Operation"
+      },
+      {
+        "type": "SELECT",
+        "name": "userPropertyOperationsObject",
+        "displayName": "Bulk Set Operation",
+        "macrosInSelect": true,
+        "selectItems": [],
+        "simpleValueType": true,
+        "help": "Select a GTM variable that returns a valid User Properties object to set multiple user properties at once. Only the values nested under the `user_properties` key are considered for the user properties. This bulk operation only supports the `set` operation. This overwrites the \u003cstrong\u003eIndividual operation\u003c/strong\u003e user properties if there are any duplicate keys. \u003ca href\u003d\"//www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\n\"\u003eClick here for an example\u003c/a\u003e.",
+        "notSetText": "Don\u0027t set an User Properties Object"
       }
     ]
   },
@@ -1241,6 +1252,7 @@ const WRAPPER_NAMESPACE = '_amplitude';
 
 // Print a log message and set the tag to failed state
 const fail = msg => {
+  log(LOG_PREFIX + 'Error: ' + msg);
   return data.gtmOnFailure();
 };
 
@@ -1402,6 +1414,36 @@ const generateConfiguration = () => {
   return initOptions;
 };
 
+const getAllUserProps = (data) => {
+  const userProps = data.userPropertyOperations || [];
+  const userPropsBulk = getUserPropsBulkSetObject(data);
+  const userPropsIndividual = userProps.map(op => {
+        return [op.command, op.userProperty, op.value];
+      });
+  const mergedGroupUserProps = userPropsIndividual.concat(userPropsBulk);
+  return mergedGroupUserProps;
+};
+
+const getUserPropsBulkSetObject = (data) => {
+  const userPropsObject = data.userPropertyOperationsObject;
+  if (!userPropsObject || !isValidObject(userPropsObject)) {
+    return [];
+  }
+
+  if (Object.entries(userPropsObject).length != 0 && !userPropsObject.user_properties) {
+    log(LOG_PREFIX + 'Error: The bulk set operation for user properties was ignored because the expected`user_properties` key is missing in the identify input.');
+    return [];
+  }
+
+  const userPropsBulk = [];
+  Object.entries(userPropsObject.user_properties).forEach((entry) => {
+    const propKey = entry[0];
+    const propValue = entry[1];
+    userPropsBulk.push(["set", propKey, propValue]);
+  });
+  return userPropsBulk;
+};
+
 const onfailure = () => {
   return fail('Failed to load the Amplitude JavaScript library');
 };
@@ -1414,7 +1456,6 @@ const onsuccess = () => {
   const instanceName = data.instanceName;
 
   switch (data.type) {
-
     case 'init':
       _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
       break;
@@ -1452,10 +1493,8 @@ const onsuccess = () => {
       break;
 
     case 'identify':
-      const userProps = data.userPropertyOperations || [];
-      _amplitude(instanceName, 'identify', userProps.map(op => {
-        return [op.command, op.userProperty, op.value];
-      }));
+      const mergedUserProps = getAllUserProps(data);
+      _amplitude(instanceName, 'identify', mergedUserProps);
       break;
 
     case 'setGroup':
@@ -1464,10 +1503,8 @@ const onsuccess = () => {
       break;
 
     case 'groupIdentify':
-      const groupUserProps = data.userPropertyOperations || [];
-      _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, data.identifyGroupName, groupUserProps.map(op => {
-        return [op.command, op.userProperty, op.value];
-      }));
+      const mergedGroupUserProps = getAllUserProps(data);
+      _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, mergedGroupUserProps);
       break;
 
     case 'revenue':
