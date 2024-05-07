@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 0da509c600e440e1a6342851f20f24a7a2f88cbd
+    changeNotes: fix the missing event properties issue (#52)
   - sha: c81144783f25e70871fc88916be972d52e81bca3
     changeNotes: Enable object input for event properties and identify
   - sha: 2c4d5030193d608c14759343736eaf6a51c6d074
