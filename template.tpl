@@ -402,7 +402,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "displayName": "Individual Event Properties",
-        "name": "eventPropertiesBasic",
+        "name": "eventProperties",
         "simpleTableColumns": [
           {
             "defaultValue": "",
@@ -1461,7 +1461,7 @@ const onsuccess = () => {
       break;
 
     case 'track':
-      const propertiesBaisc = makeTableMap(data.eventPropertiesBasic || [], 'name', 'value');
+      const propertiesBaisc = makeTableMap(data.eventProperties || [], 'name', 'value');
       const isValidPropertiesObject = data.eventPropertiesObject && isValidObject(data.eventPropertiesObject);
       let eventProperties = propertiesBaisc;
       if (isValidPropertiesObject) {
