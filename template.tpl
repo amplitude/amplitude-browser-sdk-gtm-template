@@ -428,7 +428,7 @@ ___TEMPLATE_PARAMETERS___
         "macrosInSelect": true,
         "selectItems": [],
         "simpleValueType": true,
-        "help": "Select a GTM variable that returns a valid event properties object. This overwrites the event properties in \u003cstrong\u003eIndividual Event Properties\u003c/strong\u003e if there are any duplicate keys. Amplitude ignores any inputs not in the object format and any value under user_properties key. \u003ca href\u003d\"www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\"\u003e Click here for an example\u003c/a\u003e.",
+        "help": "Select a GTM variable that returns a valid event properties object. This overwrites the event properties in \u003cstrong\u003eIndividual Event Properties\u003c/strong\u003e if there are any duplicate keys. Amplitude ignores any inputs not in the object format and any value under user_properties key. \u003ca href\u003d\"//www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#event-properties-object\"\u003e Click here for an example\u003c/a\u003e.",
         "notSetText": "Don\u0027t set an Event Property Object"
       },
       {
