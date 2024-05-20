@@ -1519,7 +1519,7 @@ const onsuccess = () => {
 
       // Allow for legacy format
       if (revenueObject.id) revenueObject.productId = revenueObject.id;
-      
+
       // Validate revenueObject
       if (!revenueObject.productId || !revenueObject.price) return fail('Missing required "productId" and/or "price" from the Revenue object');
 
