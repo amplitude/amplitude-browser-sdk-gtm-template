@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: a9291de26ee48aa1bfcd2f1cf20e616bc6578a5e
+    changeNotes: Fix the session events too often issue
   - sha: 267f1f8f839799bb672a319468d39cb1d9da8329
     changeNotes: fix example link (#53)
   - sha: 0da509c600e440e1a6342851f20f24a7a2f88cbd
