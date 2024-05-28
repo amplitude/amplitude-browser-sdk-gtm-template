@@ -2066,13 +2066,13 @@ scenarios:
 
     // Verify that the tag finished successfully.
     assertApi('gtmOnSuccess').wasCalled();
-setup: "const Object = require('Object');\n\nconst mockData = {\n  instanceName: '$default_instance'\n\
+setup: "const object = require('Object');\n\nconst mockData = {\n  instanceName: '$default_instance'\n\
   };\n\n// Helper function\nconst convertObjectToArray = function (obj, nameKey, valueKey){\n\
   \    var result = [];\n    for (var key in obj) {\n        if (obj.hasOwnProperty(key))\
   \ {\n            var entry = {};\n            entry[nameKey] = key;\n          \
   \  entry[valueKey] = obj[key];\n            result.push(entry);\n        }\n   \
   \ }\n    return result;\n};\n\nconst mergeProperties = function(obj, result, ignoredKey)\
-  \ {\n  Object.entries(obj).forEach((entry) => {\n    const key = entry[0];\n   \
+  \ {\n  object.entries(obj).forEach((entry) => {\n    const key = entry[0];\n   \
   \ if (key !== ignoredKey) {\n      const value = entry[1];\n      result[key] =\
   \ value;    \n    }\n  });\n  return result;\n};\n\nconst mergeObject = function\
   \ (baseObj, overwriteObj, ignoredKey){\n    const filteredBaseObj = mergeProperties(baseObj,\
