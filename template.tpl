@@ -1657,8 +1657,430 @@ ___WEB_PERMISSIONS___
 
 ___TESTS___
 
-scenarios: []
-setup: ''
+scenarios:
+- name: Track tag with individual event properties
+  code: "\nmockData.type = 'track';\nmockData.eventType = 'test_event';\n\nconst eventProperties\
+    \ = {\n  'individual_ep_key1': 'individual_ep_value1', \n  'individual_ep_key2':\
+    \ 'individual_ep_value2',\n};\nmockData.eventProperties = convertObjectToArray(eventProperties,\
+    \ 'name', 'value');\n\nconst groups = {\n  'group_key1': 'group_value1',\n  'group_key2':\
+    \ 'group_value2',\n};\nmockData.trackEventGroups = convertObjectToArray(groups,\
+    \ 'eventGroupType', 'eventGroupName');\n\nmockData.trackTimestamp = 1000;\n\n\
+    mock('copyFromWindow', key => {\n  return function() {\n    assertThat(arguments[0],\
+    \ 'Incorrect instance name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1],\
+    \ 'Incorrect tag type').isEqualTo(mockData.type);\n    assertThat(arguments[2],\
+    \ 'Incorrect event object').isEqualTo({\n      event_type: mockData.eventType,\
+    \ \n      groups: groups\n    });\n    assertThat(arguments[3], 'Incorrect event\
+    \ properties').isEqualTo(eventProperties);\n    assertThat(arguments[4], 'incorrect\
+    \ event options').isEqualTo({time: 1000});\n  };\n});\n\n// Call runCode to run\
+    \ the template's code.\nrunCode(mockData);\n\n// Verify that the tag finished\
+    \ successfully.\nassertApi('gtmOnSuccess').wasCalled();"
+- name: Track tag with object event properties
+  code: "\nmockData.type = 'track';\nmockData.eventType = 'test_event';\nmockData.eventPropertiesObject\
+    \ = {\n  'object_ep_key': 'test_object_ep_value',\n  user_properties: {}\n};\n\
+    \nmock('copyFromWindow', key => {\n  return function() {\n    assertThat(arguments[0],\
+    \ 'Incorrect instance name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1],\
+    \ 'Incorrect tag type').isEqualTo(mockData.type);\n    assertThat(arguments[2],\
+    \ 'Incorrect event object').isEqualTo({\n      event_type: mockData.eventType,\
+    \ \n      groups: {}\n    });\n    const eventProperties = mergeProperties(mockData.eventPropertiesObject,\
+    \ {}, 'user_properties');\n    assertThat(arguments[3], 'Incorrect event properties').isEqualTo(eventProperties);\n\
+    \  };\n});\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\
+    \n// Verify that the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
+- name: Track tag with individual and object event properties, object properties should
+    overwrite the individual properties if there has duplicate key
+  code: |2-
+
+    mockData.type = 'track';
+    mockData.eventType = 'test_event';
+
+    const eventProperties = {
+      'individual_ep_key': 'individual_ep_value',
+      'overlap_ep_key': 'individual_ep_value'
+    };
+    mockData.eventProperties = convertObjectToArray(eventProperties, 'name', 'value');
+
+    mockData.eventPropertiesObject = {
+      'object_ep_key': 'object_ep_value',
+      'overlap_ep_key': 'overlap_object_ep_value',
+      user_properties: {}
+    };
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect event object').isEqualTo({event_type: mockData.eventType, groups: {}});
+        const mergedEventProps = mergeObject(eventProperties, mockData.eventPropertiesObject, "user_properties");
+        assertThat(arguments[3], 'Incorrect event properties').isEqualTo(mergedEventProps);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Track tag with individual event properties and invalid object event properties,
+    invalid object should be ignored
+  code: |2-
+
+    mockData.type = 'track';
+    mockData.eventType = 'test_event';
+
+    const eventProperties = {
+      'individual_ep_key': 'individual_ep_value',
+    };
+    mockData.eventProperties = convertObjectToArray(eventProperties, 'name', 'value');
+
+    mockData.eventPropertiesObject = 'invalid_ep_object';
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect event object').isEqualTo({event_type: mockData.eventType, groups: {}});
+        assertThat(arguments[3], 'Incorrect event properties').isEqualTo(eventProperties);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Identify tag with individual user properties
+  code: "mockData.type = 'identify';\n\nconst userPropertyOperations = ['set', 'identify_key',\
+    \ 'identify_value'];\nmockData.userPropertyOperations = [{\n  command: userPropertyOperations[0],\n\
+    \  userProperty: userPropertyOperations[1],\n  value: userPropertyOperations[2],\n\
+    }];\n\nmock('copyFromWindow', key => {\n  return function() {\n    assertThat(arguments[0],\
+    \ 'Incorrect instance name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1],\
+    \ 'Incorrect tag name').isEqualTo(mockData.type);\n    assertThat(arguments[2],\
+    \ 'Incorrect identify object').isEqualTo([userPropertyOperations]); \n   };\n\
+    });\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\n// Verify\
+    \ that the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
+- name: Identify tag with object user properties
+  code: "mockData.type = 'identify';\n\nconst userPropertyOperations = ['set', 'object_identify_key',\
+    \ 'object_identify_value'];\nconst identifyKey = userPropertyOperations[1];\n\
+    const identifyValue = userPropertyOperations[2];\nmockData.userPropertyOperationsObject\
+    \ = {\n  'object_ep_key': 'object_ep_value',\n  'overlap_ep_key': 'overlap_object_ep_value',\n\
+    \  user_properties: {} \n};\nmockData.userPropertyOperationsObject.user_properties[identifyKey]\
+    \ = identifyValue;\n\nmock('copyFromWindow', key => {\n  return function() {\n\
+    \    assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);\n\
+    \    assertThat(arguments[1], 'Incorrect tag name').isEqualTo(mockData.type);\n\
+    \    assertThat(arguments[2], 'Incorrect identify object').isEqualTo([userPropertyOperations]);\
+    \ \n  };\n});\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\
+    \n// Verify that the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
+- name: Identify tag with individual and object user properties, object properties
+    should overwrite the individual properties if there has duplicate key
+  code: "mockData.type = 'identify';\n\nconst individualUserPropOps = ['set', 'identify_key',\
+    \ 'identify_value'];\nmockData.userPropertyOperations = [{\n  command: individualUserPropOps[0],\n\
+    \  userProperty: individualUserPropOps[1],\n  value: individualUserPropOps[2],\n\
+    }];\n\nconst objectUserPropOps = ['set', 'object_identify_key', 'object_identify_value'];\n\
+    const objectIdentifyKey = objectUserPropOps[1];\nconst objectIdentifyValue = objectUserPropOps[2];\n\
+    mockData.userPropertyOperationsObject = {\n  'object_ep_key': 'object_ep_value',\n\
+    \  'overlap_ep_key': 'overlap_object_ep_value',\n  user_properties: {} \n};\n\
+    mockData.userPropertyOperationsObject.user_properties[objectIdentifyKey] = objectIdentifyValue;\n\
+    \nmock('copyFromWindow', key => {\n  return function() {\n    assertThat(arguments[0],\
+    \ 'Incorrect instance name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1],\
+    \ 'Incorrect tag name').isEqualTo(mockData.type);\n    assertThat(arguments[2],\
+    \ 'Incorrect identify object').isEqualTo([\n      individualUserPropOps,\n   \
+    \   objectUserPropOps,\n    ]);\n  };\n});\n\n// Call runCode to run the template's\
+    \ code.\nrunCode(mockData);\n\n// Verify that the tag finished successfully.\n\
+    assertApi('gtmOnSuccess').wasCalled();"
+- name: Identify tag with individual object user properties and invalid object user
+    properties, invalid object should be ignored
+  code: |-
+    mockData.type = 'identify';
+
+    const individualUserPropOps = ['set', 'identify_key', 'identify_value'];
+    mockData.userPropertyOperations = [{
+      command: individualUserPropOps[0],
+      userProperty: individualUserPropOps[1],
+      value: individualUserPropOps[2],
+    }];
+
+    mockData.userPropertyOperationsObject = 'invalid user properties';
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect identify object').isEqualTo([
+          individualUserPropOps,
+        ]);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Group Identify tag with individual user properties
+  code: |-
+    mockData.type = 'groupIdentify';
+    mockData.identifyGroupType = 'test_group_type';
+
+    const userPropertyOperations = ['set', 'identify_key', 'identify_value'];
+    mockData.userPropertyOperations = [{
+      command: userPropertyOperations[0],
+      userProperty: userPropertyOperations[1],
+      value: userPropertyOperations[2],
+    }];
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);
+        assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([userPropertyOperations]);
+        };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Group Identify tag with object user properties
+  code: "mockData.type = 'groupIdentify';\nmockData.identifyGroupType = 'test_group_type';\n\
+    \nconst userPropertyOperations = ['set', 'object_identify_key', 'object_identify_value'];\n\
+    const identifyKey = userPropertyOperations[1];\nconst identifyValue = userPropertyOperations[2];\n\
+    mockData.userPropertyOperationsObject = {\n  'object_ep_key': 'object_ep_value',\n\
+    \  'overlap_ep_key': 'overlap_object_ep_value',\n  user_properties: {} \n};\n\
+    mockData.userPropertyOperationsObject.user_properties[identifyKey] = identifyValue;\n\
+    \nmock('copyFromWindow', key => {\n  return function() {\n    assertThat(arguments[0],\
+    \ 'Incorrect instance name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1],\
+    \ 'Incorrect tag type').isEqualTo(mockData.type);\n    assertThat(arguments[2],\
+    \ 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);\n  \
+    \  assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([userPropertyOperations]);\n\
+    \   };\n});\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\
+    \n// Verify that the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
+- name: Group Identify tag with individual and object user properties
+  code: "mockData.type = 'groupIdentify';\nmockData.identifyGroupType = 'test_group_type';\n\
+    \nconst individualUserPropOps = ['set', 'identify_key', 'identify_value'];\nmockData.userPropertyOperations\
+    \ = [{\n  command: individualUserPropOps[0],\n  userProperty: individualUserPropOps[1],\n\
+    \  value: individualUserPropOps[2],\n}];\n\nconst objectUserPropOps = ['set',\
+    \ 'object_identify_key', 'object_identify_value'];\nconst objectIdentifyKey =\
+    \ objectUserPropOps[1];\nconst objectIdentifyValue = objectUserPropOps[2];\nmockData.userPropertyOperationsObject\
+    \ = {\n  'object_ep_key': 'object_ep_value',\n  'overlap_ep_key': 'overlap_object_ep_value',\n\
+    \  user_properties: {} \n};\nmockData.userPropertyOperationsObject.user_properties[objectIdentifyKey]\
+    \ = objectIdentifyValue;\n\nmock('copyFromWindow', key => {\n  return function()\
+    \ {\n    assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);\n\
+    \    assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);\n\
+    \    assertThat(arguments[2], 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);\n\
+    \    assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([\n\
+    \      individualUserPropOps,\n      objectUserPropOps\n    ]);\n  };\n});\n\n\
+    // Call runCode to run the template's code.\nrunCode(mockData);\n\n// Verify that\
+    \ the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
+- name: Group Identify tag with individual object user properties and invalid object
+    user properties, object properties should overwrite the individual properties
+    if there has duplicate key
+  code: |-
+    mockData.type = 'groupIdentify';
+    mockData.identifyGroupType = 'test_group_type';
+
+    const individualUserPropOps = ['set', 'identify_key', 'identify_value'];
+    mockData.userPropertyOperations = [{
+      command: individualUserPropOps[0],
+      userProperty: individualUserPropOps[1],
+      value: individualUserPropOps[2],
+    }];
+
+    const objectUserPropOps = 'invalid user properties';
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);
+        assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([individualUserPropOps]);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Set Group with single group name
+  code: |2-
+
+    mockData.type = 'setGroup';
+    mockData.groupType = 'test_group_type';
+    mockData.groupName = 'test_group_name';
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect group type').isEqualTo(mockData.groupType);
+        assertThat(arguments[3], 'Incorrect group name').isEqualTo(mockData.groupName);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Set Group with multiple group name
+  code: "\nmockData.type = 'setGroup';\nmockData.groupType = 'test_group_type';\n\
+    mockData.groupName = ' group_name1, group_name2, group_name3 ';\n\nmock('copyFromWindow',\
+    \ key => {\n  return function() {\n    assertThat(arguments[0], 'Incorrect instance\
+    \ name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1], 'Incorrect\
+    \ tag type').isEqualTo(mockData.type);\n    assertThat(arguments[2], 'Incorrect\
+    \ group type').isEqualTo(mockData.groupType);\n    assertThat(arguments[3], 'Incorrect\
+    \ group name').isEqualTo([\n      'group_name1', \n      'group_name2', \n   \
+    \   'group_name3'\n    ]);\n  };\n});\n\n// Call runCode to run the template's\
+    \ code.\nrunCode(mockData);\n\n// Verify that the tag finished successfully.\n\
+    assertApi('gtmOnSuccess').wasCalled();"
+- name: Revenue tag with individual input
+  code: |-
+    mockData.type = 'revenue';
+    const revenueObj = {
+      productId: 'test_product_id',
+      price: 20,
+      quantity: 2,
+      revenue: 40,
+      revenueType: 'test_revenue_type',
+      eventProperties: {
+        'event_props_key': 'event_props_value',
+      }
+     };
+
+    mockData.revenueId = revenueObj.productId;
+    mockData.revenuePrice = revenueObj.price;
+    mockData.revenueQuantity = revenueObj.quantity;
+    mockData.revenue = revenueObj.revenue;
+    mockData.revenueType = revenueObj.revenueType;
+    mockData.revenueEventProperties = convertObjectToArray(revenueObj.eventProperties, 'name', 'value');
+
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect revenue object').isEqualTo(revenueObj);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Revenue tag with individual input without productId should fail
+  code: |-
+    mockData.type = 'revenue';
+    const revenueObj = {
+      price: 20,
+      quantity: 2,
+      revenue: 40,
+      revenueType: 'test_revenue_type',
+      eventProperties: {
+        'event_props_key': 'event_props_value',
+      }
+     };
+
+    mockData.revenueId = revenueObj.productId;
+    mockData.revenuePrice = revenueObj.price;
+    mockData.revenueQuantity = revenueObj.quantity;
+    mockData.revenue = revenueObj.revenue;
+    mockData.revenueType = revenueObj.revenueType;
+    mockData.revenueEventProperties = convertObjectToArray(revenueObj.eventProperties, 'name', 'value');
+
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect revenue object').isEqualTo(revenueObj);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnFailure').wasCalled();
+- name: Revenue tag with individual input without price should fail
+  code: |-
+    mockData.type = 'revenue';
+    const revenueObj = {
+      productId: 'test_product_id',
+      quantity: 2,
+      revenue: 40,
+      revenueType: 'test_revenue_type',
+      eventProperties: {
+        'event_props_key': 'event_props_value',
+      }
+     };
+
+    mockData.revenueId = revenueObj.productId;
+    mockData.revenuePrice = revenueObj.price;
+    mockData.revenueQuantity = revenueObj.quantity;
+    mockData.revenue = revenueObj.revenue;
+    mockData.revenueType = revenueObj.revenueType;
+    mockData.revenueEventProperties = convertObjectToArray(revenueObj.eventProperties, 'name', 'value');
+
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect revenue object').isEqualTo(revenueObj);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnFailure').wasCalled();
+- name: Revnue tag with revenue object
+  code: |-
+    mockData.type = 'revenue';
+    const revenueObj = {
+      productId: 'test_product_id',
+      price: 20,
+      quantity: 2,
+      revenue: 40,
+      revenueType: 'test_revenue_type',
+      eventProperties: {
+        'event_props_key': 'event_props_value',
+      }
+     };
+
+    mockData.revenueVariable = revenueObj;
+
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect revenue object').isEqualTo(revenueObj);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+setup: "const object = require('Object');\n\nconst mockData = {\n  instanceName: '$default_instance'\n\
+  };\n\n// Helper function\nconst convertObjectToArray = function (obj, nameKey, valueKey){\n\
+  \    var result = [];\n    for (var key in obj) {\n        if (obj.hasOwnProperty(key))\
+  \ {\n            var entry = {};\n            entry[nameKey] = key;\n          \
+  \  entry[valueKey] = obj[key];\n            result.push(entry);\n        }\n   \
+  \ }\n    return result;\n};\n\nconst mergeProperties = function(obj, result, ignoredKey)\
+  \ {\n  object.entries(obj).forEach((entry) => {\n    const key = entry[0];\n   \
+  \ if (key !== ignoredKey) {\n      const value = entry[1];\n      result[key] =\
+  \ value;    \n    }\n  });\n  return result;\n};\n\nconst mergeObject = function\
+  \ (baseObj, overwriteObj, ignoredKey){\n    const filteredBaseObj = mergeProperties(baseObj,\
+  \ {}, ignoredKey);    // Merge base object into new object\n    const filteredMergedObj\
+  \ = mergeProperties(overwriteObj, filteredBaseObj, ignoredKey);  // Overwrite with\
+  \ the second object\n    return filteredMergedObj;\n};\n\nlet success, failure;\n\
+  mock('injectScript', (url, onsuccess, onfailure) => {\n  success = onsuccess;\n\
+  \  failure = onfailure;\n  onsuccess();\n});\n     "
 
 
 ___NOTES___
