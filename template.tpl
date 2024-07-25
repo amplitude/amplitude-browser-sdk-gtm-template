@@ -1305,6 +1305,13 @@ const normalize = val => {
   return makeNumber(val) || val;
 };
 
+// Normalize device Id
+const normalizeDeviceId = val => {
+  if (val === 'null') return null;
+  if (val === 'undefined') return undefined;
+  return val;
+};
+
 // Split a string into an array and trim the constituents of leading and trailing whitespace
 const stringToArrayAndTrim = str => str.split(',').map(n => makeString(n.trim()));
 
@@ -1528,6 +1535,10 @@ const onsuccess = () => {
       revenueObject.quantity = makeNumber(revenueObject.quantity);
       revenueObject.revenue = makeNumber(revenueObject.revenue);
       _amplitude(instanceName, 'revenue', revenueObject);
+      break;
+
+    case 'setDeviceId':
+      _amplitude(instanceName, 'setDeviceId', normalizeDeviceId(data.setDeviceId));
       break;
 
     default:
