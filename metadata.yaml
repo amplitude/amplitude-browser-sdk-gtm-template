@@ -2,7 +2,7 @@ homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
   - sha: 28313f16cd3d9e8efbfb6d48218a44131b39dc3c
-    changeNotes: fix: deviceId should not be number (#60)
+    changeNotes: fix deviceId should not be number (#60)
   - sha: 15cceb67bcae576cb3c8d779292a8d5d7e5b983e
     changeNotes: Bump analytics-browser to 2.8.0 with wrapper to 3.7.12 (#59)
   - sha: a9291de26ee48aa1bfcd2f1cf20e616bc6578a5e
