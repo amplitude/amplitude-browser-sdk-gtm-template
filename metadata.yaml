@@ -2,7 +2,7 @@ homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
   - sha: 21ecc094e760d476a49a57b842d471ebdb16381c
-    changeNotes: fix: pump up to the SDK to fix cookie decoding issue and the security error while using localStorage and sessionStorage
+    changeNotes: Fix cookie decoding issue and the security error while using localStorage and sessionStorage
   - sha: 28313f16cd3d9e8efbfb6d48218a44131b39dc3c
     changeNotes: fix deviceId should not be number (#60)
   - sha: 15cceb67bcae576cb3c8d779292a8d5d7e5b983e
