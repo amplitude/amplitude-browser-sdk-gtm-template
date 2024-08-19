@@ -810,11 +810,24 @@ ___TEMPLATE_PARAMETERS___
                         "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#advanced-configuration-for-tracking-marketing-attribution\" \u003eRead more\u003c/a\u003e."
                       },
                       {
-                        "type": "TEXT",
-                        "name": "attributionExcludeReferrers",
-                        "displayName": "Exclude Referrers",
-                        "simpleValueType": true,
-                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. \u003ca href\u003d\"\"\u003eRead more\u003c/a\u003e."
+                        "type": "GROUP",
+                        "name": "attributionExcludeReferrersGroup",
+                        "displayName": "",
+                        "groupStyle": "NO_ZIPPY",
+                        "subParams": [
+                          {
+                            "type": "TEXT",
+                            "name": "attributionExcludeReferrersText",
+                            "displayName": "Exclude referrers text",
+                            "simpleValueType": true
+                          },
+                          {
+                            "type": "TEXT",
+                            "name": "attributionExcludeReferrersRegex",
+                            "displayName": "Exclude referrers regex",
+                            "simpleValueType": true
+                          }
+                        ]
                       },
                       {
                         "type": "CHECKBOX",
@@ -1357,11 +1370,15 @@ const generateConfiguration = () => {
 
     if (!!data.detAttribution) {
       initOptions.defaultTracking.attribution = {};
-
-      if (!!data.attributionExcludeReferrers) {
-        // TODO: How to deal with regular expression input
-        initOptions.defaultTracking.attribution.excludeReferrers = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
+      
+      if (!!data.attributionExcludeReferrersText) {
+        initOptions.defaultTracking.attribution.excludeReferrersText = getType(data.attributionExcludeReferrersText) === 'array' ? data.attributionExcludeReferrersText : stringToArrayAndTrim(data.attributionExcludeReferrersText);
       }
+      
+      if (!!data.attributionExcludeReferrersRegex) {
+        initOptions.defaultTracking.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
+      }
+
       initOptions.defaultTracking.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
       initOptions.defaultTracking.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
     } else {
