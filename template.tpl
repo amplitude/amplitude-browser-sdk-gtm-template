@@ -810,24 +810,18 @@ ___TEMPLATE_PARAMETERS___
                         "help": "By default, initial direct visits are tagged with the \"EMPTY\" campaign value. You can add a different initial empty value into this field. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#advanced-configuration-for-tracking-marketing-attribution\" \u003eRead more\u003c/a\u003e."
                       },
                       {
-                        "type": "GROUP",
-                        "name": "attributionExcludeReferrersGroup",
-                        "displayName": "",
-                        "groupStyle": "NO_ZIPPY",
-                        "subParams": [
-                          {
-                            "type": "TEXT",
-                            "name": "attributionExcludeReferrersText",
-                            "displayName": "Exclude referrers text",
-                            "simpleValueType": true
-                          },
-                          {
-                            "type": "TEXT",
-                            "name": "attributionExcludeReferrersRegex",
-                            "displayName": "Exclude referrers regex",
-                            "simpleValueType": true
-                          }
-                        ]
+                        "type": "TEXT",
+                        "name": "attributionExcludeReferrers",
+                        "displayName": "Exclude Referrers String",
+                        "simpleValueType": true,
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them performs exact match. For regex, use \"Exclude Referrers Regex\" instead\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "attributionExcludeReferrersRegex",
+                        "displayName": "Exclude Referrers Regex",
+                        "simpleValueType": true,
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them is converted to a Regex object and performs regex match\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
                       },
                       {
                         "type": "CHECKBOX",
@@ -1371,8 +1365,8 @@ const generateConfiguration = () => {
     if (!!data.detAttribution) {
       initOptions.defaultTracking.attribution = {};
       
-      if (!!data.attributionExcludeReferrersText) {
-        initOptions.defaultTracking.attribution.excludeReferrersText = getType(data.attributionExcludeReferrersText) === 'array' ? data.attributionExcludeReferrersText : stringToArrayAndTrim(data.attributionExcludeReferrersText);
+      if (!!data.attributionExcludeReferrers) {
+        initOptions.defaultTracking.attribution.excludeReferrersText = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
       }
       
       if (!!data.attributionExcludeReferrersRegex) {
