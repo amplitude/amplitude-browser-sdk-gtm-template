@@ -1680,6 +1680,205 @@ ___WEB_PERMISSIONS___
 ___TESTS___
 
 scenarios:
+- name: Init tag with a single exclude referrer
+  code: |-
+    const excludeReferrers = "test.com";
+    const expectedConfig = {
+      defaultTracking: {
+        attribution: {
+          excludeReferrersText: [excludeReferrers],
+          resetSessionOnNewCampaign: undefined,
+          initialEmptyValue: 'EMPTY',
+        },
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.detAttribution = true;
+    mockData.attributionExcludeReferrers = excludeReferrers;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with multiple exclude referrers
+  code: |-
+    const excludeReferrers = ["test.com", "text.org"];
+    const expectedConfig = {
+      defaultTracking: {
+        attribution: {
+          excludeReferrersText: excludeReferrers,
+          resetSessionOnNewCampaign: undefined,
+          initialEmptyValue: 'EMPTY',
+        },
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.detAttribution = true;
+    mockData.attributionExcludeReferrers = excludeReferrers;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with single exclude referrers regex
+  code: |-
+    const excludeReferrersRegex = ["test.com", "text.org"];
+    const expectedConfig = {
+      defaultTracking: {
+        attribution: {
+          excludeReferrersRegex: excludeReferrersRegex,
+          resetSessionOnNewCampaign: undefined,
+          initialEmptyValue: 'EMPTY',
+        },
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.detAttribution = true;
+    mockData.attributionExcludeReferrersRegex = excludeReferrersRegex;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with multiple exclude referrers regex
+  code: |-
+    const excludeReferrersRegex = ["test.com", "text.org"];
+    const expectedConfig = {
+      defaultTracking: {
+        attribution: {
+          excludeReferrersRegex: excludeReferrersRegex,
+          resetSessionOnNewCampaign: undefined,
+          initialEmptyValue: 'EMPTY',
+        },
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.detAttribution = true;
+    mockData.attributionExcludeReferrersRegex = excludeReferrersRegex;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with both exclude referrers text and regex
+  code: |-
+    const excludeReferrers = ["a.com", "b.org"];
+    const excludeReferrersRegex = ["c.com", "d.org"];
+    const expectedConfig = {
+      defaultTracking: {
+        attribution: {
+          excludeReferrersText: excludeReferrers,
+          excludeReferrersRegex: excludeReferrersRegex,
+          resetSessionOnNewCampaign: undefined,
+          initialEmptyValue: 'EMPTY',
+        },
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.detAttribution = true;
+    mockData.attributionExcludeReferrers = excludeReferrers;
+    mockData.attributionExcludeReferrersRegex = excludeReferrersRegex;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
 - name: Track tag with individual event properties
   code: "\nmockData.type = 'track';\nmockData.eventType = 'test_event';\n\nconst eventProperties\
     \ = {\n  'individual_ep_key1': 'individual_ep_value1', \n  'individual_ep_key2':\
@@ -2088,21 +2287,21 @@ scenarios:
 
     // Verify that the tag finished successfully.
     assertApi('gtmOnSuccess').wasCalled();
-setup: "const object = require('Object');\n\nconst mockData = {\n  instanceName: '$default_instance'\n\
-  };\n\n// Helper function\nconst convertObjectToArray = function (obj, nameKey, valueKey){\n\
-  \    var result = [];\n    for (var key in obj) {\n        if (obj.hasOwnProperty(key))\
-  \ {\n            var entry = {};\n            entry[nameKey] = key;\n          \
-  \  entry[valueKey] = obj[key];\n            result.push(entry);\n        }\n   \
-  \ }\n    return result;\n};\n\nconst mergeProperties = function(obj, result, ignoredKey)\
-  \ {\n  object.entries(obj).forEach((entry) => {\n    const key = entry[0];\n   \
-  \ if (key !== ignoredKey) {\n      const value = entry[1];\n      result[key] =\
-  \ value;    \n    }\n  });\n  return result;\n};\n\nconst mergeObject = function\
-  \ (baseObj, overwriteObj, ignoredKey){\n    const filteredBaseObj = mergeProperties(baseObj,\
-  \ {}, ignoredKey);    // Merge base object into new object\n    const filteredMergedObj\
-  \ = mergeProperties(overwriteObj, filteredBaseObj, ignoredKey);  // Overwrite with\
-  \ the second object\n    return filteredMergedObj;\n};\n\nlet success, failure;\n\
-  mock('injectScript', (url, onsuccess, onfailure) => {\n  success = onsuccess;\n\
-  \  failure = onfailure;\n  onsuccess();\n});\n     "
+setup: "const object = require('Object');\n\nconst mockData = {\n  instanceName: '$default_instance',\n\
+  \  apiKey: 'test_api_key',\n};\n\n// Helper function\nconst convertObjectToArray\
+  \ = function (obj, nameKey, valueKey){\n    var result = [];\n    for (var key in\
+  \ obj) {\n        if (obj.hasOwnProperty(key)) {\n            var entry = {};\n\
+  \            entry[nameKey] = key;\n            entry[valueKey] = obj[key];\n  \
+  \          result.push(entry);\n        }\n    }\n    return result;\n};\n\nconst\
+  \ mergeProperties = function(obj, result, ignoredKey) {\n  object.entries(obj).forEach((entry)\
+  \ => {\n    const key = entry[0];\n    if (key !== ignoredKey) {\n      const value\
+  \ = entry[1];\n      result[key] = value;    \n    }\n  });\n  return result;\n\
+  };\n\nconst mergeObject = function (baseObj, overwriteObj, ignoredKey){\n    const\
+  \ filteredBaseObj = mergeProperties(baseObj, {}, ignoredKey);    // Merge base object\
+  \ into new object\n    const filteredMergedObj = mergeProperties(overwriteObj, filteredBaseObj,\
+  \ ignoredKey);  // Overwrite with the second object\n    return filteredMergedObj;\n\
+  };\n\nlet success, failure;\nmock('injectScript', (url, onsuccess, onfailure) =>\
+  \ {\n  success = onsuccess;\n  failure = onfailure;\n  onsuccess();\n});\n     "
 
 
 ___NOTES___
