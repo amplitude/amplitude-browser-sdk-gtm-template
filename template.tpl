@@ -1750,7 +1750,7 @@ scenarios:
         assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
         assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
         assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
-         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
       };
     });
 
@@ -1789,7 +1789,7 @@ scenarios:
         assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
         assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
         assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
-         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
       };
     });
 
@@ -1828,7 +1828,7 @@ scenarios:
         assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
         assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
         assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
-         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
       };
     });
 
@@ -1870,7 +1870,7 @@ scenarios:
         assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
         assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
         assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
-         assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
       };
     });
 
