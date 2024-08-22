@@ -1761,11 +1761,11 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
 - name: Init tag with single exclude referrers regex
   code: |-
-    const excludeReferrersRegex = ["test.com", "text.org"];
+    const excludeReferrersRegex = "test.com";
     const expectedConfig = {
       defaultTracking: {
         attribution: {
-          excludeReferrersRegex: excludeReferrersRegex,
+          excludeReferrersRegex: [excludeReferrersRegex],
           resetSessionOnNewCampaign: undefined,
           initialEmptyValue: 'EMPTY',
         },
