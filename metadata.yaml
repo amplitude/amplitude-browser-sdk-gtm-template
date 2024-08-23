@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: e1eaac00556de4352bf5b7cdc586c2a314454d1a
+    changeNotes: feat support excludeReferrers regex
   - sha: 21ecc094e760d476a49a57b842d471ebdb16381c
     changeNotes: Fix cookie decoding issue and the security error while using localStorage and sessionStorage
   - sha: 28313f16cd3d9e8efbfb6d48218a44131b39dc3c
