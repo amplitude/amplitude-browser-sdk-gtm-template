@@ -777,17 +777,17 @@ ___TEMPLATE_PARAMETERS___
     "type": "GROUP",
     "subParams": [
       {
-        "help": "Check this box to enable default event tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events\"\u003eRead more\u003c/a\u003e.",
+        "help": "Check this box to enable autocapture. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#autocapture\"\u003eRead more\u003c/a\u003e.",
         "defaultValue": true,
         "simpleValueType": true,
         "name": "defaultEventTracking",
-        "checkboxText": "Track default Amplitude events",
+        "checkboxText": "Autocapture events",
         "type": "CHECKBOX",
         "subParams": [
           {
             "type": "GROUP",
             "name": "defaultEventTrackingOptions",
-            "displayName": "Default Event Tracking Options",
+            "displayName": "Autocapture Options",
             "groupStyle": "ZIPPY_CLOSED",
             "subParams": [
               {
@@ -814,14 +814,14 @@ ___TEMPLATE_PARAMETERS___
                         "name": "attributionExcludeReferrers",
                         "displayName": "Exclude Referrers String",
                         "simpleValueType": true,
-                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them performs exact match. For regex, use \"Exclude Referrers Regex\" instead\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them performs exact match. For regex, use \"Exclude Referrers Regex\" instead. \u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
                       },
                       {
                         "type": "TEXT",
                         "name": "attributionExcludeReferrersRegex",
                         "displayName": "Exclude Referrers Regex",
                         "simpleValueType": true,
-                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them is converted to a Regex object and performs regex match\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them is converted to a Regex object and performs regex match. \u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
                       },
                       {
                         "type": "CHECKBOX",
@@ -932,6 +932,72 @@ ___TEMPLATE_PARAMETERS___
                 "simpleValueType": true,
                 "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
                 "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "autocaptureElementInteractions",
+                "checkboxText": "Track element interactions",
+                "simpleValueType": true,
+                "help": "Check this box to enable element interactions tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": false,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "elementInteractionsOptions",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsCssSelectorAllowlist",
+                        "displayName": "Css Selector Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define which elements on the page should always be tracked. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsActionClickAllowlist",
+                        "displayName": "Action Click Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define which elements on the page should always be tracked. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsPageUrlAllowlistString",
+                        "displayName": "Page Url Allowlist String",
+                        "simpleValueType": true,
+                        "help": "Defines the URL, URLs, or URL pattern on which Amplitude tracks element click and change events. For regex, use \"Page Url Allowlist Regex\" instead. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsPageUrlAllowlistRegex",
+                        "displayName": "Page Url Allowlist Regex",
+                        "simpleValueType": true,
+                        "help": "Defines the URL, URLs, or URL pattern on which Amplitude tracks element click and change events. Each one of them is converted to a Regex object and performs regex match. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsDataAttributePrefixString",
+                        "displayName": "Data Attribute Prefix String",
+                        "simpleValueType": true,
+                        "help": "Allows the SDK to capture data attributes as an event property. For regex, use \"Data Attribute Prefix  Regex\" instead. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsDataAttributePrefixRegex",
+                        "displayName": "Data Attribute Prefix Regex",
+                        "simpleValueType": true,
+                        "help": "Allows the SDK to capture data attributes as an event property. Each one of them is converted to a Regex object and performs regex match. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "autocaptureElementInteractions",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "enablingConditions": [
@@ -1421,6 +1487,32 @@ const generateConfiguration = () => {
     if (!data.detFormInteraction) {
       initOptions.defaultTracking.formInteractions = false;
     }
+
+    if (!!data.autocaptureElementInteractions) {
+      initOptions.autocapture.elementInteractions = {};
+
+      initOptions.autocapture.elementInteractions.cssSelectorAllowlist = data.elementInteractionsCssSelectorAllowlist;
+      initOptions.autocapture.elementInteractions.actionClickAllowlist = data.elementInteractionsActionClickAllowlist;
+      
+      if (!!data.elementInteractionsPageUrlAllowlistString) {
+        initOptions.autocapture.elementInteractions.pageUrlAllowlistString = getType(data.elementInteractionsPageUrlAllowlistString) === 'array' ? data.elementInteractionsPageUrlAllowlistString : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistString);
+      }
+      
+      if (!!data.elementInteractionsPageUrlAllowlistRegex) {
+        initOptions.autocapture.elementInteractions.pageUrlAllowlistRegex = getType(data.elementInteractionsPageUrlAllowlistRegex) === 'array' ? data.elementInteractionsPageUrlAllowlistRegex : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistRegex);
+      }
+
+      if (!!data.elementInteractionsDataAttributePrefixString) {
+        initOptions.autocapture.elementInteractions.dataAttributePrefixString = getType(data.elementInteractionsDataAttributePrefixString) === 'array' ? data.elementInteractionsDataAttributePrefixString : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixString);
+      }
+      
+      if (!!data.elementInteractionsDataAttributePrefixRegex) {
+        initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
+      }
+    } else {
+       initOptions.defaultTracking.attribution = false;
+    }
+    
   } else {
     initOptions.defaultTracking = false;
   }
