@@ -938,7 +938,7 @@ ___TEMPLATE_PARAMETERS___
                 "name": "autocaptureElementInteractions",
                 "checkboxText": "Track element interactions",
                 "simpleValueType": true,
-                "help": "Check this box to enable element interactions tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
+                "help": "Check this box to enable element interactions tracking. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e.",
                 "defaultValue": false,
                 "subParams": [
                   {
@@ -1426,73 +1426,78 @@ const generateConfiguration = () => {
   }
 
   if (!!data.defaultEventTracking) {
-    initOptions.defaultTracking = {};
+    initOptions.autocapture = {};
 
     if (!!data.detAttribution) {
-      initOptions.defaultTracking.attribution = {};
+      initOptions.autocapture.attribution = {};
       
       if (!!data.attributionExcludeReferrers) {
-        initOptions.defaultTracking.attribution.excludeReferrersText = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
+        initOptions.autocapture.attribution.excludeReferrersText = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
       }
       
       if (!!data.attributionExcludeReferrersRegex) {
-        initOptions.defaultTracking.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
+        initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
       }
 
-      initOptions.defaultTracking.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
-      initOptions.defaultTracking.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
+      initOptions.autocapture.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
+      initOptions.autocapture.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
     } else {
-       initOptions.defaultTracking.attribution = false;
+       initOptions.autocapture.attribution = false;
     }
 
     if (!!data.detPageView) {
-      initOptions.defaultTracking.pageViews = {};
+      initOptions.autocapture.pageViews = {};
 
       if (!!data.pageViewLegacy) {
         // pass the pageViewLegacy option into the SDK wrapper and use plugin in to make the page view event using legacy properties.
         initOptions.pageViewLegacy = true;
       } else {
         if (!!data.pageViewType) {
-          initOptions.defaultTracking.pageViews.eventType = data.pageViewType;
+          initOptions.autocapture.pageViews.eventType = data.pageViewType;
         }
       }
 
-      initOptions.defaultTracking.pageViews = {
+      initOptions.autocapture.pageViews = {
         trackOn: undefined
       };
 
       switch (data.pageHistoryTracking) {
         case 'path':
-          initOptions.defaultTracking.pageViews.trackHistoryChanges = 'pathOnly';
+          initOptions.autocapture.pageViews.trackHistoryChanges = 'pathOnly';
           break;
         default:
-          initOptions.defaultTracking.pageViews.trackHistoryChanges = 'all';
+          initOptions.autocapture.pageViews.trackHistoryChanges = 'all';
           break;
       }
     } else {
-      initOptions.defaultTracking.pageViews = false;
+      initOptions.autocapture.pageViews = false;
     }
 
     // Session events are enable by default
     if (!data.detSession) {
-      initOptions.defaultTracking.sessions = false;
+      initOptions.autocapture.sessions = false;
     }
 
     // fileDownloads events are enable by default
     if (!data.detFileDownload) {
-       initOptions.defaultTracking.fileDownloads = false;
+       initOptions.autocapture.fileDownloads = false;
     }
 
     // fileDownloads events are enable by default
     if (!data.detFormInteraction) {
-      initOptions.defaultTracking.formInteractions = false;
+      initOptions.autocapture.formInteractions = false;
     }
 
     if (!!data.autocaptureElementInteractions) {
       initOptions.autocapture.elementInteractions = {};
 
-      initOptions.autocapture.elementInteractions.cssSelectorAllowlist = data.elementInteractionsCssSelectorAllowlist;
-      initOptions.autocapture.elementInteractions.actionClickAllowlist = data.elementInteractionsActionClickAllowlist;
+      if (!!data.elementInteractionsCssSelectorAllowlist) {
+        initOptions.autocapture.elementInteractions.cssSelectorAllowlist = getType(data.elementInteractionsCssSelectorAllowlist) === 'array' ? data.elementInteractionsCssSelectorAllowlist : stringToArrayAndTrim(data.elementInteractionsCssSelectorAllowlist);
+      }
+
+      if (!!data.elementInteractionsActionClickAllowlist) {
+        initOptions.autocapture.elementInteractions.actionClickAllowlist = getType(data.elementInteractionsActionClickAllowlist) === 'array' ? data.elementInteractionsActionClickAllowlist : stringToArrayAndTrim(data.elementInteractionsActionClickAllowlist);
+      }
       
       if (!!data.elementInteractionsPageUrlAllowlistString) {
         initOptions.autocapture.elementInteractions.pageUrlAllowlistString = getType(data.elementInteractionsPageUrlAllowlistString) === 'array' ? data.elementInteractionsPageUrlAllowlistString : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistString);
@@ -1510,11 +1515,11 @@ const generateConfiguration = () => {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
       }
     } else {
-       initOptions.defaultTracking.attribution = false;
+       initOptions.autocapture.elementInteractions = false;
     }
     
   } else {
-    initOptions.defaultTracking = false;
+    initOptions.autocapture = false;
   }
 
   if(initOptions.logLevel == 4){
