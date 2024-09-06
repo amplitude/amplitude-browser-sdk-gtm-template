@@ -1781,7 +1781,7 @@ scenarios:
   code: |-
     const excludeReferrers = "test.com";
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersText: [excludeReferrers],
           resetSessionOnNewCampaign: undefined,
@@ -1821,7 +1821,7 @@ scenarios:
   code: |-
     const excludeReferrers = ["test.com", "text.org"];
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersText: excludeReferrers,
           resetSessionOnNewCampaign: undefined,
@@ -1860,7 +1860,7 @@ scenarios:
   code: |-
     const excludeReferrersRegex = "test.com";
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersRegex: [excludeReferrersRegex],
           resetSessionOnNewCampaign: undefined,
@@ -1899,7 +1899,7 @@ scenarios:
   code: |-
     const excludeReferrersRegex = ["test.com", "text.org"];
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersRegex: excludeReferrersRegex,
           resetSessionOnNewCampaign: undefined,
@@ -1939,7 +1939,7 @@ scenarios:
     const excludeReferrers = ["a.com", "b.org"];
     const excludeReferrersRegex = ["c.com", "d.org"];
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersText: excludeReferrers,
           excludeReferrersRegex: excludeReferrersRegex,
