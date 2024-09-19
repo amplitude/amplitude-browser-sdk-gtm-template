@@ -1514,8 +1514,6 @@ const generateConfiguration = () => {
       if (!!data.elementInteractionsDataAttributePrefixRegex) {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
       }
-    } else {
-       initOptions.autocapture.elementInteractions = false;
     }
     
   } else {
@@ -1958,6 +1956,93 @@ scenarios:
     mockData.detAttribution = true;
     mockData.attributionExcludeReferrers = excludeReferrers;
     mockData.attributionExcludeReferrersRegex = excludeReferrersRegex;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with element interactions
+  code: |-
+    const expectedConfig = {
+      autocapture: {
+        attribution: false,
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+        elementInteractions: {}
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.autocaptureElementInteractions = true;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with element interactions and custom configs
+  code: |-
+    const cssSelectorAllowlist = ['a','button','input'];
+    const actionClickAllowlist = ['div'];
+    const pageUrlAllowlistString = ['a.com', 'b.com'];
+    const pageUrlAllowlistRegex = ['c.com', 'd.com'];
+    const dataAttributePrefixString = ['data-amp-track','data-parent'];
+    const dataAttributePrefixRegex = ['data-test1', 'data-test2'];
+    const expectedConfig = {
+      autocapture: {
+        attribution: false,
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+        elementInteractions: {
+          cssSelectorAllowlist: cssSelectorAllowlist,
+          actionClickAllowlist: actionClickAllowlist,
+          pageUrlAllowlistString: pageUrlAllowlistString,
+          pageUrlAllowlistRegex: pageUrlAllowlistRegex,
+          dataAttributePrefixString: dataAttributePrefixString,
+          dataAttributePrefixRegex: dataAttributePrefixRegex,
+        }
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.autocaptureElementInteractions = true;
+    mockData.elementInteractionsCssSelectorAllowlist = cssSelectorAllowlist;
+    mockData.elementInteractionsActionClickAllowlist = 'div';
+    mockData.elementInteractionsPageUrlAllowlistString = pageUrlAllowlistString;
+    mockData.elementInteractionsPageUrlAllowlistRegex = pageUrlAllowlistRegex;
+    mockData.elementInteractionsDataAttributePrefixString = dataAttributePrefixString;
+    mockData.elementInteractionsDataAttributePrefixRegex = dataAttributePrefixRegex;
 
     // Test the following line:
     // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
