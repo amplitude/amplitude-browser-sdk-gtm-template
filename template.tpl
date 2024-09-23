@@ -777,17 +777,17 @@ ___TEMPLATE_PARAMETERS___
     "type": "GROUP",
     "subParams": [
       {
-        "help": "Check this box to enable default event tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-default-events\"\u003eRead more\u003c/a\u003e.",
+        "help": "Check this box to enable autocapture. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#autocapture\"\u003eRead more\u003c/a\u003e.",
         "defaultValue": true,
         "simpleValueType": true,
         "name": "defaultEventTracking",
-        "checkboxText": "Track default Amplitude events",
+        "checkboxText": "Autocapture events",
         "type": "CHECKBOX",
         "subParams": [
           {
             "type": "GROUP",
             "name": "defaultEventTrackingOptions",
-            "displayName": "Default Event Tracking Options",
+            "displayName": "Autocapture Options",
             "groupStyle": "ZIPPY_CLOSED",
             "subParams": [
               {
@@ -814,14 +814,14 @@ ___TEMPLATE_PARAMETERS___
                         "name": "attributionExcludeReferrers",
                         "displayName": "Exclude Referrers String",
                         "simpleValueType": true,
-                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them performs exact match. For regex, use \"Exclude Referrers Regex\" instead\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them performs exact match. For regex, use \"Exclude Referrers Regex\" instead. \u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
                       },
                       {
                         "type": "TEXT",
                         "name": "attributionExcludeReferrersRegex",
                         "displayName": "Exclude Referrers Regex",
                         "simpleValueType": true,
-                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them is converted to a Regex object and performs regex match\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
+                        "help": "Pass a comma-separated list of referring domains you want to exclude from campaign attribution. Each one of them is converted to a Regex object and performs regex match. \u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#init\"\u003eRead more\u003c/a\u003e."
                       },
                       {
                         "type": "CHECKBOX",
@@ -932,6 +932,72 @@ ___TEMPLATE_PARAMETERS___
                 "simpleValueType": true,
                 "help": "Check this box to enable file download tracking. \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#tracking-file-downloads\"\u003eRead more\u003c/a\u003e.",
                 "defaultValue": true
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "autocaptureElementInteractions",
+                "checkboxText": "Track element interactions",
+                "simpleValueType": true,
+                "help": "Check this box to enable element interactions tracking. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": false,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "elementInteractionsOptions",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsCssSelectorAllowlist",
+                        "displayName": "Css Selector Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define which elements on the page should always be tracked. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsActionClickAllowlist",
+                        "displayName": "Action Click Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define which elements on the page should always be tracked. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsPageUrlAllowlistString",
+                        "displayName": "Page Url Allowlist String",
+                        "simpleValueType": true,
+                        "help": "Defines the URL, URLs, or URL pattern on which Amplitude tracks element click and change events. For regex, use \"Page Url Allowlist Regex\" instead. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsPageUrlAllowlistRegex",
+                        "displayName": "Page Url Allowlist Regex",
+                        "simpleValueType": true,
+                        "help": "Defines the URL, URLs, or URL pattern on which Amplitude tracks element click and change events. Each one of them is converted to a Regex object and performs regex match. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsDataAttributePrefixString",
+                        "displayName": "Data Attribute Prefix String",
+                        "simpleValueType": true,
+                        "help": "Allows the SDK to capture data attributes as an event property. For regex, use \"Data Attribute Prefix  Regex\" instead. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "elementInteractionsDataAttributePrefixRegex",
+                        "displayName": "Data Attribute Prefix Regex",
+                        "simpleValueType": true,
+                        "help": "Allows the SDK to capture data attributes as an event property. Each one of them is converted to a Regex object and performs regex match. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e."
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "autocaptureElementInteractions",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "enablingConditions": [
@@ -1250,7 +1316,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.10.1';
+const WRAPPER_VERSION = '3.11.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1360,69 +1426,98 @@ const generateConfiguration = () => {
   }
 
   if (!!data.defaultEventTracking) {
-    initOptions.defaultTracking = {};
+    initOptions.autocapture = {};
 
     if (!!data.detAttribution) {
-      initOptions.defaultTracking.attribution = {};
+      initOptions.autocapture.attribution = {};
       
       if (!!data.attributionExcludeReferrers) {
-        initOptions.defaultTracking.attribution.excludeReferrersText = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
+        initOptions.autocapture.attribution.excludeReferrersText = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
       }
       
       if (!!data.attributionExcludeReferrersRegex) {
-        initOptions.defaultTracking.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
+        initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
       }
 
-      initOptions.defaultTracking.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
-      initOptions.defaultTracking.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
+      initOptions.autocapture.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
+      initOptions.autocapture.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
     } else {
-       initOptions.defaultTracking.attribution = false;
+       initOptions.autocapture.attribution = false;
     }
 
     if (!!data.detPageView) {
-      initOptions.defaultTracking.pageViews = {};
+      initOptions.autocapture.pageViews = {};
 
       if (!!data.pageViewLegacy) {
         // pass the pageViewLegacy option into the SDK wrapper and use plugin in to make the page view event using legacy properties.
         initOptions.pageViewLegacy = true;
       } else {
         if (!!data.pageViewType) {
-          initOptions.defaultTracking.pageViews.eventType = data.pageViewType;
+          initOptions.autocapture.pageViews.eventType = data.pageViewType;
         }
       }
 
-      initOptions.defaultTracking.pageViews = {
+      initOptions.autocapture.pageViews = {
         trackOn: undefined
       };
 
       switch (data.pageHistoryTracking) {
         case 'path':
-          initOptions.defaultTracking.pageViews.trackHistoryChanges = 'pathOnly';
+          initOptions.autocapture.pageViews.trackHistoryChanges = 'pathOnly';
           break;
         default:
-          initOptions.defaultTracking.pageViews.trackHistoryChanges = 'all';
+          initOptions.autocapture.pageViews.trackHistoryChanges = 'all';
           break;
       }
     } else {
-      initOptions.defaultTracking.pageViews = false;
+      initOptions.autocapture.pageViews = false;
     }
 
     // Session events are enable by default
     if (!data.detSession) {
-      initOptions.defaultTracking.sessions = false;
+      initOptions.autocapture.sessions = false;
     }
 
     // fileDownloads events are enable by default
     if (!data.detFileDownload) {
-       initOptions.defaultTracking.fileDownloads = false;
+       initOptions.autocapture.fileDownloads = false;
     }
 
     // fileDownloads events are enable by default
     if (!data.detFormInteraction) {
-      initOptions.defaultTracking.formInteractions = false;
+      initOptions.autocapture.formInteractions = false;
     }
+
+    if (!!data.autocaptureElementInteractions) {
+      initOptions.autocapture.elementInteractions = {};
+
+      if (!!data.elementInteractionsCssSelectorAllowlist) {
+        initOptions.autocapture.elementInteractions.cssSelectorAllowlist = getType(data.elementInteractionsCssSelectorAllowlist) === 'array' ? data.elementInteractionsCssSelectorAllowlist : stringToArrayAndTrim(data.elementInteractionsCssSelectorAllowlist);
+      }
+
+      if (!!data.elementInteractionsActionClickAllowlist) {
+        initOptions.autocapture.elementInteractions.actionClickAllowlist = getType(data.elementInteractionsActionClickAllowlist) === 'array' ? data.elementInteractionsActionClickAllowlist : stringToArrayAndTrim(data.elementInteractionsActionClickAllowlist);
+      }
+      
+      if (!!data.elementInteractionsPageUrlAllowlistString) {
+        initOptions.autocapture.elementInteractions.pageUrlAllowlistString = getType(data.elementInteractionsPageUrlAllowlistString) === 'array' ? data.elementInteractionsPageUrlAllowlistString : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistString);
+      }
+      
+      if (!!data.elementInteractionsPageUrlAllowlistRegex) {
+        initOptions.autocapture.elementInteractions.pageUrlAllowlistRegex = getType(data.elementInteractionsPageUrlAllowlistRegex) === 'array' ? data.elementInteractionsPageUrlAllowlistRegex : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistRegex);
+      }
+
+      if (!!data.elementInteractionsDataAttributePrefixString) {
+        initOptions.autocapture.elementInteractions.dataAttributePrefixString = getType(data.elementInteractionsDataAttributePrefixString) === 'array' ? data.elementInteractionsDataAttributePrefixString : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixString);
+      }
+      
+      if (!!data.elementInteractionsDataAttributePrefixRegex) {
+        initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
+      }
+    }
+    
   } else {
-    initOptions.defaultTracking = false;
+    initOptions.autocapture = false;
   }
 
   if(initOptions.logLevel == 4){
@@ -1684,7 +1779,7 @@ scenarios:
   code: |-
     const excludeReferrers = "test.com";
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersText: [excludeReferrers],
           resetSessionOnNewCampaign: undefined,
@@ -1724,7 +1819,7 @@ scenarios:
   code: |-
     const excludeReferrers = ["test.com", "text.org"];
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersText: excludeReferrers,
           resetSessionOnNewCampaign: undefined,
@@ -1763,7 +1858,7 @@ scenarios:
   code: |-
     const excludeReferrersRegex = "test.com";
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersRegex: [excludeReferrersRegex],
           resetSessionOnNewCampaign: undefined,
@@ -1802,7 +1897,7 @@ scenarios:
   code: |-
     const excludeReferrersRegex = ["test.com", "text.org"];
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersRegex: excludeReferrersRegex,
           resetSessionOnNewCampaign: undefined,
@@ -1842,7 +1937,7 @@ scenarios:
     const excludeReferrers = ["a.com", "b.org"];
     const excludeReferrersRegex = ["c.com", "d.org"];
     const expectedConfig = {
-      defaultTracking: {
+      autocapture: {
         attribution: {
           excludeReferrersText: excludeReferrers,
           excludeReferrersRegex: excludeReferrersRegex,
@@ -1861,6 +1956,93 @@ scenarios:
     mockData.detAttribution = true;
     mockData.attributionExcludeReferrers = excludeReferrers;
     mockData.attributionExcludeReferrersRegex = excludeReferrersRegex;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with element interactions
+  code: |-
+    const expectedConfig = {
+      autocapture: {
+        attribution: false,
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+        elementInteractions: {}
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.autocaptureElementInteractions = true;
+
+    // Test the following line:
+    // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+    mock('copyFromWindow', key => {
+      return function() {
+        assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
+        assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
+        assertThat(arguments[2], 'Incorrect apiKey object').isEqualTo(mockData.apiKey);
+        assertThat(arguments[3], 'Incorrect user Id').isEqualTo(null);
+        assertThat(arguments[4], 'Incorrect config').isEqualTo(expectedConfig);
+      };
+    });
+
+    // Call runCode to run the template's code.
+    runCode(mockData);
+
+    // Verify that the tag finished successfully.
+    assertApi('gtmOnSuccess').wasCalled();
+- name: Init tag with element interactions and custom configs
+  code: |-
+    const cssSelectorAllowlist = ['a','button','input'];
+    const actionClickAllowlist = ['div'];
+    const pageUrlAllowlistString = ['a.com', 'b.com'];
+    const pageUrlAllowlistRegex = ['c.com', 'd.com'];
+    const dataAttributePrefixString = ['data-amp-track','data-parent'];
+    const dataAttributePrefixRegex = ['data-test1', 'data-test2'];
+    const expectedConfig = {
+      autocapture: {
+        attribution: false,
+        pageViews: false,
+        sessions: false,
+        fileDownloads: false,
+        formInteractions: false,
+        elementInteractions: {
+          cssSelectorAllowlist: cssSelectorAllowlist,
+          actionClickAllowlist: actionClickAllowlist,
+          pageUrlAllowlistString: pageUrlAllowlistString,
+          pageUrlAllowlistRegex: pageUrlAllowlistRegex,
+          dataAttributePrefixString: dataAttributePrefixString,
+          dataAttributePrefixRegex: dataAttributePrefixRegex,
+        }
+      }
+    };
+
+    mockData.type = 'init';
+    mockData.defaultEventTracking = true;
+    mockData.autocaptureElementInteractions = true;
+    mockData.elementInteractionsCssSelectorAllowlist = cssSelectorAllowlist;
+    mockData.elementInteractionsActionClickAllowlist = 'div';
+    mockData.elementInteractionsPageUrlAllowlistString = pageUrlAllowlistString;
+    mockData.elementInteractionsPageUrlAllowlistRegex = pageUrlAllowlistRegex;
+    mockData.elementInteractionsDataAttributePrefixString = dataAttributePrefixString;
+    mockData.elementInteractionsDataAttributePrefixRegex = dataAttributePrefixRegex;
 
     // Test the following line:
     // _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
