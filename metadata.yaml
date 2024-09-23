@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 8f2e77fea211f02977563cbfd333dbaff6d92311
+    changeNotes: feat autocapture plugin and visual labeler
   - sha: 5e4818abf983a329e637b67220405c2e83a9121b
     changeNotes: fix defaultTracking is false
   - sha: e1eaac00556de4352bf5b7cdc586c2a314454d1a
