@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 7144f0ef1c460108eeae5ffa1ea83434d4739702
+    changeNotes: Fixed group identify not being sent
   - sha: 8f2e77fea211f02977563cbfd333dbaff6d92311
     changeNotes: feat autocapture plugin and visual labeler
   - sha: 5e4818abf983a329e637b67220405c2e83a9121b
