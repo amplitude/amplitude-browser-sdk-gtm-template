@@ -1617,7 +1617,7 @@ const onsuccess = () => {
 
     case 'groupIdentify':
       const mergedGroupUserProps = getAllUserProps(data);
-      _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, mergedGroupUserProps);
+      _amplitude(instanceName, 'groupIdentify', data.identifyGroupType, data.identifyGroupName, mergedGroupUserProps);
       break;
 
     case 'revenue':
@@ -2222,6 +2222,7 @@ scenarios:
   code: |-
     mockData.type = 'groupIdentify';
     mockData.identifyGroupType = 'test_group_type';
+    mockData.identifyGroupName = 'test_group_name';
 
     const userPropertyOperations = ['set', 'identify_key', 'identify_value'];
     mockData.userPropertyOperations = [{
@@ -2235,7 +2236,9 @@ scenarios:
         assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
         assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
         assertThat(arguments[2], 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);
-        assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([userPropertyOperations]);
+        assertThat(arguments[3], 'Incorrect identify group name').isEqualTo(mockData.identifyGroupName);
+        assertThat(arguments[4], 'Incorrect gourp identify object').isEqualTo([userPropertyOperations]);
+
         };
     });
 
@@ -2246,8 +2249,9 @@ scenarios:
     assertApi('gtmOnSuccess').wasCalled();
 - name: Group Identify tag with object user properties
   code: "mockData.type = 'groupIdentify';\nmockData.identifyGroupType = 'test_group_type';\n\
-    \nconst userPropertyOperations = ['set', 'object_identify_key', 'object_identify_value'];\n\
-    const identifyKey = userPropertyOperations[1];\nconst identifyValue = userPropertyOperations[2];\n\
+    mockData.identifyGroupName = 'test_group_name';\n\nconst userPropertyOperations\
+    \ = ['set', 'object_identify_key', 'object_identify_value'];\nconst identifyKey\
+    \ = userPropertyOperations[1];\nconst identifyValue = userPropertyOperations[2];\n\
     mockData.userPropertyOperationsObject = {\n  'object_ep_key': 'object_ep_value',\n\
     \  'overlap_ep_key': 'overlap_object_ep_value',\n  user_properties: {} \n};\n\
     mockData.userPropertyOperationsObject.user_properties[identifyKey] = identifyValue;\n\
@@ -2255,12 +2259,14 @@ scenarios:
     \ 'Incorrect instance name').isEqualTo(mockData.instanceName);\n    assertThat(arguments[1],\
     \ 'Incorrect tag type').isEqualTo(mockData.type);\n    assertThat(arguments[2],\
     \ 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);\n  \
-    \  assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([userPropertyOperations]);\n\
+    \  assertThat(arguments[3], 'Incorrect identify group name').isEqualTo(mockData.identifyGroupName);\n\
+    \    assertThat(arguments[4], 'Incorrect gourp identify object').isEqualTo([userPropertyOperations]);\n\
     \   };\n});\n\n// Call runCode to run the template's code.\nrunCode(mockData);\n\
     \n// Verify that the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
 - name: Group Identify tag with individual and object user properties
   code: "mockData.type = 'groupIdentify';\nmockData.identifyGroupType = 'test_group_type';\n\
-    \nconst individualUserPropOps = ['set', 'identify_key', 'identify_value'];\nmockData.userPropertyOperations\
+    mockData.identifyGroupName = 'test_group_name';\n\nconst individualUserPropOps\
+    \ = ['set', 'identify_key', 'identify_value'];\nmockData.userPropertyOperations\
     \ = [{\n  command: individualUserPropOps[0],\n  userProperty: individualUserPropOps[1],\n\
     \  value: individualUserPropOps[2],\n}];\n\nconst objectUserPropOps = ['set',\
     \ 'object_identify_key', 'object_identify_value'];\nconst objectIdentifyKey =\
@@ -2271,7 +2277,8 @@ scenarios:
     \ {\n    assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);\n\
     \    assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);\n\
     \    assertThat(arguments[2], 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);\n\
-    \    assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([\n\
+    \    assertThat(arguments[3], 'Incorrect identify group name').isEqualTo(mockData.identifyGroupName);\n\
+    \    assertThat(arguments[4], 'Incorrect gourp identify object').isEqualTo([\n\
     \      individualUserPropOps,\n      objectUserPropOps\n    ]);\n  };\n});\n\n\
     // Call runCode to run the template's code.\nrunCode(mockData);\n\n// Verify that\
     \ the tag finished successfully.\nassertApi('gtmOnSuccess').wasCalled();"
@@ -2281,6 +2288,7 @@ scenarios:
   code: |-
     mockData.type = 'groupIdentify';
     mockData.identifyGroupType = 'test_group_type';
+    mockData.identifyGroupName = 'test_group_name';
 
     const individualUserPropOps = ['set', 'identify_key', 'identify_value'];
     mockData.userPropertyOperations = [{
@@ -2296,7 +2304,8 @@ scenarios:
         assertThat(arguments[0], 'Incorrect instance name').isEqualTo(mockData.instanceName);
         assertThat(arguments[1], 'Incorrect tag type').isEqualTo(mockData.type);
         assertThat(arguments[2], 'Incorrect identify group type').isEqualTo(mockData.identifyGroupType);
-        assertThat(arguments[3], 'Incorrect gourp identify object').isEqualTo([individualUserPropOps]);
+        assertThat(arguments[3], 'Incorrect identify group name').isEqualTo(mockData.identifyGroupName);
+        assertThat(arguments[4], 'Incorrect gourp identify object').isEqualTo([individualUserPropOps]);
       };
     });
 
