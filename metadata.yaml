@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: e6b0b6602f5ab7c0680889f65a660e5e1528dc16
+    changeNotes: fix should track file download when url with params
   - sha: 00cd2185dc0c068c87135bc7e1c14ac1969d29b2
     changeNotes: resolve crash caused by invalid regular expression
   - sha: 7144f0ef1c460108eeae5ffa1ea83434d4739702
