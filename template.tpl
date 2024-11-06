@@ -141,7 +141,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "LABEL",
     "name": "groupIdentifyDescription",
-    "displayName": "\u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client/#groupidentify\"\u003eSet Group Properties\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#group-properties\"\u003eSDK Reference\u003c/a\u003e",
+    "displayName": "\u003ca href\u003d\"https://amplitude.com/docs/data/source-catalog/google-tag-manager#set-group-properties\"\u003eSet Group Properties\u003c/a\u003e - See also \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/#group-properties\"\u003eSDK Reference\u003c/a\u003e. \u003cstrong\u003eNote that group properties are indeed user properties for each member in that group. So we will use the term \"user property\" instead of \"group property\" in the \"Identify Settings\" section\u003c/strong\u003e",
     "enablingConditions": [
       {
         "paramName": "type",
