@@ -725,6 +725,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "displayValue": "Clear All",
                 "value": "clearAll"
+              },
+              {
+                "value": "unset",
+                "displayValue": "Unset"
               }
             ],
             "defaultValue": "set",
@@ -1316,7 +1320,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.11.2';
+const WRAPPER_VERSION = '3.11.3';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
