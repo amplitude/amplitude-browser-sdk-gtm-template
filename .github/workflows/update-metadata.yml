@@ -17,7 +17,7 @@ jobs:
       - name: Update metadata.yaml
         run: |
           SHA=$(git rev-parse HEAD)
-          MESSAGE=${{ github.event.inputs.releaseDescription }}
+          MESSAGE=$(echo "${{ github.event.inputs.releaseDescription }}" | tr -d ':')
           NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
           echo "New version info to be added: \n"
           echo "$NEW_VERSION"
