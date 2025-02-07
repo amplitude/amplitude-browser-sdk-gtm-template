@@ -1279,7 +1279,7 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
-        "name": "sessionReplayPlugin",
+        "name": "sessionReplay",
         "checkboxText": "Enable Session Replay Plugin",
         "simpleValueType": true,
         "defaultValue": false,
@@ -1320,7 +1320,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.11.3';
+const WRAPPER_VERSION = '3.11.4';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1430,10 +1430,10 @@ const generateConfiguration = () => {
   }
   
   // Configuration for Session Replay Plugin
-  if (!!data.sessionReplayPlugin) {
-    initOptions.sessionReplayPlugin = true;
+  if (!!data.sessionReplay) {
+    initOptions.sessionReplay = true;
   } else {
-    initOptions.sessionReplayPlugin = false;
+    initOptions.sessionReplay = false;
   }
 
   if (!!data.defaultEventTracking) {
@@ -1768,7 +1768,7 @@ ___WEB_PERMISSIONS___
             "listItem": [
               {
                 "type": 1,
-                "string": "https://cdn.jsdelivr.net/gh/amplitude/amplitude-js-gtm@9ab33ccfe335d75de0e3ec27a20cb06d17581791/dist/index.js"
+                "string": "https://cdn.jsdelivr.net/gh/amplitude/amplitude-js-gtm@573e09ae749b550ca6053a44c362fc05b4d738f1/dist/index.js"
               }
             ]
           }
