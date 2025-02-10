@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 8586f4801eeab34e7973f31b947b0fb57d4a3da6
+    changeNotes: Enable Session Replay option in GTM
   - sha: 45704170a76b625045a52a7a773ee363ab299a79
     changeNotes: fix support identify.unset versions bump to 2.11.10 (#72)
   - sha: 011ad846d801d2e20e7face67d7dea13152d23dc
