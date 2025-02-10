@@ -1284,6 +1284,14 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "sessionReplay",
+        "checkboxText": "Enable Session Replay Plugin",
+        "simpleValueType": true,
+        "defaultValue": false,
+        "subParams": []
       }
     ]
   },
@@ -1320,7 +1328,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.11.3';
+const WRAPPER_VERSION = '3.11.4';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1427,6 +1435,13 @@ const generateConfiguration = () => {
       deviceManufacturer: data.deviceManufacturer,
       deviceModel: data.deviceModel,
     };
+  }
+  
+  // Configuration for Session Replay Plugin
+  if (!!data.sessionReplay) {
+    initOptions.sessionReplay = true;
+  } else {
+    initOptions.sessionReplay = false;
   }
 
   if (!!data.defaultEventTracking) {
