@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 541a3b3f081934787181d5369603b81c6b6f4b77
+    changeNotes: Add support for Guides and Surveys
   - sha: f2d35f8b810f471cfc5a87eeafdcdd8f01446b7e
     changeNotes: fix autocaputure time assignment, add currency, receipt, and bump to 2.12.0
   - sha: 8586f4801eeab34e7973f31b947b0fb57d4a3da6
