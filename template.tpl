@@ -1292,6 +1292,13 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "defaultValue": false,
         "subParams": []
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "guidesSurveys",
+        "checkboxText": "Enable Guides and Surveys Plugin",
+        "simpleValueType": true,
+        "defaultValue": false
       }
     ]
   },
@@ -1328,7 +1335,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.12.1';
+const WRAPPER_VERSION = '3.13.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1411,12 +1418,12 @@ const generateConfiguration = () => {
 
   // Use manual configuration if it exists – otherwise use what was passed in the variable or an empty object
   const initOptions = (data.initOptions === 'manual' ? makeTableMap(manualOptions, 'key', 'value') : data.initOptions) || {};
-  
+
   // Configuration for trackingOptions
   if (!!data.initTrackingOptions) {
     initOptions.trackingOptions = makeTableMap(normalizeOptionsValues(data.initTrackingOptions), 'key', 'value');
   }
-  
+
   // Configuration for cookieOptions
   if (!!data.initCookieOptions) {
     initOptions.cookieOptions = makeTableMap(normalizeOptionsValues(data.initCookieOptions), 'key', 'value');
@@ -1436,7 +1443,7 @@ const generateConfiguration = () => {
       deviceModel: data.deviceModel,
     };
   }
-  
+
   // Configuration for Session Replay Plugin
   if (!!data.sessionReplay) {
     initOptions.sessionReplay = true;
@@ -1444,16 +1451,23 @@ const generateConfiguration = () => {
     initOptions.sessionReplay = false;
   }
 
+  // Configuration for Guides and Surveys Plugin
+  if (!!data.guidesSurveys) {
+    initOptions.guidesSurveys = true;
+  } else {
+    initOptions.guidesSurveys = false;
+  }
+
   if (!!data.defaultEventTracking) {
     initOptions.autocapture = {};
 
     if (!!data.detAttribution) {
       initOptions.autocapture.attribution = {};
-      
+
       if (!!data.attributionExcludeReferrers) {
         initOptions.autocapture.attribution.excludeReferrersText = getType(data.attributionExcludeReferrers) === 'array' ? data.attributionExcludeReferrers : stringToArrayAndTrim(data.attributionExcludeReferrers);
       }
-      
+
       if (!!data.attributionExcludeReferrersRegex) {
         initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
       }
@@ -1517,11 +1531,11 @@ const generateConfiguration = () => {
       if (!!data.elementInteractionsActionClickAllowlist) {
         initOptions.autocapture.elementInteractions.actionClickAllowlist = getType(data.elementInteractionsActionClickAllowlist) === 'array' ? data.elementInteractionsActionClickAllowlist : stringToArrayAndTrim(data.elementInteractionsActionClickAllowlist);
       }
-      
+
       if (!!data.elementInteractionsPageUrlAllowlistString) {
         initOptions.autocapture.elementInteractions.pageUrlAllowlistString = getType(data.elementInteractionsPageUrlAllowlistString) === 'array' ? data.elementInteractionsPageUrlAllowlistString : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistString);
       }
-      
+
       if (!!data.elementInteractionsPageUrlAllowlistRegex) {
         initOptions.autocapture.elementInteractions.pageUrlAllowlistRegex = getType(data.elementInteractionsPageUrlAllowlistRegex) === 'array' ? data.elementInteractionsPageUrlAllowlistRegex : stringToArrayAndTrim(data.elementInteractionsPageUrlAllowlistRegex);
       }
@@ -1529,12 +1543,12 @@ const generateConfiguration = () => {
       if (!!data.elementInteractionsDataAttributePrefixString) {
         initOptions.autocapture.elementInteractions.dataAttributePrefixString = getType(data.elementInteractionsDataAttributePrefixString) === 'array' ? data.elementInteractionsDataAttributePrefixString : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixString);
       }
-      
+
       if (!!data.elementInteractionsDataAttributePrefixRegex) {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
       }
     }
-    
+
   } else {
     initOptions.autocapture = false;
   }
@@ -1542,7 +1556,7 @@ const generateConfiguration = () => {
   if(initOptions.logLevel == 4){
     log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by configuration: " + JSON.stringify(initOptions));
   }
-  
+
   return initOptions;
 };
 
@@ -1603,7 +1617,7 @@ const onsuccess = () => {
         Object.delete(cleanedPropertiesObject, 'user_properties');
         eventProperties = mergeObject(propertiesBaisc, cleanedPropertiesObject);
       }
-      
+
       // Convert comma-separated groupName into an array of groupNames
       const groups = makeTableMap((data.trackEventGroups || []).map(group => {
         return {
@@ -2517,5 +2531,3 @@ setup: "const object = require('Object');\n\nconst mockData = {\n  instanceName:
 ___NOTES___
 
 Created on 27/10/2021, 18:34:01
-
-
