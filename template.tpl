@@ -596,6 +596,24 @@ ___TEMPLATE_PARAMETERS___
             "type": "TEXT"
           },
           {
+            "type": "TEXT",
+            "name": "revenueCurrency",
+            "displayName": "Currency",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "revenueReceipt",
+            "displayName": "Receipt",
+            "simpleValueType": true
+          },
+          {
+            "type": "TEXT",
+            "name": "revenueReceiptSignature",
+            "displayName": "Receipt signature",
+            "simpleValueType": true
+          },
+          {
             "displayName": "Event Properties",
             "name": "revenueEventProperties",
             "simpleTableColumns": [
@@ -1335,7 +1353,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.13.0';
+const WRAPPER_VERSION = '3.14.1';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1660,7 +1678,10 @@ const onsuccess = () => {
         quantity: data.revenueQuantity || 1,
         revenue: data.revenue,
         revenueType: data.revenueType,
-        eventProperties: makeTableMap(data.revenueEventProperties || [], 'name', 'value')
+        eventProperties: makeTableMap(data.revenueEventProperties || [], 'name', 'value'),
+        currency: data.revenueCurrency,
+        receipt: data.revenueReceipt,
+        receiptSig: data.revenueReceiptSignature
       };
 
       // Allow for legacy format
@@ -1673,6 +1694,15 @@ const onsuccess = () => {
       revenueObject.price = makeNumber(revenueObject.price);
       revenueObject.quantity = makeNumber(revenueObject.quantity);
       revenueObject.revenue = makeNumber(revenueObject.revenue);
+      if (revenueObject.currency) {
+        revenueObject.currency = makeString(revenueObject.currency);
+      }
+      if (revenueObject.receipt) {
+        revenueObject.receipt = makeString(revenueObject.receipt);
+      }
+      if (revenueObject.receiptSig) {
+        revenueObject.receiptSig = makeString(revenueObject.receiptSig);
+      }
       _amplitude(instanceName, 'revenue', revenueObject);
       break;
 
@@ -2531,3 +2561,5 @@ setup: "const object = require('Object');\n\nconst mockData = {\n  instanceName:
 ___NOTES___
 
 Created on 27/10/2021, 18:34:01
+
+
