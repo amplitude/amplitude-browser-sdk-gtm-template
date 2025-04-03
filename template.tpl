@@ -1353,7 +1353,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.14.0';
+const WRAPPER_VERSION = '3.14.1';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1694,9 +1694,15 @@ const onsuccess = () => {
       revenueObject.price = makeNumber(revenueObject.price);
       revenueObject.quantity = makeNumber(revenueObject.quantity);
       revenueObject.revenue = makeNumber(revenueObject.revenue);
-      revenueObject.currency = makeString(revenueObject.currency);
-      revenueObject.receipt = makeString(revenueObject.receipt);
-      revenueObject.receiptSig = makeString(revenueObject.receiptSig);
+      if (revenueObject.currency) {
+        revenueObject.currency = makeString(revenueObject.currency);
+      }
+      if (revenueObject.receipt) {
+        revenueObject.receipt = makeString(revenueObject.receipt);
+      }
+      if (revenueObject.receiptSig) {
+        revenueObject.receiptSig = makeString(revenueObject.receiptSig);
+      }
       _amplitude(instanceName, 'revenue', revenueObject);
       break;
 
