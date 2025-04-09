@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 0a9b4fe67b0367d9718fee8bb8305be461841461
+    changeNotes: updating session replay version
   - sha: 939d4de128881822530c570d9540247df485613e
     changeNotes: Adding input placeholders for currency, receipt and receipt signature
   - sha: 541a3b3f081934787181d5369603b81c6b6f4b77
