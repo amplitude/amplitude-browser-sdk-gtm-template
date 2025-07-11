@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: aa072d5abe522f1c7051e45e5157707bd508e797
+    changeNotes: bump sr sdk version to 1.20.0
   - sha: e4fb19194aa91c6935f63b902627fb580abebd3b
     changeNotes: bump sr sdk version to 1.20.0
   - sha: 0a9b4fe67b0367d9718fee8bb8305be461841461
