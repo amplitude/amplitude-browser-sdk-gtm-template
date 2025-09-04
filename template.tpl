@@ -1020,6 +1020,66 @@ ___TEMPLATE_PARAMETERS___
                     ]
                   }
                 ]
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "autocaptureNetworkTracking",
+                "checkboxText": "Track network errors",
+                "simpleValueType": true,
+                "help": "Check this box to enable element interactions tracking. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-network-requests\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": false,
+                "subParams": [
+                  {
+                    "type": "CHECKBOX",
+                    "name": "networkTrackingIgnoreAmplitudeRequests",
+                    "checkboxText": "Ignore requests made to Amplitude API\u0027s",
+                    "simpleValueType": true,
+                    "defaultValue": true
+                  },
+                  {
+                    "type": "TEXT",
+                    "name": "networkTrackingIgnoreHosts",
+                    "displayName": "List of hosts to ignore requests from (comma separated)",
+                    "simpleValueType": true
+                  },
+                  {
+                    "type": "PARAM_TABLE",
+                    "name": "networkTrackingCaptureRules",
+                    "displayName": "The rules for capturing network requests",
+                    "paramTableColumns": [
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "urls",
+                          "displayName": "URLs",
+                          "simpleValueType": true,
+                          "help": "Defines the URLs to capture. By default any URL is captured. (comma separated list)"
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "methods",
+                          "displayName": "Methods",
+                          "simpleValueType": true,
+                          "help": "The HTTP methods to capture. e.g.: [\"POST\", \"PUT\", \"DELETE\"]"
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "statusCodeRange",
+                          "displayName": "Status Code Range",
+                          "simpleValueType": true,
+                          "help": "The status code range to capture. Supports comma-separated ranges or single status codes. For example, \"0,200-299,413,500-599\""
+                        },
+                        "isUnique": false
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "enablingConditions": [
@@ -1564,6 +1624,41 @@ const generateConfiguration = () => {
 
       if (!!data.elementInteractionsDataAttributePrefixRegex) {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
+      }
+    }
+
+    if (!!data.autocaptureNetworkTracking) {
+      let ignoreAmplitudeRequests;
+      if (typeof data.networkTrackingIgnoreAmplitudeRequests === 'string' && data.networkTrackingIgnoreAmplitudeRequests.toLowerCase() === 'false') {
+        ignoreAmplitudeRequests = false;
+      }
+      let ignoreHosts;
+      if (typeof data.networkTrackingIgnoreHosts === 'string') {
+        ignoreHosts = data.networkTrackingIgnoreHosts.split(',').map((host) => host.trim());
+      }
+
+      let captureRules;
+      if (data.networkTrackingCaptureRules) {
+        captureRules = [];
+        data.networkTrackingCaptureRules.forEach(rule => {
+          let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : [];
+          captureRules.push({
+            urls: urls.length > 0 ? urls : undefined,
+            methods: rule.methods ? rule.methods.split(',').map(method => method.trim()) : undefined,
+            statusCodeRange: rule.statusCodeRange || undefined,
+          });
+        });
+      }
+
+      initOptions.autocapture.networkTracking = {};
+      if (ignoreAmplitudeRequests !== undefined) {
+        initOptions.autocapture.networkTracking.ignoreAmplitudeRequests = ignoreAmplitudeRequests;
+      }
+      if (ignoreHosts !== undefined) {
+        initOptions.autocapture.networkTracking.ignoreHosts = ignoreHosts;
+      }
+      if (captureRules !== undefined && captureRules.length > 0) {
+        initOptions.autocapture.networkTracking.captureRules = captureRules;
       }
     }
 
