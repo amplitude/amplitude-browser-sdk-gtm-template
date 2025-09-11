@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 172b4c887f1406b3185c0ef645ee4a3a52f54d06
+    changeNotes: bump browser sdk to 2.23.6 to support network tracking
   - sha: 7127bfcdac9dae1a193bf126e1c66dbeaccbdfd7
     changeNotes: upgrade analytics to 2.23.5
   - sha: 377f02b99e7b48964dd23de352db7f39f6a99926
