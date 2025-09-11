@@ -1020,6 +1020,76 @@ ___TEMPLATE_PARAMETERS___
                     ]
                   }
                 ]
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "autocaptureNetworkTracking",
+                "checkboxText": "Track network errors",
+                "simpleValueType": true,
+                "help": "Check this box to enable element interactions tracking. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-network-requests\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": false,
+                "subParams": [
+                  {
+                    "type": "CHECKBOX",
+                    "name": "networkTrackingIgnoreAmplitudeRequests",
+                    "checkboxText": "Ignore requests made to Amplitude API\u0027s",
+                    "simpleValueType": true,
+                    "defaultValue": true
+                  },
+                  {
+                    "type": "TEXT",
+                    "name": "networkTrackingIgnoreHosts",
+                    "displayName": "List of hosts to ignore requests from (comma separated)",
+                    "simpleValueType": true
+                  },
+                  {
+                    "type": "PARAM_TABLE",
+                    "name": "networkTrackingCaptureRules",
+                    "displayName": "The rules for capturing network requests",
+                    "paramTableColumns": [
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "urls",
+                          "displayName": "URLs",
+                          "simpleValueType": true,
+                          "help": "Define list of URLs to capture (exact match). By default any URL is captured. (comma separated list)."
+                        },
+                        "isUnique": true
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "methods",
+                          "displayName": "Methods",
+                          "simpleValueType": true,
+                          "help": "The HTTP methods to capture. e.g.: [\"POST\", \"PUT\", \"DELETE\"]"
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "statusCodeRange",
+                          "displayName": "Status Code Range",
+                          "simpleValueType": true,
+                          "help": "The status code range to capture. Supports comma-separated ranges or single status codes. For example, \"0,200-299,413,500-599\""
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "urlsRegex",
+                          "displayName": "URLs Regex",
+                          "simpleValueType": true,
+                          "help": "Define list of URL regex patterns to capture. By default any URL is captured. (comma separated list)."
+                        },
+                        "isUnique": false
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "enablingConditions": [
@@ -1353,7 +1423,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.17.2';
+const WRAPPER_VERSION = '3.18.1';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1565,6 +1635,38 @@ const generateConfiguration = () => {
       if (!!data.elementInteractionsDataAttributePrefixRegex) {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
       }
+    }
+
+    if (!!data.autocaptureNetworkTracking) {
+      let ignoreAmplitudeRequests;
+      if (typeof data.networkTrackingIgnoreAmplitudeRequests === 'string' && data.networkTrackingIgnoreAmplitudeRequests.toLowerCase() === 'true') {
+        ignoreAmplitudeRequests = true;
+      }
+      let ignoreHosts;
+      if (typeof data.networkTrackingIgnoreHosts === 'string') {
+        ignoreHosts = data.networkTrackingIgnoreHosts.split(',').map((host) => host.trim());
+      }
+
+      let captureRules;
+      if (data.networkTrackingCaptureRules) {
+        captureRules = [];
+        data.networkTrackingCaptureRules.forEach(rule => {
+          let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : [];
+          let urlsRegex = rule.urlsRegex ? rule.urlsRegex.split(',').map(url => url.trim()) : [];
+          captureRules.push({
+            urls: urls,
+            urlsRegex: urlsRegex,
+            methods: rule.methods ? rule.methods.split(',').map(method => method.trim()) : undefined,
+            statusCodeRange: rule.statusCodeRange,
+          });
+        });
+      }
+
+      initOptions.autocapture.networkTracking = {
+        ignoreAmplitudeRequests: ignoreAmplitudeRequests,
+        ignoreHosts: ignoreHosts,
+        captureRules: captureRules,
+      };
     }
 
   } else {
