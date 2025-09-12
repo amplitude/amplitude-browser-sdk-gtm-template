@@ -1675,26 +1675,26 @@ const generateConfiguration = () => {
       }
     }
     
-    const frustractionInteractionsOptions = {};
+    const frustrationInteractionsOptions = {};
 
       if (!!data.rageClicksCssSelectorAllowlist) {
         const rageClicks = {};
-        frustractionInteractionsOptions.rageClicks = rageClicks;
+        frustrationInteractionsOptions.rageClicks = rageClicks;
         rageClicks.cssSelectorAllowlist = getType(data.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(data.rageClicksCssSelectorAllowlist);
       }
     
       if (!!data.deadClicksCssSelectorAllowlist) {
         const deadClicks = {};
-        frustractionInteractionsOptions.deadClicks = deadClicks;
+        frustrationInteractionsOptions.deadClicks = deadClicks;
         deadClicks.cssSelectorAllowlist = getType(data.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(data.deadClicksCssSelectorAllowlist);
       }
     
-    const hasFrustrationInteractionsOptions = Object.keys(frustractionInteractionsOptions).length > 0;
+    const hasFrustrationInteractionsOptions = Object.keys(frustrationInteractionsOptions).length > 0;
     if (!!data.autocaptureFrustrationInteractions) {
       if (!hasFrustrationInteractionsOptions) {
         initOptions.autocapture.frustrationInteractions = true; 
       } else {
-        initOptions.autocapture.frustrationInteractions = frustractionInteractionsOptions;
+        initOptions.autocapture.frustrationInteractions = frustrationInteractionsOptions;
       }
     }
   
