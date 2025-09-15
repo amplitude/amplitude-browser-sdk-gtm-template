@@ -1023,6 +1023,44 @@ ___TEMPLATE_PARAMETERS___
               },
               {
                 "type": "CHECKBOX",
+                "name": "autocaptureFrustrationInteractions",
+                "checkboxText": "Track frustration interactions",
+                "simpleValueType": true,
+                "help": "Check this box to enable frustration interactions tracking. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": false,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "frustrationInteractionsOptions",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "TEXT",
+                        "name": "rageClicksCssSelectorAllowlist",
+                        "displayName": "Rage Click CSS Selector Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define which elements should have rage clicks captured on. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-frustration-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "deadClicksCssSelectorAllowlist",
+                        "displayName": "Dead Click CSS Selector Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define the elements on which Amplitude captures dead clicks. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-frustration-interactions\"\u003eRead more\u003c/a\u003e."
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "autocaptureFrustrationInteractions",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "CHECKBOX",
                 "name": "autocaptureNetworkTracking",
                 "checkboxText": "Track network errors",
                 "simpleValueType": true,
@@ -1423,7 +1461,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.18.1';
+const WRAPPER_VERSION = '3.19.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1636,7 +1674,30 @@ const generateConfiguration = () => {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
       }
     }
+    
+    const frustrationInteractionsOptions = {};
 
+      if (!!data.rageClicksCssSelectorAllowlist) {
+        const rageClicks = {};
+        frustrationInteractionsOptions.rageClicks = rageClicks;
+        rageClicks.cssSelectorAllowlist = getType(data.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(data.rageClicksCssSelectorAllowlist);
+      }
+    
+      if (!!data.deadClicksCssSelectorAllowlist) {
+        const deadClicks = {};
+        frustrationInteractionsOptions.deadClicks = deadClicks;
+        deadClicks.cssSelectorAllowlist = getType(data.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(data.deadClicksCssSelectorAllowlist);
+      }
+    
+    const hasFrustrationInteractionsOptions = Object.keys(frustrationInteractionsOptions).length > 0;
+    if (!!data.autocaptureFrustrationInteractions) {
+      if (!hasFrustrationInteractionsOptions) {
+        initOptions.autocapture.frustrationInteractions = true; 
+      } else {
+        initOptions.autocapture.frustrationInteractions = frustrationInteractionsOptions;
+      }
+    }
+  
     if (!!data.autocaptureNetworkTracking) {
       let ignoreAmplitudeRequests;
       if (typeof data.networkTrackingIgnoreAmplitudeRequests === 'string' && data.networkTrackingIgnoreAmplitudeRequests.toLowerCase() === 'true') {
