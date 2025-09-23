@@ -1,4 +1,4 @@
-import { GtmData } from "../types";
+import { GtmData } from "../../libs/types";
 
 const win = typeof globalThis !== 'undefined' ? globalThis : window;
 

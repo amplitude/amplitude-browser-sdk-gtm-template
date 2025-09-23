@@ -96,6 +96,7 @@
     }
     }
 
-    window.require = require;
+    const win = typeof globalThis !== 'undefined' ? globalThis : window;
+    (win as unknown as any).require = require;
 
 })();
