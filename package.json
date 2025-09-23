@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Tests are not implemented yet\"",
     "build": "node scripts/build-template.js",
-    "dev": "vite serve"
+    "dev": "vite serve",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "ejs": "^3.1.10"
   },
   "devDependencies": {
+    "husky": "^9.1.7",
     "vite": "^7.1.6"
   }
 }

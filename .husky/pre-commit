@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Build the template
+yarn build
+
+# Do not allow unstaged changes (this is so that template is up-to-date before committing)
+if ! git diff --quiet; then
+  echo "❌ You still have unstaged changes. Please stage or stash them before committing."
+  exit 1
+fi
