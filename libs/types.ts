@@ -1,7 +1,7 @@
 export type GtmData = {
   // Core properties
   apiKey: string;
-  type: 'init' | 'track' | 'identify' | 'group' | 'pageView' | 'session' | 'setUserId' | 'setGroup' | 'groupIdentify' | 'revenue' | 'setDeviceId' | 'setSessionId' | 'reset' | 'setOptOut';
+  type: 'init' | 'track' | 'identify' | 'group' | 'pageView' | 'session' | 'setUserId' | 'setGroup' | 'groupIdentify' | 'revenue' | 'flush' | 'setDeviceId' | 'setSessionId' | 'reset' | 'setOptOut';
   instanceName?: string;
   gtmOnSuccess: () => void;
   gtmOnFailure: () => void;
@@ -84,6 +84,7 @@ export type GtmData = {
   eventType?: string;
   eventProperties?: Array<{name: string, value: any}>;
   eventPropertiesObject?: {[key: string]: any};
+  trackWithGroups?: boolean;
   trackEventGroups?: Array<{
     eventGroupType: string;
     eventGroupName: string;
@@ -97,6 +98,7 @@ export type GtmData = {
   identifyGroupName?: string;
 
   // Revenue tracking
+  revenueFromVariable?: boolean;
   revenueVariable?: {
     productId?: string;
     id?: string;
@@ -121,6 +123,15 @@ export type GtmData = {
 
   // Device ID
   setDeviceId?: string | null | undefined;
+
+  // Session ID
+  setSessionId?: string;
+
+  // User ID
+  setUserId?: string;
+
+  // Opt Out
+  setOptOut?: boolean;
 
   // Dynamic property access for type-specific operations
   [key: string]: any;
