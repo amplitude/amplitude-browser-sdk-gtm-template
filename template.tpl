@@ -110,7 +110,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "paramName": "type",
         "paramValue": "track",
-        "type": "EQUALSSSS"
+        "type": "EQUALS"
       }
     ]
   },

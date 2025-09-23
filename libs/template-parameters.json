@@ -77,7 +77,7 @@
       {
         "paramName": "type",
         "paramValue": "track",
-        "type": "EQUALSSSS"
+        "type": "EQUALS"
       }
     ]
   },
