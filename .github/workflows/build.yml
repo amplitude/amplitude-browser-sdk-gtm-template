@@ -18,7 +18,7 @@ jobs:
           yarn build
           # Check that the template didn't change
           if ! git diff --quiet; then
-            echo "❌ The template changed. Please run yarn build and commit the changes."
+            echo "❌ The generated template (template.tpl) that was committed is different from the generated template. Please run yarn build and commit the changes."
             exit 1
           fi
 
