@@ -1,8 +1,15 @@
-import { GtmData } from "../../libs/types";
+import { GeneratedGtmParameters } from "../generated-types";
 
 const win = typeof globalThis !== 'undefined' ? globalThis : window;
 
-const data: GtmData = {
+type GtmCallbacks = {
+  gtmOnSuccess: () => void;
+  gtmOnFailure: () => void;
+}
+
+type GtmParameters = GeneratedGtmParameters | GtmCallbacks;
+
+const data: GtmParameters = {
   apiKey: win.AMPLITUDE_API_KEY,
   type: 'init',
   defaultEventTracking: true,

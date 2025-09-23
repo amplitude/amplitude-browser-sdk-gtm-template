@@ -5,7 +5,7 @@
   "description": "The amplitude GTM template with @amplitude/analytics-browser internal",
   "scripts": {
     "test": "echo \"Tests are not implemented yet\"",
-    "build": "node scripts/build-template.js",
+    "build": "node scripts/build-template.js && node scripts/generate-types.js",
     "dev": "vite serve",
     "prepare": "husky"
   },
