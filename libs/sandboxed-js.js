@@ -255,7 +255,6 @@ const generateConfiguration = () => {
         ignoreHosts: ignoreHosts,
         captureRules: captureRules,
       };
-      initOptions.autocapture.networkTracking = true; // TODO: Delete this
     }
 
   } else {
@@ -312,7 +311,6 @@ const onsuccess = () => {
 
   switch (data.type) {
     case 'init':
-      debugger;
       _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
       break;
 
