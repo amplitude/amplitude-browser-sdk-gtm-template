@@ -412,6 +412,7 @@ if (typeof process === 'undefined' || process.env.JEST_WORKER_ID === undefined) 
   injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
 } else {
   window.__EXPORTS__ = {
+    onsuccess,
     generateConfiguration,
   };
 }

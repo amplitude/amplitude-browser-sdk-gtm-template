@@ -23,14 +23,7 @@ module.exports = {
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
   collectCoverageFrom: [
-    'src/**/*.{ts,tsx,js,jsx}',
     'libs/**/*.{ts,tsx,js,jsx}',
-    '!src/**/*.d.ts',
-    '!src/**/*.spec.ts',
-    '!src/**/*.test.ts',
-    '!libs/**/*.d.ts',
-    '!libs/**/*.spec.ts',
-    '!libs/**/*.test.ts',
   ],
   extensionsToTreatAsEsm: ['.ts'],
   transformIgnorePatterns: [

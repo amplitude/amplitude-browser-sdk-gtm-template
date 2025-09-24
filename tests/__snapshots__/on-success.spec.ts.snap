@@ -1,0 +1,296 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`onsuccess default case for unknown operation type 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "customOperation",
+      "custom-value",
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess groupIdentify operation 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "groupIdentify",
+      "company",
+      "amplitude",
+      [],
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess identify operation with user properties 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "identify",
+      [],
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess init operation with basic configuration 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "init",
+      "test-api-key",
+      null,
+      {
+        "autocapture": false,
+        "guidesSurveys": false,
+        "sessionReplay": false,
+      },
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess revenue operation with legacy id field 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "revenue",
+      {
+        "id": "legacy-product-id",
+        "price": 19.99,
+        "productId": "legacy-product-id",
+        "quantity": 0,
+        "revenue": 0,
+      },
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess revenue operation with required fields 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "revenue",
+      {
+        "currency": "USD",
+        "eventProperties": {},
+        "price": 29.99,
+        "productId": "product-123",
+        "quantity": 2,
+        "receipt": undefined,
+        "receiptSig": undefined,
+        "revenue": 59.98,
+        "revenueType": "purchase",
+      },
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess revenue operation with revenue variable object 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "revenue",
+      {
+        "eventProperties": {
+          "category": "subscription",
+        },
+        "price": 49.99,
+        "productId": "custom-product",
+        "quantity": 1,
+        "receipt": "receipt-abc123",
+        "receiptSig": "signature-xyz",
+        "revenue": 49.99,
+      },
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess setDeviceId operation 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "setDeviceId",
+      "device-123",
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess setGroup operation with comma-separated groups 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "setGroup",
+      "team",
+      [
+        "engineering",
+        "product",
+        "design",
+      ],
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess setGroup operation with single group 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "setGroup",
+      "company",
+      "amplitude",
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess track operation with comma-separated group names 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "track",
+      {
+        "event_type": "Purchase",
+        "groups": {},
+      },
+      {},
+      {},
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess track operation with event properties and groups 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "track",
+      {
+        "event_type": "Button Click",
+        "groups": {},
+      },
+      {},
+      {
+        "time": 1634567890123,
+      },
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`onsuccess track operation with event properties object 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "track",
+      {
+        "event_type": "Page View",
+        "groups": {},
+      },
+      {
+        "page_title": "Home Page",
+        "page_url": "/home",
+        "referrer": "google.com",
+      },
+      {},
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
