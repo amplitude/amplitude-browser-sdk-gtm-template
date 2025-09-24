@@ -1,5 +1,5 @@
 function logToConsole(...args: any[]): void {
-  console.log("[GTM mock log]", ...args);
+  console.log('[GTM mock log]', ...args);
 }
 
 if (typeof module !== 'undefined' && module.exports) {

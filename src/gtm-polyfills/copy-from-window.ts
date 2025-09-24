@@ -1,5 +1,5 @@
 function copyFromWindow (key: string): any {
-  if (typeof window !== "undefined" && key in window) {
+  if (typeof window !== 'undefined' && key in window) {
     return window[key as keyof Window];
   }
   return undefined;

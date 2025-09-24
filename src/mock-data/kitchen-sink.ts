@@ -1,11 +1,11 @@
-import { GeneratedGtmParameters } from "../generated-types";
+import { GeneratedGtmParameters } from '../generated-types';
 
-const win = typeof globalThis !== 'undefined' ? globalThis : window;
+const win: any = typeof globalThis !== 'undefined' ? globalThis : window;
 
 type GtmCallbacks = {
   gtmOnSuccess: () => void;
   gtmOnFailure: () => void;
-}
+};
 
 type GtmParameters = GeneratedGtmParameters | GtmCallbacks;
 

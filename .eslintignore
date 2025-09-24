@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+coverage/
+
+# Generated files
+src/generated-types.ts
+
+# Libraries
+libs/
+
+# Test snapshots
+**/__snapshots__/
+
+# Configuration files (except .eslintrc.js)
+*.config.js
+jest.config.js
+
+# Template files
+*.tpl
+*.ejs
+
+# Documentation
+README.md
+*.md

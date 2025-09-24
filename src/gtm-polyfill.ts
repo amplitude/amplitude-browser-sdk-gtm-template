@@ -1,15 +1,15 @@
 import copyFromWindow from './gtm-polyfills/copy-from-window';
 import getType from './gtm-polyfills/get-type';
-import Object from './gtm-polyfills/Object';
+import Object from './gtm-polyfills/object';
 import injectScript from './gtm-polyfills/inject-script';
 import logToConsole from './gtm-polyfills/log-to-console';
 import makeNumber from './gtm-polyfills/make-number';
 import makeString from './gtm-polyfills/make-string';
 import makeTableMap from './gtm-polyfills/make-table-map';
-import JSONWrapper from './gtm-polyfills/JSON';
+import JSONWrapper from './gtm-polyfills/json';
 
-  // override "require" to return the polyfills
-function require(module) {
+// override "require" to return the polyfills
+function require(module: string): any {
   switch (module) {
     case 'Object':
       return Object;
