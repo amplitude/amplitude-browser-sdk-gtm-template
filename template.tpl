@@ -1825,7 +1825,9 @@ if (typeof process === 'undefined' || process.env.JEST_WORKER_ID === undefined) 
 } else {
   window.__EXPORTS__ = {
     onsuccess,
+    mergeObject,
     generateConfiguration,
+    getUserPropsBulkSetObject,
   };
 }
 
