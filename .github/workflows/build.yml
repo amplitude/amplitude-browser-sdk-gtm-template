@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies and build
+        run: |
+          yarn install
+          yarn build
+          # Check that the template didn't change
+          if ! git diff --quiet; then
+            echo "❌ The generated template (template.tpl) that was committed is different from the generated template. Please run yarn build and commit the changes."
+            exit 1
+          fi
+
+      - name: Tests
+        run: |
+          yarn test

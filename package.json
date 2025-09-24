@@ -1,0 +1,30 @@
+{
+  "name": "amplitude-browser-sdk-gtm-template",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The amplitude GTM template with @amplitude/analytics-browser internal",
+  "scripts": {
+    "test": "echo \"Tests are not implemented yet\"",
+    "build": "node scripts/build-template.js && node scripts/generate-types.js",
+    "dev": "yarn setup-env && vite serve",
+    "prepare": "husky",
+    "setup-env": "node scripts/setup-env.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amplitude/amplitude-browser-sdk-gtm-template.git"
+  },
+  "author": "Dan Graham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amplitude/amplitude-browser-sdk-gtm-template/issues"
+  },
+  "homepage": "https://github.com/amplitude/amplitude-browser-sdk-gtm-template#readme",
+  "dependencies": {
+    "ejs": "^3.1.10"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "vite": "^7.1.6"
+  }
+}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1>GTM Template test page</h1>
+        <p>Look at console in devtools to test manually</p>
+        <script type="module">
+          window.AMPLITUDE_API_KEY = import.meta.env.VITE_AMPLITUDE_API_KEY;
+        </script>
+        <script defer src="src/mock-data/kitchen-sink.ts"></script>
+        <script defer src="src/gtm-polyfill.ts"></script>
+        <script defer src="libs/sandboxed-js.js"></script>
+    </body>
+</html>
