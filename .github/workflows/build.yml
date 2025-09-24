@@ -2,9 +2,8 @@ name: Build
 
 on:
   pull_request:
-    # any branch
     branches:
-      - '*'
+      - main
 
 jobs:
   build:
