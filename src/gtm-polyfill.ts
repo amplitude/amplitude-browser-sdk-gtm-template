@@ -46,13 +46,13 @@
         return value != null ? String(value) : "";
     }
     
-    // Builds a map from a table-like array of {key, value}
-    function makeTableMap(table) {
+    // Builds a map from a table-like array using specified key and value column names
+    function makeTableMap(table, keyName, valueName) {
         const map = {};
         if (Array.isArray(table)) {
         table.forEach(row => {
-            if (row && row.key) {
-            map[row.key] = row.value;
+            if (row && row[keyName]) {
+            map[row[keyName]] = row[valueName];
             }
         });
         }
