@@ -26,6 +26,11 @@ const options = {
 };
 
 ejs.renderFile('template.tpl.ejs', data, options, function(err, str){
+    if (err) {
+        console.error('Error building template:', err);
+        process.exit(1);
+    }
     // str => Rendered HTML string
     fs.writeFileSync('template.tpl', str);
+    console.log('Template built successfully');
 });
