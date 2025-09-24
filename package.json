@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "The amplitude GTM template with @amplitude/analytics-browser internal",
   "scripts": {
-    "test": "echo \"Tests are not implemented yet\"",
+    "test": "jest",
     "build": "node scripts/build-template.js && node scripts/generate-types.js",
     "dev": "yarn setup-env && vite serve",
     "prepare": "husky",
@@ -25,6 +25,8 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
+    "jest": "^30.1.3",
+    "jest-environment-jsdom": "^30.1.2",
     "vite": "^7.1.6"
   }
 }

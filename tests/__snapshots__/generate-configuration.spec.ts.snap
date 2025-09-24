@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`generateConfiguration basic autocapture options 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration kitchen sink example 1`] = `
+{
+  "autocapture": {
+    "attribution": {
+      "excludeReferrersRegex": [
+        "test",
+      ],
+      "excludeReferrersText": [
+        "test",
+      ],
+      "initialEmptyValue": "EMPTY",
+      "resetSessionOnNewCampaign": true,
+    },
+    "elementInteractions": {
+      "actionClickAllowlist": [
+        "test",
+      ],
+      "cssSelectorAllowlist": [
+        "test",
+      ],
+      "dataAttributePrefixRegex": [
+        "test",
+      ],
+      "dataAttributePrefixString": [
+        "test",
+      ],
+      "pageUrlAllowlistRegex": [
+        "test",
+      ],
+      "pageUrlAllowlistString": [
+        "test",
+      ],
+    },
+    "fileDownloads": false,
+    "formInteractions": false,
+    "networkTracking": {
+      "captureRules": [
+        {
+          "methods": [
+            "GET",
+          ],
+          "statusCodeRange": "400-599",
+          "urls": [
+            "hello.com",
+          ],
+          "urlsRegex": [],
+        },
+      ],
+      "ignoreAmplitudeRequests": undefined,
+      "ignoreHosts": [
+        "test",
+      ],
+    },
+    "pageViews": {
+      "trackHistoryChanges": "pathOnly",
+      "trackOn": undefined,
+    },
+    "sessions": false,
+  },
+  "cookieOptions": {
+    "domain": "test",
+  },
+  "guidesSurveys": true,
+  "pageViewLegacy": true,
+  "serverZone": "EU",
+  "sessionReplay": true,
+  "trackingOptions": {
+    "ipAddress": "test",
+  },
+  "userAgentEnrichmentOptions": {
+    "deviceManufacturer": true,
+    "deviceModel": true,
+    "osName": true,
+    "osVersion": true,
+  },
+}
+`;
