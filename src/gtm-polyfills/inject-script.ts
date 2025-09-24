@@ -1,4 +1,4 @@
-module.exports = function injectScript(
+function injectScript(
   url: string, 
   onSuccess?: () => void, 
   onFailure?: () => void
@@ -14,3 +14,9 @@ module.exports = function injectScript(
     if (onFailure) onFailure();
   }
 }
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = injectScript;
+}
+
+export default injectScript;

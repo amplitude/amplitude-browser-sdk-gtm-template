@@ -1,3 +1,5 @@
-module.exports = function (): ObjectConstructor {
-  return typeof window !== 'undefined' ? window.Object : Object;
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = window.Object;
 }
+
+export default window.Object;

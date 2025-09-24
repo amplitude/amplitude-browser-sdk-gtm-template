@@ -1,6 +1,6 @@
-import '../src/mock-data/kitchen-sink.ts';
+import '../src/mock-data/kitchen-sink';
 import '../libs/sandboxed-js.js';
-import { GeneratedGtmParameters } from '@/generated-types.js';
+import { GeneratedGtmParameters } from '../src/generated-types';
 
 const win: any = typeof globalThis !== 'undefined' ? globalThis : window;
 
