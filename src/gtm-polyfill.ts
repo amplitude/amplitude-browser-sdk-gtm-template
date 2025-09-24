@@ -8,36 +8,29 @@ import makeString from './gtm-polyfills/make-string';
 import makeTableMap from './gtm-polyfills/make-table-map';
 import JSONWrapper from './gtm-polyfills/JSON.ts';
 
-
-
   // override "require" to return the polyfills
 function require(module) {
-  if (module === 'Object') {
-    return Object;
-  }
-  if (module === 'copyFromWindow') {
-    return copyFromWindow;
-  }
-  if (module === 'getType') {
-    return getType;
-  }
-  if (module === 'injectScript') {
-    return injectScript;
-  }
-  if (module === 'logToConsole') {
-    return logToConsole;
-  }
-  if (module === 'makeNumber') {
-    return makeNumber;
-  }
-  if (module === 'makeString') {
-    return makeString;
-  }
-  if (module === 'makeTableMap') {
-    return makeTableMap;
-  }
-  if (module === 'JSON') {
-    return JSONWrapper;
+  switch (module) {
+    case 'Object':
+      return Object;
+    case 'copyFromWindow':
+      return copyFromWindow;
+    case 'getType':
+      return getType;
+    case 'injectScript':
+      return injectScript;
+    case 'logToConsole':
+      return logToConsole;
+    case 'makeNumber':
+      return makeNumber;
+    case 'makeString':
+      return makeString;
+    case 'makeTableMap':
+      return makeTableMap;
+    case 'JSON':
+      return JSONWrapper;
+    default:
+      throw new Error(`Unknown module: ${module}. Add it to src/gtm-polyfills/${module}.ts and update it in jets.config.js`);
   }
 }
 
