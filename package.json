@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Tests are not implemented yet\"",
     "build": "node scripts/build-template.js && node scripts/generate-types.js",
-    "dev": "vite serve",
-    "prepare": "husky"
+    "dev": "yarn setup-env && vite serve",
+    "prepare": "husky",
+    "setup-env": "node scripts/setup-env.js"
   },
   "repository": {
     "type": "git",
