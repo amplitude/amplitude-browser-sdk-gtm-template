@@ -2,6 +2,9 @@ name: Build
 
 on:
   pull_request:
+    # any branch
+    branches:
+      - '*'
 
 jobs:
   build:
