@@ -6,7 +6,7 @@ import logToConsole from './gtm-polyfills/log-to-console';
 import makeNumber from './gtm-polyfills/make-number';
 import makeString from './gtm-polyfills/make-string';
 import makeTableMap from './gtm-polyfills/make-table-map';
-import JSONWrapper from './gtm-polyfills/JSON.ts';
+import JSONWrapper from './gtm-polyfills/JSON';
 
   // override "require" to return the polyfills
 function require(module) {

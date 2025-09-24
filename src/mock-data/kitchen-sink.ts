@@ -15,6 +15,7 @@ const data: GtmParameters = {
   defaultEventTracking: true,
   autocaptureNetworkTracking: true,
   detPageView: true,
+  detSession: true,
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
   },
