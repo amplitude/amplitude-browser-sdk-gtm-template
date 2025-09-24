@@ -22,9 +22,18 @@ module.exports = {
     '^.+\\.(js|jsx)$': 'babel-jest',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/'],
+  collectCoverage: true,
   collectCoverageFrom: [
     'libs/**/*.{ts,tsx,js,jsx}',
   ],
+  coverageThreshold: {
+    global: {
+      statements: 90,
+      branches: 83,
+      functions: 91,
+      lines: 97
+    }
+  },
   extensionsToTreatAsEsm: ['.ts'],
   transformIgnorePatterns: [
     'node_modules/(?!(.*\\.mjs$))',
