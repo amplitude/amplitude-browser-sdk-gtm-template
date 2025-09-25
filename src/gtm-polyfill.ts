@@ -1,102 +1,38 @@
-// --- Mock GTM Template APIs --- //
+import copyFromWindow from './gtm-polyfills/copy-from-window';
+import getType from './gtm-polyfills/get-type';
+import Object from './gtm-polyfills/object';
+import injectScript from './gtm-polyfills/inject-script';
+import logToConsole from './gtm-polyfills/log-to-console';
+import makeNumber from './gtm-polyfills/make-number';
+import makeString from './gtm-polyfills/make-string';
+import makeTableMap from './gtm-polyfills/make-table-map';
+import JSONWrapper from './gtm-polyfills/json';
 
-// Copies a property from window
-(function () {
-    function copyFromWindow(key) {
-        if (typeof window !== "undefined" && key in window) {
-        return window[key];
-        }
-        return undefined;
-    }
-    
-    // Returns type of a variable (like GTM getType)
-    function getType(value) {
-        if (value === null) return "null";
-        if (Array.isArray(value)) return "array";
-        return typeof value;
-    }
-    
-    // Injects a script tag
-    function injectScript(url, onSuccess, onFailure) {
-        if (typeof document !== "undefined") {
-            const script = document.createElement("script");
-            script.src = url;
-            script.onload = () => onSuccess && onSuccess();
-            script.onerror = () => onFailure && onFailure();
-            document.head.appendChild(script);
-        } else {
-            console.warn("injectScript called outside browser:", url);
-            if (onFailure) onFailure();
-        }
-    }
-    
-    // Logs to console (GTM sandboxed version just maps to this)
-    function logToConsole(...args) {
-        console.log("[GTM mock log]", ...args);
-    }
-    
-    // Converts to number
-    function makeNumber(value) {
-        const n = Number(value);
-        return isNaN(n) ? 0 : n;
-    }
-    
-    // Converts to string
-    function makeString(value) {
-        return value != null ? String(value) : "";
-    }
-    
-    // Builds a map from a table-like array using specified key and value column names
-    function makeTableMap(table, keyName, valueName) {
-        const map = {};
-        if (Array.isArray(table)) {
-        table.forEach(row => {
-            if (row && row[keyName]) {
-            map[row[keyName]] = row[valueName];
-            }
-        });
-        }
-        return map;
-    }
-    
-    // Safe JSON wrapper
-    const JSONWrapper = {
-        parse: JSON.parse,
-        stringify: JSON.stringify,
-    };
-    
+// override "require" to return the polyfills
+function require(module: string): any {
+  switch (module) {
+    case 'Object':
+      return Object;
+    case 'copyFromWindow':
+      return copyFromWindow;
+    case 'getType':
+      return getType;
+    case 'injectScript':
+      return injectScript;
+    case 'logToConsole':
+      return logToConsole;
+    case 'makeNumber':
+      return makeNumber;
+    case 'makeString':
+      return makeString;
+    case 'makeTableMap':
+      return makeTableMap;
+    case 'JSON':
+      return JSONWrapper;
+    default:
+      throw new Error(`Unknown module: ${module}. Add it to src/gtm-polyfills/${module}.ts and update it in jets.config.js`);
+  }
+}
 
-    function require(module) {
-    if (module === 'copyFromWindow') {
-        return copyFromWindow;
-    }
-    if (module === 'getType') {
-        return getType;
-    }
-    if (module === 'Object') {
-        return window.Object;
-    }
-    if (module === 'injectScript') {
-        return injectScript;
-    }
-    if (module === 'logToConsole') {
-        return logToConsole;
-    }
-    if (module === 'makeNumber') {
-        return makeNumber;
-    }
-    if (module === 'makeString') {
-        return makeString;
-    }
-    if (module === 'makeTableMap') {
-        return makeTableMap;
-    }
-    if (module === 'JSON') {
-        return JSONWrapper;
-    }
-    }
-
-    const win = typeof globalThis !== 'undefined' ? globalThis : window;
-    (win as unknown as any).require = require;
-
-})();
+const win = typeof globalThis !== 'undefined' ? globalThis : window;
+(win as unknown as any).require = require;

@@ -1500,7 +1500,7 @@ const initUserId = data.initUserId || null;
 
 let _amplitude;
 
-const generateConfiguration = () => {
+const generateConfiguration = (data) => {
   // Build and normalize initialization options map, if manual configuration was selected
   const manualOptions = normalizeOptionsValues(data.initManualOptions);
 
@@ -1723,7 +1723,7 @@ const onsuccess = () => {
 
   switch (data.type) {
     case 'init':
-      _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration());
+      _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration(data));
       break;
 
     case 'track':
@@ -1820,7 +1820,13 @@ const onsuccess = () => {
   data.gtmOnSuccess();
 };
 
-injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
+if (typeof process === 'undefined' || process.env.JEST_WORKER_ID === undefined) {
+  injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
+} else {
+  window.__EXPORTS__ = {
+    generateConfiguration,
+  };
+}
 
 
 ___WEB_PERMISSIONS___

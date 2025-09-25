@@ -1,6 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Lint the code
+yarn lint
+
 # Build the template
 yarn build
 

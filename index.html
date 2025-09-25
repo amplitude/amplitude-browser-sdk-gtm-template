@@ -6,8 +6,8 @@
         <script type="module">
           window.AMPLITUDE_API_KEY = import.meta.env.VITE_AMPLITUDE_API_KEY;
         </script>
+        <script type="module" src="src/gtm-polyfill.ts"></script>
         <script defer src="src/mock-data/kitchen-sink.ts"></script>
-        <script defer src="src/gtm-polyfill.ts"></script>
         <script defer src="libs/sandboxed-js.js"></script>
     </body>
 </html>
