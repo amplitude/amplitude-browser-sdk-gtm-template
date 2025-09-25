@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`getAllUserProps with both individual and bulk user property operations 1`] = `
+[
+  [
+    "set",
+    "plan",
+    "premium",
+  ],
+  [
+    "append",
+    "interests",
+    "technology",
+  ],
+  [
+    "set",
+    "name",
+    "John Doe",
+  ],
+  [
+    "set",
+    "age",
+    30,
+  ],
+]
+`;
+
+exports[`getAllUserProps with empty user property operations array 1`] = `
+[
+  [
+    "set",
+    "country",
+    "USA",
+  ],
+]
+`;
+
+exports[`getAllUserProps with individual user property operations to cover line 275 1`] = `
+[
+  [
+    "set",
+    "email",
+    "test@example.com",
+  ],
+  [
+    "add",
+    "login_count",
+    1,
+  ],
+  [
+    "unset",
+    "temp_flag",
+    undefined,
+  ],
+]
+`;
+
+exports[`getAllUserProps with no user property operations defined 1`] = `[]`;

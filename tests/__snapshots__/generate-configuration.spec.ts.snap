@@ -1,6 +1,167 @@
 // Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
+exports[`generateConfiguration attribution tracking disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration attribution with custom initial empty value 1`] = `
+{
+  "autocapture": {
+    "attribution": {
+      "initialEmptyValue": "NO_VALUE",
+      "resetSessionOnNewCampaign": false,
+    },
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
 exports[`generateConfiguration basic autocapture options 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration comma-separated strings for attribution exclude referrers 1`] = `
+{
+  "autocapture": {
+    "attribution": {
+      "excludeReferrersRegex": [
+        ".*\\.ads\\..*",
+        ".*\\.marketing\\..*",
+      ],
+      "excludeReferrersText": [
+        "google.com",
+        "facebook.com",
+      ],
+      "initialEmptyValue": "EMPTY",
+      "resetSessionOnNewCampaign": undefined,
+    },
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration comma-separated strings for element interactions 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "elementInteractions": {
+      "actionClickAllowlist": [
+        "click",
+        "submit",
+      ],
+      "cssSelectorAllowlist": [
+        ".button",
+        ".link",
+      ],
+      "dataAttributePrefixRegex": [
+        "data-.*-track",
+        "data-.*-event",
+      ],
+      "dataAttributePrefixString": [
+        "data-track",
+        "data-event",
+      ],
+      "pageUrlAllowlistRegex": [
+        "/product/.*",
+        "/category/.*",
+      ],
+      "pageUrlAllowlistString": [
+        "/checkout",
+        "/product",
+      ],
+    },
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration configuration with logLevel 4 to trigger info logging 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "logLevel": 4,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration default event tracking disabled 1`] = `
+{
+  "autocapture": false,
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration element interactions disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration empty and undefined optional fields 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration eu data disabled 1`] = `
 {
   "autocapture": {
     "attribution": false,
@@ -89,5 +250,230 @@ exports[`generateConfiguration kitchen sink example 1`] = `
     "osName": true,
     "osVersion": true,
   },
+}
+`;
+
+exports[`generateConfiguration manual configuration options 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "serverUrl": "https://api2.amplitude.com",
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration network tracking disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration network tracking with complex capture rules 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "networkTracking": {
+      "captureRules": [
+        {
+          "methods": [
+            "GET",
+            "POST",
+            "PUT",
+          ],
+          "statusCodeRange": "200-299",
+          "urls": [
+            "api.example.com",
+            "api2.example.com",
+          ],
+          "urlsRegex": [
+            ".*\\.api\\..*",
+          ],
+        },
+        {
+          "methods": [
+            "GET",
+          ],
+          "statusCodeRange": "400-599",
+          "urls": [
+            "error.example.com",
+          ],
+          "urlsRegex": [],
+        },
+      ],
+      "ignoreAmplitudeRequests": undefined,
+      "ignoreHosts": undefined,
+    },
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration network tracking with string ignore amplitude requests 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "networkTracking": {
+      "captureRules": undefined,
+      "ignoreAmplitudeRequests": undefined,
+      "ignoreHosts": [
+        "localhost",
+        "example.com",
+      ],
+    },
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration network tracking with string networkTrackingIgnoreAmplitudeRequests set to "true" 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "networkTracking": {
+      "captureRules": undefined,
+      "ignoreAmplitudeRequests": true,
+      "ignoreHosts": undefined,
+    },
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration page history tracking all changes 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": {
+      "trackHistoryChanges": "all",
+      "trackOn": undefined,
+    },
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration page view tracking disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration page view with legacy option disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": {
+      "trackHistoryChanges": "all",
+      "trackOn": undefined,
+    },
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration partial user agent enrichment options 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+  "userAgentEnrichmentOptions": {
+    "deviceManufacturer": false,
+    "deviceModel": true,
+    "osName": true,
+    "osVersion": false,
+  },
+}
+`;
+
+exports[`generateConfiguration session replay and guides surveys explicitly disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration session, file download, and form interaction disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration user agent enrichment disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
 }
 `;

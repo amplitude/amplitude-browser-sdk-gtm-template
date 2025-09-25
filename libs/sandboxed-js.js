@@ -328,6 +328,7 @@ const onfailure = () => {
 const onsuccess = () => {
 
   _amplitude = copyFromWindow(WRAPPER_NAMESPACE);
+  /* istanbul ignore if */
   if (!_amplitude) return fail('Failed to load the Amplitude namespace');
 
   const instanceName = data.instanceName;
@@ -435,6 +436,13 @@ injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
 
 // exports:start
 window.__EXPORTS__ = {
+  onsuccess,
+  onfailure,
+  mergeObject,
   generateConfiguration,
+  getUserPropsBulkSetObject,
+  getAllUserProps,
+  normalize,
+  normalizeDeviceId,
 };
 // exports:end

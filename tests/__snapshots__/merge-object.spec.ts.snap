@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`mergeObject basic object merging 1`] = `
+{
+  "a": 1,
+  "b": 2,
+  "c": 3,
+  "d": 4,
+}
+`;
+
+exports[`mergeObject both objects null 1`] = `{}`;
+
+exports[`mergeObject empty base object with valid overwrite object 1`] = `
+{
+  "a": 1,
+  "b": "hello",
+}
+`;
+
+exports[`mergeObject nested objects 1`] = `
+{
+  "admin": true,
+  "settings": {
+    "notifications": true,
+  },
+  "user": {
+    "age": 31,
+    "email": "john@example.com",
+  },
+}
+`;
+
+exports[`mergeObject non-object base with valid overwrite object 1`] = `
+{
+  "a": 1,
+  "b": 2,
+}
+`;
+
+exports[`mergeObject null base object with valid overwrite object 1`] = `
+{
+  "a": 1,
+  "b": 2,
+}
+`;
+
+exports[`mergeObject objects with array values 1`] = `
+{
+  "categories": [
+    1,
+    2,
+    3,
+  ],
+  "empty_array": [],
+  "new_array": [
+    "a",
+    "b",
+    "c",
+  ],
+  "numbers": [
+    10,
+    20,
+    30,
+  ],
+  "tags": [
+    "react",
+    "vue",
+  ],
+}
+`;
+
+exports[`mergeObject undefined base object with valid overwrite object 1`] = `
+{
+  "a": 1,
+  "b": 2,
+}
+`;
+
+exports[`mergeObject valid base object with empty overwrite object 1`] = `
+{
+  "a": 1,
+  "b": "hello",
+}
+`;
+
+exports[`mergeObject valid base object with null overwrite object 1`] = `
+{
+  "a": 1,
+  "b": 2,
+}
+`;
+
+exports[`mergeObject valid base object with undefined overwrite object 1`] = `
+{
+  "a": 1,
+  "b": 2,
+}
+`;
