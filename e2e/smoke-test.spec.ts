@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Home Page', () => {
-  test('should load the home page without errors', async ({ page }) => {
+  test('should load the home page and make an API call to the Amplitude API without errors', async ({ page }) => {
     const errors: any[] = [];
     page.on('pageerror', (exception) => {
       errors.push(exception);
