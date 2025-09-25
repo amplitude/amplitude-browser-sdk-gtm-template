@@ -16,6 +16,11 @@ const data: GtmParameters = {
   autocaptureNetworkTracking: true,
   detPageView: true,
   detSession: true,
+  autocaptureFrustrationInteractions: true,
+  frustrationInteractionsOptions: {
+    rageClicksCssSelectorAllowlist: '*',
+    deadClicksCssSelectorAllowlist: '*',
+  },
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
   },

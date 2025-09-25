@@ -38,7 +38,7 @@ export interface GeneratedGtmParameters {
   userPropertyOperationsObject?: Record<string, string>;
   initGroup?: {defaultEventTracking?: boolean; euData?: boolean; initUserId?: string; initOptions?: 'manual'; initManualOptions?: Array<{key: 'flushIntervalMillis' | 'flushMaxRetries' | 'flushQueueSize' | 'logLevel' | 'minIdLength' | 'serverUrl' | 'useBatch' | 'appVersion' | 'deviceId' | 'identityStorage' | 'partnerId' | 'sessionTimeout' | 'userId' | 'optOut' | 'transport'; value: string}>; initTrackingOptions?: Array<{key: 'ipAddress' | 'language' | 'platform'; value: string}>; initCookieOptions?: Array<{key: 'domain' | 'expiration' | 'sameSite' | 'secure' | 'upgrade'; value: string}>; userAgentEnrichment?: boolean; sessionReplay?: boolean; guidesSurveys?: boolean};
   defaultEventTracking?: boolean;
-  defaultEventTrackingOptions?: {detAttribution?: boolean; detPageView?: boolean; detSession?: boolean; detFormInteraction?: boolean; detFileDownload?: boolean; autocaptureElementInteractions?: boolean; autocaptureNetworkTracking?: boolean};
+  defaultEventTrackingOptions?: {detAttribution?: boolean; detPageView?: boolean; detSession?: boolean; detFormInteraction?: boolean; detFileDownload?: boolean; autocaptureElementInteractions?: boolean; autocaptureFrustrationInteractions?: boolean; autocaptureNetworkTracking?: boolean};
   detAttribution?: boolean;
   attributionOptions?: {attributionInitialEmptyValue?: string; attributionExcludeReferrers?: string; attributionExcludeReferrersRegex?: string; attributionResetSession?: boolean};
   attributionInitialEmptyValue?: string;
@@ -61,6 +61,10 @@ export interface GeneratedGtmParameters {
   elementInteractionsPageUrlAllowlistRegex?: string;
   elementInteractionsDataAttributePrefixString?: string;
   elementInteractionsDataAttributePrefixRegex?: string;
+  autocaptureFrustrationInteractions?: boolean;
+  frustrationInteractionsOptions?: {rageClicksCssSelectorAllowlist?: string; deadClicksCssSelectorAllowlist?: string};
+  rageClicksCssSelectorAllowlist?: string;
+  deadClicksCssSelectorAllowlist?: string;
   autocaptureNetworkTracking?: boolean;
   networkTrackingIgnoreAmplitudeRequests?: boolean;
   networkTrackingIgnoreHosts?: string;

@@ -11,7 +11,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.18.1';
+const WRAPPER_VERSION = '3.20.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -222,6 +222,29 @@ const generateConfiguration = (data) => {
 
       if (!!data.elementInteractionsDataAttributePrefixRegex) {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
+      }
+    }
+
+    const frustrationInteractionsOptions = data.frustrationInteractionsOptions || {};
+
+    if (!!frustrationInteractionsOptions.rageClicksCssSelectorAllowlist) {
+      const rageClicks = {};
+      frustrationInteractionsOptions.rageClicks = rageClicks;
+      rageClicks.cssSelectorAllowlist = getType(frustrationInteractionsOptions.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(frustrationInteractionsOptions.rageClicksCssSelectorAllowlist);
+    }
+  
+    if (!!frustrationInteractionsOptions.deadClicksCssSelectorAllowlist) {
+      const deadClicks = {};
+      frustrationInteractionsOptions.deadClicks = deadClicks;
+      deadClicks.cssSelectorAllowlist = getType(frustrationInteractionsOptions.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(frustrationInteractionsOptions.deadClicksCssSelectorAllowlist);
+    }
+    
+    const hasFrustrationInteractionsOptions = Object.keys(frustrationInteractionsOptions).length > 0;
+    if (!!data.autocaptureFrustrationInteractions) {
+      if (!hasFrustrationInteractionsOptions) {
+        initOptions.autocapture.frustrationInteractions = true; 
+      } else {
+        initOptions.autocapture.frustrationInteractions = frustrationInteractionsOptions;
       }
     }
 

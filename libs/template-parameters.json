@@ -990,6 +990,44 @@
               },
               {
                 "type": "CHECKBOX",
+                "name": "autocaptureFrustrationInteractions",
+                "checkboxText": "Track frustration interactions",
+                "simpleValueType": true,
+                "help": "Check this box to enable frustration interactions tracking. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-element-interactions\"\u003eRead more\u003c/a\u003e.",
+                "defaultValue": false,
+                "subParams": [
+                  {
+                    "type": "GROUP",
+                    "name": "frustrationInteractionsOptions",
+                    "groupStyle": "NO_ZIPPY",
+                    "subParams": [
+                      {
+                        "type": "TEXT",
+                        "name": "rageClicksCssSelectorAllowlist",
+                        "displayName": "Rage Click CSS Selector Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define which elements should have rage clicks captured on. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-frustration-interactions\"\u003eRead more\u003c/a\u003e."
+                      },
+                      {
+                        "type": "TEXT",
+                        "name": "deadClicksCssSelectorAllowlist",
+                        "displayName": "Dead Click CSS Selector Allowlist",
+                        "simpleValueType": true,
+                        "help": "Accepts one or more CSS selectors that define the elements on which Amplitude captures dead clicks. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#track-frustration-interactions\"\u003eRead more\u003c/a\u003e."
+                      }
+                    ],
+                    "enablingConditions": [
+                      {
+                        "paramName": "autocaptureFrustrationInteractions",
+                        "paramValue": true,
+                        "type": "EQUALS"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "CHECKBOX",
                 "name": "autocaptureNetworkTracking",
                 "checkboxText": "Track network errors",
                 "simpleValueType": true,

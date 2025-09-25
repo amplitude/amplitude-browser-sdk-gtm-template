@@ -1461,7 +1461,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.19.0';
+const WRAPPER_VERSION = '3.20.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1674,20 +1674,20 @@ const generateConfiguration = (data) => {
         initOptions.autocapture.elementInteractions.dataAttributePrefixRegex = getType(data.elementInteractionsDataAttributePrefixRegex) === 'array' ? data.elementInteractionsDataAttributePrefixRegex : stringToArrayAndTrim(data.elementInteractionsDataAttributePrefixRegex);
       }
     }
-    
-    const frustrationInteractionsOptions = {};
 
-      if (!!data.rageClicksCssSelectorAllowlist) {
-        const rageClicks = {};
-        frustrationInteractionsOptions.rageClicks = rageClicks;
-        rageClicks.cssSelectorAllowlist = getType(data.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(data.rageClicksCssSelectorAllowlist);
-      }
-    
-      if (!!data.deadClicksCssSelectorAllowlist) {
-        const deadClicks = {};
-        frustrationInteractionsOptions.deadClicks = deadClicks;
-        deadClicks.cssSelectorAllowlist = getType(data.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(data.deadClicksCssSelectorAllowlist);
-      }
+    const frustrationInteractionsOptions = data.frustrationInteractionsOptions || {};
+
+    if (!!frustrationInteractionsOptions.rageClicksCssSelectorAllowlist) {
+      const rageClicks = {};
+      frustrationInteractionsOptions.rageClicks = rageClicks;
+      rageClicks.cssSelectorAllowlist = getType(frustrationInteractionsOptions.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(frustrationInteractionsOptions.rageClicksCssSelectorAllowlist);
+    }
+  
+    if (!!frustrationInteractionsOptions.deadClicksCssSelectorAllowlist) {
+      const deadClicks = {};
+      frustrationInteractionsOptions.deadClicks = deadClicks;
+      deadClicks.cssSelectorAllowlist = getType(frustrationInteractionsOptions.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(frustrationInteractionsOptions.deadClicksCssSelectorAllowlist);
+    }
     
     const hasFrustrationInteractionsOptions = Object.keys(frustrationInteractionsOptions).length > 0;
     if (!!data.autocaptureFrustrationInteractions) {
@@ -1697,7 +1697,7 @@ const generateConfiguration = (data) => {
         initOptions.autocapture.frustrationInteractions = frustrationInteractionsOptions;
       }
     }
-  
+
     if (!!data.autocaptureNetworkTracking) {
       let ignoreAmplitudeRequests;
       if (typeof data.networkTrackingIgnoreAmplitudeRequests === 'string' && data.networkTrackingIgnoreAmplitudeRequests.toLowerCase() === 'true') {
