@@ -23,7 +23,6 @@ describe('generateConfiguration', () => {
   });
 
   test('kitchen sink example', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureElementInteractions: true,
@@ -58,8 +57,32 @@ describe('generateConfiguration', () => {
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
   });
 
+  describe('frustration interactions', () => {
+    test('enable autocaptureFrustrationInteractions', () => {
+      const data: GeneratedGtmParameters = {
+        ...BASE_DATA,
+        autocaptureFrustrationInteractions: true,
+      }
+      const autocapture = win.__EXPORTS__.generateConfiguration(data).autocapture;
+      expect(autocapture.frustrationInteractions).toBe(true);
+    });
+
+    test('basic autocapture options', () => {
+      const data: GeneratedGtmParameters = {
+        ...BASE_DATA,
+        autocaptureFrustrationInteractions: true,
+        frustrationInteractionsOptions: {
+          rageClicksCssSelectorAllowlist: 'test1,test2',
+          deadClicksCssSelectorAllowlist: 'test1,test2',
+        },
+      }
+      const autocapture = win.__EXPORTS__.generateConfiguration(data).autocapture;
+      expect(autocapture.frustrationInteractions.rageClicks.cssSelectorAllowlist).toEqual(['test1', 'test2']);
+      expect(autocapture.frustrationInteractions.deadClicks.cssSelectorAllowlist).toEqual(['test1', 'test2']);
+    });
+  });
+
   test('basic autocapture options', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
     }
@@ -67,7 +90,6 @@ describe('generateConfiguration', () => {
   });
 
   test('manual configuration options', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       initOptions: 'manual',
@@ -77,7 +99,6 @@ describe('generateConfiguration', () => {
   });
 
   test('eu data disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       euData: false,
@@ -86,7 +107,6 @@ describe('generateConfiguration', () => {
   });
 
   test('user agent enrichment disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       userAgentEnrichment: false,
@@ -95,7 +115,6 @@ describe('generateConfiguration', () => {
   });
 
   test('session replay and guides surveys explicitly disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       sessionReplay: false,
@@ -105,7 +124,6 @@ describe('generateConfiguration', () => {
   });
 
   test('default event tracking disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       defaultEventTracking: false,
@@ -114,7 +132,6 @@ describe('generateConfiguration', () => {
   });
 
   test('attribution tracking disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detAttribution: false,
@@ -123,7 +140,6 @@ describe('generateConfiguration', () => {
   });
 
   test('page view tracking disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detPageView: false,
@@ -132,7 +148,6 @@ describe('generateConfiguration', () => {
   });
 
   test('page history tracking all changes', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detPageView: true,
@@ -142,7 +157,6 @@ describe('generateConfiguration', () => {
   });
 
   test('session, file download, and form interaction disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detSession: false,
@@ -153,7 +167,6 @@ describe('generateConfiguration', () => {
   });
 
   test('element interactions disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureElementInteractions: false,
@@ -162,7 +175,6 @@ describe('generateConfiguration', () => {
   });
 
   test('network tracking with string ignore amplitude requests', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureNetworkTracking: true,
@@ -173,7 +185,6 @@ describe('generateConfiguration', () => {
   });
 
   test('network tracking disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureNetworkTracking: false,
@@ -182,7 +193,6 @@ describe('generateConfiguration', () => {
   });
 
   test('comma-separated strings for attribution exclude referrers', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detAttribution: true,
@@ -193,7 +203,6 @@ describe('generateConfiguration', () => {
   });
 
   test('comma-separated strings for element interactions', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureElementInteractions: true,
@@ -208,7 +217,6 @@ describe('generateConfiguration', () => {
   });
 
   test('network tracking with complex capture rules', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureNetworkTracking: true,
@@ -230,7 +238,6 @@ describe('generateConfiguration', () => {
   });
 
   test('page view with legacy option disabled', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detPageView: true,
@@ -241,7 +248,6 @@ describe('generateConfiguration', () => {
   });
 
   test('attribution with custom initial empty value', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       detAttribution: true,
@@ -252,7 +258,6 @@ describe('generateConfiguration', () => {
   });
 
   test('partial user agent enrichment options', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       userAgentEnrichment: true,
@@ -265,7 +270,6 @@ describe('generateConfiguration', () => {
   });
 
   test('empty and undefined optional fields', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       initTrackingOptions: undefined,
@@ -278,7 +282,6 @@ describe('generateConfiguration', () => {
   });
 
   test('network tracking with string networkTrackingIgnoreAmplitudeRequests set to "true"', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureNetworkTracking: true,
@@ -288,7 +291,6 @@ describe('generateConfiguration', () => {
   });
 
   test('configuration with logLevel 4 to trigger info logging', () => {
-    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       initOptions: { logLevel: 4 },
