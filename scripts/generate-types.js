@@ -26,7 +26,7 @@ function mapParameterType(param) {
           .join(' | ');
         return values;
       }
-      return 'string';
+      return 'Record<string, string>';
     
     case 'SIMPLE_TABLE':
       if (param.simpleTableColumns) {

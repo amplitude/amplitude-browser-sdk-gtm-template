@@ -228,7 +228,13 @@ exports[`onsuccess track operation with comma-separated group names 1`] = `
       "track",
       {
         "event_type": "Purchase",
-        "groups": {},
+        "groups": {
+          "category": [
+            "electronics",
+            "gadgets",
+            "tech",
+          ],
+        },
       },
       {},
       {},
@@ -251,9 +257,14 @@ exports[`onsuccess track operation with event properties and groups 1`] = `
       "track",
       {
         "event_type": "Button Click",
-        "groups": {},
+        "groups": {
+          "company": "acme-corp",
+        },
       },
-      {},
+      {
+        "button_text": "Sign Up",
+        "page": "landing",
+      },
       {
         "time": 1634567890123,
       },
@@ -282,6 +293,7 @@ exports[`onsuccess track operation with event properties object 1`] = `
         "page_title": "Home Page",
         "page_url": "/home",
         "referrer": "google.com",
+        "utm_source": "newsletter",
       },
       {},
     ],
