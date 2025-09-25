@@ -1884,6 +1884,7 @@ const onsuccess = () => {
 injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
 
 
+
 ___WEB_PERMISSIONS___
 
 [
