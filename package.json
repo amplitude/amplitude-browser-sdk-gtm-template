@@ -24,10 +24,10 @@
   },
   "homepage": "https://github.com/amplitude/amplitude-browser-sdk-gtm-template#readme",
   "dependencies": {
-    "ejs": "^3.1.10"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.3",
+    "ejs": "^3.1.10",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
