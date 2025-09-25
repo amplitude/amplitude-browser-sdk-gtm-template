@@ -1,4 +1,3 @@
-
 // APIs
 const copyFromWindow = require('copyFromWindow');
 const getType = require('getType');
