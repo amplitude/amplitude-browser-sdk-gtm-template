@@ -1,4 +1,24 @@
 const fs = require('fs');
+const { execSync } = require('child_process');
+
+// Check for uncommitted changes in libs/ directory
+const checkUncommittedChanges = () => {
+    // Check if we're in a git repository
+    execSync('git rev-parse --git-dir', { stdio: 'ignore' });
+    
+    // Get git status for libs/ directory only
+    const gitStatus = execSync('git status --porcelain libs/', { encoding: 'utf8' }).trim();
+    
+    if (gitStatus) {
+        console.error('❌ Error: Cannot sync template.tpl while there are uncommited changes in libs/ directory:');
+        console.error(gitStatus);
+        console.error('\nPlease commit or stash your changes before syncing.');
+        console.error('This prevents accidentally overwriting your local modifications.');
+        process.exit(1);
+    }
+    
+    console.log('✓ No uncommitted changes in libs/ directory');
+};
 
 // Helper function to remove leading and trailing empty lines
 const trimEmptyLines = (content) => {
@@ -20,6 +40,9 @@ const trimEmptyLines = (content) => {
 };
 
 console.log('Extracting libs from template.tpl...');
+
+// Check for uncommitted changes before proceeding (unless --force is used)
+checkUncommittedChanges();
 
 // First, read the existing sandboxed-js.js to preserve the exports section
 let exportsSection = '';
