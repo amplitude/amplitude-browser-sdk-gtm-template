@@ -5,6 +5,9 @@
   "description": "The amplitude GTM template with @amplitude/analytics-browser internal",
   "scripts": {
     "test": "jest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
     "build": "node scripts/build-template.js && node scripts/generate-types.js",
     "sync": "node scripts/sync-template.js",
     "dev": "yarn setup-env && vite serve",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.28.3",
+    "@playwright/test": "^1.48.0",
     "ejs": "^3.1.10",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
