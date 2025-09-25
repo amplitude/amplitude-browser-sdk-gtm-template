@@ -1,6 +1,6 @@
 const fs = require('fs');
 const ejs = require('ejs');
-const sandboxedJs = fs.readFileSync('libs/sandboxed-js.js', 'utf8');
+let sandboxedJs = fs.readFileSync('libs/sandboxed-js.js', 'utf8');
 const templateParametersJson = fs.readFileSync('libs/template-parameters.json', 'utf8');
 const infoJson = fs.readFileSync('libs/template-info.json', 'utf8');
 
@@ -15,6 +15,12 @@ if (!template.includes('<%- templateParametersJson %>')) {
 if (!template.includes('<%- infoJson %>')) {
     throw new Error('infoJson is not in the template');
 }
+
+// take out the exports:start and exports:end from the sandboxedJs
+const exportsStart = sandboxedJs.indexOf('// exports:start');
+const exportsEndTxt = '// exports:end';
+const exportsEnd = sandboxedJs.indexOf(exportsEndTxt);
+sandboxedJs = sandboxedJs.slice(0, exportsStart) + sandboxedJs.slice(exportsEnd + exportsEndTxt.length);
 
 const data = {
     sandboxedJs: sandboxedJs,

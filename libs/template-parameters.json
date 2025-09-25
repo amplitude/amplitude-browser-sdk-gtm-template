@@ -1068,7 +1068,7 @@
                           "name": "methods",
                           "displayName": "Methods",
                           "simpleValueType": true,
-                          "help": "The HTTP methods to capture. e.g.: [\"POST\", \"PUT\", \"DELETE\"]"
+                          "help": "The HTTP methods to capture. e.g.: \"POST,PUT,DELETE\""
                         },
                         "isUnique": false
                       },

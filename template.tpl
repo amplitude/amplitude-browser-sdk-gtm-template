@@ -1101,7 +1101,7 @@ ___TEMPLATE_PARAMETERS___
                           "name": "methods",
                           "displayName": "Methods",
                           "simpleValueType": true,
-                          "help": "The HTTP methods to capture. e.g.: [\"POST\", \"PUT\", \"DELETE\"]"
+                          "help": "The HTTP methods to capture. e.g.: \"POST,PUT,DELETE\""
                         },
                         "isUnique": false
                       },
@@ -1881,13 +1881,8 @@ const onsuccess = () => {
   data.gtmOnSuccess();
 };
 
-if (typeof process === 'undefined' || process.env.JEST_WORKER_ID === undefined) {
-  injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
-} else {
-  window.__EXPORTS__ = {
-    generateConfiguration,
-  };
-}
+injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
+
 
 
 ___WEB_PERMISSIONS___

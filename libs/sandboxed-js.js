@@ -431,10 +431,10 @@ const onsuccess = () => {
   data.gtmOnSuccess();
 };
 
-if (typeof process === 'undefined' || process.env.JEST_WORKER_ID === undefined) {
-  injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
-} else {
-  window.__EXPORTS__ = {
-    generateConfiguration,
-  };
-}
+injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
+
+// exports:start
+window.__EXPORTS__ = {
+  generateConfiguration,
+};
+// exports:end
