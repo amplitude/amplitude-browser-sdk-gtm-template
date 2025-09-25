@@ -276,4 +276,23 @@ describe('generateConfiguration', () => {
     };
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
   });
+
+  test('network tracking with string networkTrackingIgnoreAmplitudeRequests set to "true"', () => {
+    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      autocaptureNetworkTracking: true,
+      networkTrackingIgnoreAmplitudeRequests: 'true',
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
+
+  test('configuration with logLevel 4 to trigger info logging', () => {
+    expect(win.__EXPORTS__.generateConfiguration).toBeDefined();
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      initOptions: { logLevel: 4 },
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
 });

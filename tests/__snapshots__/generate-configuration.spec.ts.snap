@@ -110,6 +110,21 @@ exports[`generateConfiguration comma-separated strings for element interactions 
 }
 `;
 
+exports[`generateConfiguration configuration with logLevel 4 to trigger info logging 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "logLevel": 4,
+  "sessionReplay": false,
+}
+`;
+
 exports[`generateConfiguration default event tracking disabled 1`] = `
 {
   "autocapture": false,
@@ -325,6 +340,25 @@ exports[`generateConfiguration network tracking with string ignore amplitude req
         "localhost",
         "example.com",
       ],
+    },
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration network tracking with string networkTrackingIgnoreAmplitudeRequests set to "true" 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "networkTracking": {
+      "captureRules": undefined,
+      "ignoreAmplitudeRequests": true,
+      "ignoreHosts": undefined,
     },
     "pageViews": false,
     "sessions": false,
