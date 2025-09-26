@@ -1448,7 +1448,6 @@ ___TEMPLATE_PARAMETERS___
 
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
-
 // APIs
 const copyFromWindow = require('copyFromWindow');
 const getType = require('getType');
@@ -1883,7 +1882,6 @@ const onsuccess = () => {
 };
 
 injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
-
 
 
 
