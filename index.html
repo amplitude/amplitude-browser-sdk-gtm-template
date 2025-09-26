@@ -9,5 +9,10 @@
         <script type="module" src="src/gtm-polyfill.ts"></script>
         <script defer src="src/mock-data/kitchen-sink.ts"></script>
         <script defer src="libs/sandboxed-js.js"></script>
+        <script defer>
+          setTimeout(() => {
+            amplitude.track('Test Event');
+          }, 1000);
+        </script>
     </body>
 </html>

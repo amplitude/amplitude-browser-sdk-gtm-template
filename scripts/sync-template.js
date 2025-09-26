@@ -10,7 +10,7 @@ const checkUncommittedChanges = () => {
     const gitStatus = execSync('git status --porcelain libs/', { encoding: 'utf8' }).trim();
     
     if (gitStatus) {
-        console.error('❌ Error: Cannot sync template.tpl while there are uncommited changes in libs/ directory:');
+        console.error('❌ Error: Cannot sync template.tpl while there are uncommitted changes in libs/ directory:');
         console.error(gitStatus);
         console.error('\nPlease commit or stash your changes before syncing.');
         console.error('This prevents accidentally overwriting your local modifications.');
