@@ -1,0 +1,129 @@
+# Amplitude Browser SDK GTM Template - Cursor Rules
+
+## Project Overview
+This is a Google Tag Manager (GTM) template for the Amplitude Analytics Browser SDK. The project builds a sandboxed JavaScript file that can be imported into GTM to enable Amplitude analytics functionality.
+
+## Code Style & Standards
+
+### TypeScript
+- **Strict mode**: Always use TypeScript strict mode settings
+- **Target**: ES2020 with module resolution set to "node"
+- **Explicit types**: Prefer explicit types over `any`, except in GTM polyfill files where `any` is acceptable
+- **Quotes**: Use single quotes consistently (`'` not `"`)
+- **Semicolons**: Always use semicolons
+- **Indentation**: Use 2 spaces for indentation
+- **Comma dangling**: Use trailing commas in multiline objects/arrays
+
+### File Naming
+- TypeScript files: `kebab-case.ts`
+- Test files: `kebab-case.spec.ts` or `kebab-case.test.ts`
+- Configuration files: Follow conventional naming (e.g., `jest.config.js`)
+
+## Project Structure
+
+### Core Directories
+- `src/` - Source TypeScript files
+- `src/gtm-polyfills/` - GTM API polyfills (special linting rules apply)
+- `tests/` - Jest test files
+- `scripts/` - Build and utility scripts
+- `libs/` - Generated output files (do not edit manually)
+- `coverage/` - Test coverage reports (generated)
+
+### Key Files
+- `template.tpl` - Main GTM template file
+- `template.tpl.ejs` - EJS template source that generates the GTM template
+- `src/gtm-polyfill.ts` - Polyfills GTM's sandboxed methods so that can test locally
+- `libs/sandboxed-js.js` - Generated sandboxed JavaScript for GTM
+
+## Testing Requirements
+
+### Test Patterns
+- Mock GTM APIs using the polyfills in test setup
+- Use snapshots for configuration generation tests
+- Test both success and failure scenarios
+- Always test edge cases and error conditions
+
+## Build Process
+
+### Build Scripts
+- `yarn build` - Generates template and types (primary build command)
+- `yarn test` - Runs Jest test suite with coverage
+- `yarn lint` - Runs ESLint on source files
+- `yarn type-check` - TypeScript compilation check
+
+### Generated Files
+- `libs/sandboxed-js.js` - Main output, used in GTM template
+- `src/generated-types.ts` - Auto-generated TypeScript types
+- `template.tpl` - Final GTM template file
+
+**Never edit generated files directly** - always modify source files and rebuild.
+
+## GTM-Specific Guidelines
+
+### Polyfill Development
+- GTM polyfills simulate GTM's sandboxed environment
+- Use `any` types liberally in polyfill files (it's allowed via ESLint override)
+- Global variables are acceptable in `gtm-polyfills/` directory
+- Follow GTM API specifications exactly
+
+### Template Parameters
+- Template parameters are defined in external GTM dashboard
+- Test parameter configurations thoroughly
+- Do not accept any code that is breaking. This applies primarily to what's in template-parameters.json and sandboxed-js.js. Breaking changes will cause users who upgrade to have their implementations break.
+
+### Sandboxed JavaScript
+- The output must work in GTM's sandboxed environment
+- No access to standard browser APIs directly
+- Must use GTM's provided APIs through polyfills
+
+## Development Workflow
+
+### Making Changes
+1. **Source code changes**: Edit files in `src/`
+2. **Run tests**: `yarn test` to ensure coverage requirements
+3. **Lint code**: `yarn lint` to check code style
+4. **Build**: `yarn build` to generate template
+5. **Test in GTM**: Use `yarn dev` for local testing
+
+### GTM Template Updates
+- Any changes to "template.tpl" need to be tested in tagmanager.google.com; testing locally is not sufficient because it is just a polyfill of the real GTM sandbox
+
+## Dependencies Management
+- sandboxed-js.js should only ever be one file with no dependencies
+
+## Documentation
+- Keep README.md up to date with build/test instructions
+- Document any GTM-specific quirks or limitations
+- Include examples for common use cases
+- Maintain changelog for template versions
+
+## Security Considerations
+- Follow GTM's security guidelines for templates
+- Validate all user inputs thoroughly
+- No direct DOM manipulation (use GTM APIs)
+- Be cautious with data transmission/storage
+
+## When Working on This Project
+1. **Always run tests before committing** - 100% coverage is required
+2. **Test in actual GTM environment** - polyfills may not catch everything
+3. **Follow GTM template guidelines** - this will be published to GTM Gallery
+4. **Update documentation** - keep README and comments current
+5. **Use conventional commit messages** - help with changelog generation
+
+## Common Commands
+```bash
+# Development workflow
+yarn install          # Install dependencies
+yarn test             # Run tests with coverage
+yarn lint             # Check code style
+yarn lint:fix         # Fix auto-fixable linting issues
+yarn build            # Build template and types
+yarn dev              # Start development server
+yarn type-check       # Check TypeScript compilation
+
+# Testing in GTM
+yarn dev              # Serves libs/sandboxed-js.js locally
+# Then import template.tpl into GTM for testing
+```
+
+Remember: This is a GTM template that will be used by many developers. Code quality, reliability, and adherence to GTM guidelines are paramount. And it's critical that no changes to this cause customer's implementations to break when they upgrade.
