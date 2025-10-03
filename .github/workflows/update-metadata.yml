@@ -40,11 +40,10 @@ jobs:
         run: |
           # Extract just the SHA for the tag name
           SHA=$(git rev-parse --short=5 HEAD)
-          FULL_SHA=$(git rev-parse HEAD)
           TAG_NAME="GTM Template Version: $SHA"
           
           # Create the named template file
-          TEMPLATE_NAME="amplitude-gtm.$FULL_SHA.tpl"
+          TEMPLATE_NAME="amplitude-gtm.$SHA.tpl"
           cp template.tpl "$TEMPLATE_NAME"
           
           # Determine if this should be a draft
