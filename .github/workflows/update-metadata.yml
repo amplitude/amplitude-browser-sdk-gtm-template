@@ -9,6 +9,8 @@ on:
 jobs:
   update-metadata:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -24,13 +26,41 @@ jobs:
 
         # Quotes in message are not allowed
       - name: Update metadata.yaml
+        id: update-metadata
         run: |
           SHA=$(git rev-parse HEAD)
           MESSAGE=$(echo "${{ github.event.inputs.releaseDescription }}" | tr -d ':')
           NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
           echo "New version info to be added: \n"
           echo "$NEW_VERSION"
-          sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml       
+          sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create Github Release
+        run: |
+          # Extract just the SHA for the tag name
+          SHA=$(git rev-parse --short=5 HEAD)
+          TAG_NAME="GTM Template Version: $SHA"
+          
+          # Create the named template file
+          TEMPLATE_NAME="amplitude-gtm.$SHA.tpl"
+          cp template.tpl "$TEMPLATE_NAME"
+          
+          # Determine if this should be a draft
+          IS_DRAFT=""
+          if [ "${{ github.ref }}" != "refs/heads/main" ]; then
+            IS_DRAFT="--draft"
+          fi
+          
+          # Create the release using GitHub CLI
+          gh release create "$TAG_NAME" \
+            --title "$TAG_NAME" \
+            --notes "${{ github.event.inputs.releaseDescription }}" \
+            $IS_DRAFT \
+            --repo ${{ github.repository }} \
+            "$TEMPLATE_NAME"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Commit and push if changed
         run: |
