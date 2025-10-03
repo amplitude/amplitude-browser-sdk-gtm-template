@@ -57,11 +57,10 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # TODO: Uncomment this before merging into main!!!!
-      # - name: Commit and push if changed
-      #   run: |
-      #     git config --local user.email amplitude-sdk-bot@users.noreply.github.com
-      #     git config --local user.name amplitude-sdk-bot
-      #     git add metadata.yaml
-      #     git commit -m "Update metadata.yaml" || exit 0  # Exit 0 if no changes
-      #     git push
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email amplitude-sdk-bot@users.noreply.github.com
+          git config --local user.name amplitude-sdk-bot
+          git add metadata.yaml
+          git commit -m "Update metadata.yaml" || exit 0  # Exit 0 if no changes
+          git push
