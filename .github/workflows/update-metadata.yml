@@ -24,13 +24,24 @@ jobs:
 
         # Quotes in message are not allowed
       - name: Update metadata.yaml
+        id: update-metadata
         run: |
           SHA=$(git rev-parse HEAD)
           MESSAGE=$(echo "${{ github.event.inputs.releaseDescription }}" | tr -d ':')
           NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
           echo "New version info to be added: \n"
           echo "$NEW_VERSION"
-          sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml       
+          sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create Github Release
+        uses: actions/create-release@v3
+        with:
+          release_name: ${{ steps.update-metadata.outputs.new_version }}
+          release_body: ${{ github.event.inputs.releaseDescription }}
+          release_draft: ${{ github.ref != 'refs/heads/main' }}
+          release_prerelease: false
+          release_title: ${{ steps.update-metadata.outputs.new_version }}
 
       - name: Commit and push if changed
         run: |
