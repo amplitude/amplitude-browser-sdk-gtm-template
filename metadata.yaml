@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 0ce51bcfd172ecbb1fbbb7722be205418d3b0194
+    changeNotes: Another fake template
   - sha: 0e971a132819925322fc636dec9a0a74ad2
     changeNotes: revert frustration interactions
   - sha: dc3714c3cf670e197908cfecb7fac4e1ae6de387
