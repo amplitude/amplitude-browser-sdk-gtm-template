@@ -40,7 +40,7 @@ jobs:
         run: |
           # Extract just the SHA for the tag name
           SHA=$(git rev-parse --short=5 HEAD)
-          TAG_NAME="Google Tag Manager Template Version: $SHA"
+          TAG_NAME="GTM Template Version: $SHA"
           
           # Determine if this should be a draft
           IS_DRAFT=""
