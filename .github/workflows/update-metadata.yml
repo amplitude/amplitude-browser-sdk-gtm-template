@@ -37,19 +37,31 @@ jobs:
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
       - name: Create Github Release
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ steps.update-metadata.outputs.new_version }}
-          release_name: ${{ steps.update-metadata.outputs.new_version }}
-          body: ${{ github.event.inputs.releaseDescription }}
-          draft: ${{ github.ref != 'refs/heads/main' }}
-          prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit and push if changed
         run: |
-          git config --local user.email amplitude-sdk-bot@users.noreply.github.com
-          git config --local user.name amplitude-sdk-bot
-          git add metadata.yaml
-          git commit -m "Update metadata.yaml" || exit 0  # Exit 0 if no changes
-          git push
+          # Extract just the SHA for the tag name
+          SHA=$(git rev-parse HEAD)
+          TAG_NAME="v$SHA"
+          
+          # Determine if this should be a draft
+          IS_DRAFT=""
+          if [ "${{ github.ref }}" != "refs/heads/main" ]; then
+            IS_DRAFT="--draft"
+          fi
+          
+          # Create the release using GitHub CLI
+          gh release create "$TAG_NAME" \
+            --title "$TAG_NAME" \
+            --notes "${{ github.event.inputs.releaseDescription }}" \
+            $IS_DRAFT \
+            --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # TODO: Uncomment this before merging into main!!!!
+      # - name: Commit and push if changed
+      #   run: |
+      #     git config --local user.email amplitude-sdk-bot@users.noreply.github.com
+      #     git config --local user.name amplitude-sdk-bot
+      #     git add metadata.yaml
+      #     git commit -m "Update metadata.yaml" || exit 0  # Exit 0 if no changes
+      #     git push
