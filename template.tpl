@@ -1674,26 +1674,28 @@ const generateConfiguration = (data) => {
       }
     }
 
-    const frustrationInteractionsOptions = data.frustrationInteractionsOptions || {};
-
-    if (!!frustrationInteractionsOptions.rageClicksCssSelectorAllowlist) {
-      const rageClicks = {};
-      frustrationInteractionsOptions.rageClicks = rageClicks;
-      rageClicks.cssSelectorAllowlist = getType(frustrationInteractionsOptions.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(frustrationInteractionsOptions.rageClicksCssSelectorAllowlist);
-    }
-  
-    if (!!frustrationInteractionsOptions.deadClicksCssSelectorAllowlist) {
-      const deadClicks = {};
-      frustrationInteractionsOptions.deadClicks = deadClicks;
-      deadClicks.cssSelectorAllowlist = getType(frustrationInteractionsOptions.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(frustrationInteractionsOptions.deadClicksCssSelectorAllowlist);
-    }
-    
-    const hasFrustrationInteractionsOptions = Object.keys(frustrationInteractionsOptions).length > 0;
     if (!!data.autocaptureFrustrationInteractions) {
+      let rageClicks;
+      let deadClicks;
+      
+      if (!!data.rageClicksCssSelectorAllowlist) {
+        rageClicks = {};
+        rageClicks.cssSelectorAllowlist = getType(data.rageClicksCssSelectorAllowlist) === 'array' ? data.rageClicksCssSelectorAllowlist : stringToArrayAndTrim(data.rageClicksCssSelectorAllowlist);
+      }
+    
+      if (!!data.deadClicksCssSelectorAllowlist) {
+        deadClicks = {};
+        deadClicks.cssSelectorAllowlist = getType(data.deadClicksCssSelectorAllowlist) === 'array' ? data.deadClicksCssSelectorAllowlist : stringToArrayAndTrim(data.deadClicksCssSelectorAllowlist);
+      }
+    
+      const hasFrustrationInteractionsOptions = !!rageClicks || !!deadClicks;
       if (!hasFrustrationInteractionsOptions) {
         initOptions.autocapture.frustrationInteractions = true; 
       } else {
-        initOptions.autocapture.frustrationInteractions = frustrationInteractionsOptions;
+        initOptions.autocapture.frustrationInteractions = {
+          rageClicks: rageClicks,
+          deadClicks: deadClicks,
+        };
       }
     }
 

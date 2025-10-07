@@ -18,8 +18,8 @@ const data: GtmParameters = {
   detSession: true,
   autocaptureFrustrationInteractions: true,
   frustrationInteractionsOptions: {
-    rageClicksCssSelectorAllowlist: '*',
-    deadClicksCssSelectorAllowlist: '*',
+    rageClicksCssSelectorAllowlist: '*,*,*',
+    deadClicksCssSelectorAllowlist: '*,*,*',
   },
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
