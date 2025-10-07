@@ -71,10 +71,8 @@ describe('generateConfiguration', () => {
       const data: GeneratedGtmParameters = {
         ...BASE_DATA,
         autocaptureFrustrationInteractions: true,
-        frustrationInteractionsOptions: {
-          rageClicksCssSelectorAllowlist: 'test1,test2',
-          deadClicksCssSelectorAllowlist: 'test1,test2',
-        },
+        rageClicksCssSelectorAllowlist: 'test1,test2',
+        deadClicksCssSelectorAllowlist: 'test1,test2',
       }
       const autocapture = win.__EXPORTS__.generateConfiguration(data).autocapture;
       expect(autocapture.frustrationInteractions.rageClicks.cssSelectorAllowlist).toEqual(['test1', 'test2']);
