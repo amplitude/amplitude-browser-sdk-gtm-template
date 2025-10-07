@@ -76,7 +76,6 @@ function processParameterRecursively(param, interfaceLines, processedNames = new
   }
   
   // Skip GROUP types entirely - flatten their subParams to top-level parameters
-  // This flattens the structure by processing the GROUP's subParams directly
   if (param.type === 'GROUP') {
     // Process the GROUP's subParams directly without adding the GROUP itself
     if (param.subParams) {
