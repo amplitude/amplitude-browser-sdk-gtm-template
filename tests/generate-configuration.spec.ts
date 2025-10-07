@@ -223,12 +223,18 @@ describe('generateConfiguration', () => {
           urls: 'api.example.com,api2.example.com', 
           urlsRegex: '.*\\.api\\..*',
           methods: 'GET,POST,PUT', 
-          statusCodeRange: '200-299' 
+          statusCodeRange: '200-299',
         },
         {
           urls: 'error.example.com',
           methods: 'GET',
           statusCodeRange: '400-599'
+        },
+        {
+          responseHeaders: 'Content-Type,Set-Cookie',
+          responseBody: 'status,data/info/**',
+          requestHeaders: 'Content-Type,Set-Cookie',
+          requestBody: 'status,data/info/**',
         }
       ],
     };

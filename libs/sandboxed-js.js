@@ -265,12 +265,25 @@ const generateConfiguration = (data) => {
         data.networkTrackingCaptureRules.forEach(rule => {
           let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : [];
           let urlsRegex = rule.urlsRegex ? rule.urlsRegex.split(',').map(url => url.trim()) : [];
-          captureRules.push({
-            urls: urls,
-            urlsRegex: urlsRegex,
+          const captureRule = {
+            urls: urls.length > 0 ? urls : undefined,
+            urlsRegex: urlsRegex.length > 0 ? urlsRegex : undefined,
             methods: rule.methods ? rule.methods.split(',').map(method => method.trim()) : undefined,
             statusCodeRange: rule.statusCodeRange,
+            responseHeaders: rule.responseHeaders ? rule.responseHeaders.split(',').map(header => header.trim()) : undefined,
+            responseBody: rule.responseBody ? {
+              allowlist: rule.responseBody.split(',').map(body => body.trim()),
+            } : undefined,
+            requestHeaders: rule.requestHeaders ? rule.requestHeaders.split(',').map(header => header.trim()) : undefined,
+            requestBody: rule.requestBody ? {
+              allowlist: rule.requestBody.split(',').map(body => body.trim()),
+            } : undefined,
+          };
+          // remove undefined properties
+          captureRules = captureRules.filter(rule => {
+            return Object.keys(rule).length > 0;
           });
+          captureRules.push(captureRule);
         });
       }
 

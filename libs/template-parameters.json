@@ -1091,6 +1091,46 @@
                           "help": "Define list of URL regex patterns to capture. By default any URL is captured. (comma separated list)."
                         },
                         "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "responseHeaders",
+                          "displayName": "Response Headers",
+                          "help": "The response headers to capture, comma separated list. e.g.: \"Content-Type,Set-Cookie\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "responseBody",
+                          "displayName": "Response Body",
+                          "help": "Capture part of the response body as JSON pointers. Comma separated list. e.g.: \"status,data/info/**\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "requestHeaders",
+                          "displayName": "Request Headers",
+                          "help": "The request headers to capture, comma separated list. e.g.: \"Content-Type,Set-Cookie\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "requestBody",
+                          "displayName": "Request Body",
+                          "help": "Capture part of the request body as JSON pointers. Comma separated list. e.g.: \"status,data/info/**\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
                       }
                     ]
                   }

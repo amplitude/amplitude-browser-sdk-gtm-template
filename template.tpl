@@ -1124,6 +1124,46 @@ ___TEMPLATE_PARAMETERS___
                           "help": "Define list of URL regex patterns to capture. By default any URL is captured. (comma separated list)."
                         },
                         "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "responseHeaders",
+                          "displayName": "Response Headers",
+                          "help": "The response headers to capture, comma separated list. e.g.: \"Content-Type,Set-Cookie\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "responseBody",
+                          "displayName": "Response Body",
+                          "help": "Capture part of the response body as JSON pointers. Comma separated list. e.g.: \"status,data/info/**\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "requestHeaders",
+                          "displayName": "Request Headers",
+                          "help": "The request headers to capture, comma separated list. e.g.: \"Content-Type,Set-Cookie\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "requestBody",
+                          "displayName": "Request Body",
+                          "help": "Capture part of the request body as JSON pointers. Comma separated list. e.g.: \"status,data/info/**\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
                       }
                     ]
                   }
@@ -1715,12 +1755,25 @@ const generateConfiguration = (data) => {
         data.networkTrackingCaptureRules.forEach(rule => {
           let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : [];
           let urlsRegex = rule.urlsRegex ? rule.urlsRegex.split(',').map(url => url.trim()) : [];
-          captureRules.push({
-            urls: urls,
-            urlsRegex: urlsRegex,
+          const captureRule = {
+            urls: urls.length > 0 ? urls : undefined,
+            urlsRegex: urlsRegex.length > 0 ? urlsRegex : undefined,
             methods: rule.methods ? rule.methods.split(',').map(method => method.trim()) : undefined,
             statusCodeRange: rule.statusCodeRange,
+            responseHeaders: rule.responseHeaders ? rule.responseHeaders.split(',').map(header => header.trim()) : undefined,
+            responseBody: rule.responseBody ? {
+              allowlist: rule.responseBody.split(',').map(body => body.trim()),
+            } : undefined,
+            requestHeaders: rule.requestHeaders ? rule.requestHeaders.split(',').map(header => header.trim()) : undefined,
+            requestBody: rule.requestBody ? {
+              allowlist: rule.requestBody.split(',').map(body => body.trim()),
+            } : undefined,
+          };
+          // remove undefined properties
+          captureRules = captureRules.filter(rule => {
+            return Object.keys(rule).length > 0;
           });
+          captureRules.push(captureRule);
         });
       }
 
