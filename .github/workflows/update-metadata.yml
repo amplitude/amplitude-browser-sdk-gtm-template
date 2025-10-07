@@ -40,7 +40,8 @@ jobs:
         run: |
           # Extract just the SHA for the tag name
           SHA=$(git rev-parse --short=5 HEAD)
-          TAG_NAME="GTM Template Version: $SHA"
+          GIT_TAG_NAME="$SHA"
+          TITLE="GTM Template Version: $SHA"
           
           # Create the named template file
           TEMPLATE_NAME="amplitude-gtm.$SHA.tpl"
@@ -53,8 +54,8 @@ jobs:
           fi
           
           # Create the release using GitHub CLI
-          gh release create "$TAG_NAME" \
-            --title "$TAG_NAME" \
+          gh release create "$GIT_TAG_NAME" \
+            --title "$TITLE" \
             --notes "${{ github.event.inputs.releaseDescription }}" \
             $IS_DRAFT \
             --repo ${{ github.repository }} \
