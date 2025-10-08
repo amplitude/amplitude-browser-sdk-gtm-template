@@ -47,14 +47,8 @@ function mapParameterType(param) {
       return 'Array<{[key: string]: any}>';
     
     case 'GROUP':
-      if (param.subParams) {
-        const subTypes = param.subParams
-          .filter(subParam => !['LABEL'].includes(subParam.type))
-          .map(subParam => `${subParam.name}?: ${mapParameterType(subParam)}`)
-          .join('; ');
-        return `{${subTypes}}`;
-      }
-      return '{[key: string]: any}';
+      // GROUP types should not generate their own fields, only their subParams
+      return null;
     
     case 'LABEL':
       // Labels are not data fields, skip them
@@ -75,9 +69,20 @@ function isOptional(param) {
 }
 
 // Recursively process parameters and their subParams
-function processParameterRecursively(param, interfaceLines, processedNames = new Set()) {
+function processParameterRecursively(param, interfaceLines, processedNames = new Set(), parentType = null) {
   // Skip LABEL types as they're not data fields
   if (param.type === 'LABEL') {
+    return;
+  }
+  
+  // Skip GROUP types entirely - flatten their subParams to top-level parameters
+  if (param.type === 'GROUP') {
+    // Process the GROUP's subParams directly without adding the GROUP itself
+    if (param.subParams) {
+      for (const subParam of param.subParams) {
+        processParameterRecursively(subParam, interfaceLines, processedNames, param.type);
+      }
+    }
     return;
   }
   
@@ -96,7 +101,7 @@ function processParameterRecursively(param, interfaceLines, processedNames = new
   // Recursively process subParams
   if (param.subParams) {
     for (const subParam of param.subParams) {
-      processParameterRecursively(subParam, interfaceLines, processedNames);
+      processParameterRecursively(subParam, interfaceLines, processedNames, param.type);
     }
   }
 }
@@ -108,7 +113,7 @@ function generateTypeScriptInterface(parameters) {
   
   // Process each parameter recursively
   for (const param of parameters) {
-    processParameterRecursively(param, interfaceLines, processedNames);
+    processParameterRecursively(param, interfaceLines, processedNames, null);
   }
   
   interfaceLines.push('}');
