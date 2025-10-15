@@ -349,7 +349,6 @@ const onsuccess = () => {
 
   switch (data.type) {
     case 'init':
-      debugger;
       _amplitude(instanceName, 'init', data.apiKey, initUserId, generateConfiguration(data));
       break;
 

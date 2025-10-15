@@ -224,7 +224,7 @@ exports[`generateConfiguration kitchen sink example 1`] = `
           "urls": [
             "hello.com",
           ],
-          "urlsRegex": [],
+          "urlsRegex": undefined,
         },
       ],
       "ignoreAmplitudeRequests": undefined,
@@ -325,7 +325,7 @@ exports[`generateConfiguration network tracking with complex capture rules 1`] =
           "urls": [
             "error.example.com",
           ],
-          "urlsRegex": [],
+          "urlsRegex": undefined,
         },
         {
           "methods": undefined,
@@ -350,8 +350,8 @@ exports[`generateConfiguration network tracking with complex capture rules 1`] =
             "Set-Cookie",
           ],
           "statusCodeRange": undefined,
-          "urls": [],
-          "urlsRegex": [],
+          "urls": undefined,
+          "urlsRegex": undefined,
         },
       ],
       "ignoreAmplitudeRequests": undefined,
