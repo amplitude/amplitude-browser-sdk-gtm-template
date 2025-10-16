@@ -14,6 +14,17 @@ const data: GtmParameters = {
   type: 'init',
   defaultEventTracking: true,
   autocaptureNetworkTracking: true,
+  networkTrackingIgnoreAmplitudeRequests: true,
+  networkTrackingIgnoreHosts: '*',
+  networkTrackingCaptureRules: [
+    {
+      methods: '*',
+      responseHeaders: 'access-control-allow-headers,access-control-allow-methods',
+      responseBody: 'status,message',
+      requestHeaders: 'accept-encoding,accept-language',
+      requestBody: 'status,message/*',
+    },
+  ],
   detPageView: true,
   detSession: true,
   autocaptureFrustrationInteractions: true,

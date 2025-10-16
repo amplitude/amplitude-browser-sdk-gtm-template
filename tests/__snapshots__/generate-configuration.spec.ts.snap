@@ -216,11 +216,15 @@ exports[`generateConfiguration kitchen sink example 1`] = `
           "methods": [
             "GET",
           ],
+          "requestBody": undefined,
+          "requestHeaders": undefined,
+          "responseBody": undefined,
+          "responseHeaders": undefined,
           "statusCodeRange": "400-599",
           "urls": [
             "hello.com",
           ],
-          "urlsRegex": [],
+          "urlsRegex": undefined,
         },
       ],
       "ignoreAmplitudeRequests": undefined,
@@ -296,6 +300,10 @@ exports[`generateConfiguration network tracking with complex capture rules 1`] =
             "POST",
             "PUT",
           ],
+          "requestBody": undefined,
+          "requestHeaders": undefined,
+          "responseBody": undefined,
+          "responseHeaders": undefined,
           "statusCodeRange": "200-299",
           "urls": [
             "api.example.com",
@@ -309,11 +317,41 @@ exports[`generateConfiguration network tracking with complex capture rules 1`] =
           "methods": [
             "GET",
           ],
+          "requestBody": undefined,
+          "requestHeaders": undefined,
+          "responseBody": undefined,
+          "responseHeaders": undefined,
           "statusCodeRange": "400-599",
           "urls": [
             "error.example.com",
           ],
-          "urlsRegex": [],
+          "urlsRegex": undefined,
+        },
+        {
+          "methods": undefined,
+          "requestBody": {
+            "allowlist": [
+              "status",
+              "data/info/**",
+            ],
+          },
+          "requestHeaders": [
+            "Content-Type",
+            "Set-Cookie",
+          ],
+          "responseBody": {
+            "allowlist": [
+              "status",
+              "data/info/**",
+            ],
+          },
+          "responseHeaders": [
+            "Content-Type",
+            "Set-Cookie",
+          ],
+          "statusCodeRange": undefined,
+          "urls": undefined,
+          "urlsRegex": undefined,
         },
       ],
       "ignoreAmplitudeRequests": undefined,

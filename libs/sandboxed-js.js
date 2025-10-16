@@ -10,7 +10,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.21.0';
+const WRAPPER_VERSION = '3.22.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -263,14 +263,23 @@ const generateConfiguration = (data) => {
       if (data.networkTrackingCaptureRules) {
         captureRules = [];
         data.networkTrackingCaptureRules.forEach(rule => {
-          let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : [];
+          let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : undefined;
           let urlsRegex = rule.urlsRegex ? rule.urlsRegex.split(',').map(url => url.trim()) : [];
-          captureRules.push({
+          const captureRule = {
             urls: urls,
-            urlsRegex: urlsRegex,
+            urlsRegex: urlsRegex.length > 0 ? urlsRegex : undefined,
             methods: rule.methods ? rule.methods.split(',').map(method => method.trim()) : undefined,
             statusCodeRange: rule.statusCodeRange,
-          });
+            responseHeaders: rule.responseHeaders ? rule.responseHeaders.split(',').map(header => header.trim()) : undefined,
+            responseBody: rule.responseBody ? {
+              allowlist: rule.responseBody.split(',').map(body => body.trim()),
+            } : undefined,
+            requestHeaders: rule.requestHeaders ? rule.requestHeaders.split(',').map(header => header.trim()) : undefined,
+            requestBody: rule.requestBody ? {
+              allowlist: rule.requestBody.split(',').map(body => body.trim()),
+            } : undefined,
+          };  
+          captureRules.push(captureRule);
         });
       }
 

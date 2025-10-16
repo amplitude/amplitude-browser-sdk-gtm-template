@@ -1124,6 +1124,48 @@ ___TEMPLATE_PARAMETERS___
                           "help": "Define list of URL regex patterns to capture. By default any URL is captured. (comma separated list)."
                         },
                         "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "responseHeaders",
+                          "displayName": "Response Headers",
+                          "help": "The response headers to capture, comma separated list. e.g.: \"Content-Type,Set-Cookie\"",
+                          "simpleValueType": true,
+                          "defaultValue": "access-control-allow-origin, access-control-allow-credentials, access-control-expose-headers, access-control-max-age, access-control-allow-methods, access-control-allow-headers, accept-patch, accept-ranges, age, allow, alt-svc, cache-control, connection, content-disposition, content-encoding, content-language, content-length, content-location, content-md5, content-range, content-type, date, delta-base, etag, expires, im, last-modified, link, location, permanent, p3p, pragma, proxy-authenticate, public-key-pins, retry-after, server, status, strict-transport-security, trailer, transfer-encoding, tk, upgrade, vary, via, warning, www-authenticate, x-b3-traceid, x-frame-options"
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "responseBody",
+                          "displayName": "Response Body",
+                          "help": "Capture part of the response body as JSON pointers. Comma separated list. e.g.: \"status,data/info/**\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "requestHeaders",
+                          "displayName": "Request Headers",
+                          "help": "The request headers to capture, comma separated list. e.g.: \"Content-Type,Set-Cookie\"",
+                          "simpleValueType": true,
+                          "defaultValue": "access-control-allow-origin, access-control-allow-credentials, access-control-expose-headers, access-control-max-age, access-control-allow-methods, access-control-allow-headers, accept-patch, accept-ranges, age, allow, alt-svc, cache-control, connection, content-disposition, content-encoding, content-language, content-length, content-location, content-md5, content-range, content-type, date, delta-base, etag, expires, im, last-modified, link, location, permanent, p3p, pragma, proxy-authenticate, public-key-pins, retry-after, server, status, strict-transport-security, trailer, transfer-encoding, tk, upgrade, vary, via, warning, www-authenticate, x-b3-traceid, x-frame-options"
+                        },
+                        "isUnique": false
+                      },
+                      {
+                        "param": {
+                          "type": "TEXT",
+                          "name": "requestBody",
+                          "displayName": "Request Body",
+                          "help": "Capture part of the request body as JSON pointers. Comma separated list. e.g.: \"status,data/info/**\"",
+                          "simpleValueType": true
+                        },
+                        "isUnique": false
                       }
                     ]
                   }
@@ -1460,7 +1502,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.21.0';
+const WRAPPER_VERSION = '3.22.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1713,14 +1755,23 @@ const generateConfiguration = (data) => {
       if (data.networkTrackingCaptureRules) {
         captureRules = [];
         data.networkTrackingCaptureRules.forEach(rule => {
-          let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : [];
+          let urls = rule.urls ? rule.urls.split(',').map(url => url.trim()) : undefined;
           let urlsRegex = rule.urlsRegex ? rule.urlsRegex.split(',').map(url => url.trim()) : [];
-          captureRules.push({
+          const captureRule = {
             urls: urls,
-            urlsRegex: urlsRegex,
+            urlsRegex: urlsRegex.length > 0 ? urlsRegex : undefined,
             methods: rule.methods ? rule.methods.split(',').map(method => method.trim()) : undefined,
             statusCodeRange: rule.statusCodeRange,
-          });
+            responseHeaders: rule.responseHeaders ? rule.responseHeaders.split(',').map(header => header.trim()) : undefined,
+            responseBody: rule.responseBody ? {
+              allowlist: rule.responseBody.split(',').map(body => body.trim()),
+            } : undefined,
+            requestHeaders: rule.requestHeaders ? rule.requestHeaders.split(',').map(header => header.trim()) : undefined,
+            requestBody: rule.requestBody ? {
+              allowlist: rule.requestBody.split(',').map(body => body.trim()),
+            } : undefined,
+          };  
+          captureRules.push(captureRule);
         });
       }
 
@@ -1884,7 +1935,6 @@ const onsuccess = () => {
 };
 
 injectScript(JS_URL, onsuccess, onfailure, 'amplitude');
-
 
 
 ___WEB_PERMISSIONS___
