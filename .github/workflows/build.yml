@@ -25,6 +25,11 @@ jobs:
             exit 1
           fi
 
+      - name: Lint metadata.yaml
+        id: lint-metadata
+        run: |
+          npx yaml-lint metadata.yaml
+
       - name: Lint and Tests
         run: |
           yarn lint

@@ -36,6 +36,11 @@ jobs:
           sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml
           echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
 
+      - name: Lint metadata.yaml
+        id: lint-metadata
+        run: |
+          npx yaml-lint metadata.yaml
+
       - name: Create Github Release
         run: |
           # Extract just the SHA for the tag name
