@@ -1137,6 +1137,14 @@
                     ]
                   }
                 ]
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "autocaptureWebVitals",
+                "checkboxText": "Track web vitals",
+                "simpleValueType": true,
+                "defaultValue": false,
+                "help": "Enable this to track Google Core Web Vitals metrics"
               }
             ],
             "enablingConditions": [

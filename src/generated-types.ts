@@ -58,6 +58,7 @@ export interface GeneratedGtmParameters {
   networkTrackingIgnoreAmplitudeRequests?: boolean;
   networkTrackingIgnoreHosts?: string;
   networkTrackingCaptureRules?: Array<{urls?: string; methods?: string; statusCodeRange?: string; urlsRegex?: string; responseHeaders?: string; responseBody?: string; requestHeaders?: string; requestBody?: string}>;
+  autocaptureWebVitals?: boolean;
   euData?: boolean;
   initUserId?: string;
   initOptions?: 'manual';
