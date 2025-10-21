@@ -2,7 +2,7 @@ homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
   - sha: cbabd82cf56abb74e8560000aebc24fabb51033b
-    changeNotes: upgrade analytics-browser to v2.26.0, add header/body to network tracking template
+    changeNotes: upgrade analytics-browser to v2.26.0, add header or body to network tracking template
   - sha: 66ab3949452737e69b9606586343dacc439ac3bd
     changeNotes: fix rage + dead click css selectors not being applied
   - sha: 376f5a4ede682224770aaee713542309938657b0
