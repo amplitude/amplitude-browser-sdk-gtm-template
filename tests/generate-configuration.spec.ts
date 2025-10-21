@@ -154,6 +154,22 @@ describe('generateConfiguration', () => {
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
   });
 
+  test('web vitals tracking disabled', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      autocaptureWebVitals: false,
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data).autocapture.webVitals).toBe(undefined);
+  });
+
+  test('web vitals tracking enabled', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      autocaptureWebVitals: true,
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data).autocapture.webVitals).toBe(true);
+  });
+
   test('session, file download, and form interaction disabled', () => {
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
