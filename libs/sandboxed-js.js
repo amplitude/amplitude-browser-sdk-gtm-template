@@ -10,7 +10,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '3.22.0';
+const WRAPPER_VERSION = '3.23.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -194,6 +194,11 @@ const generateConfiguration = (data) => {
     // fileDownloads events are enable by default
     if (!data.detFormInteraction) {
       initOptions.autocapture.formInteractions = false;
+    }
+
+    // webVitals are not enabled by default
+    if (data.autocaptureWebVitals) {
+      initOptions.autocapture.webVitals = true;
     }
 
     if (!!data.autocaptureElementInteractions) {

@@ -28,10 +28,9 @@ const data: GtmParameters = {
   detPageView: true,
   detSession: true,
   autocaptureFrustrationInteractions: true,
-  frustrationInteractionsOptions: {
-    rageClicksCssSelectorAllowlist: '*,*,*',
-    deadClicksCssSelectorAllowlist: '*,*,*',
-  },
+  rageClicksCssSelectorAllowlist: '*,*,*',
+  deadClicksCssSelectorAllowlist: '*,*,*',
+  autocaptureWebVitals: true,
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
   },
