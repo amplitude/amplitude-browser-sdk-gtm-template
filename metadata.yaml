@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 50a57f46ac95cefae1a3bb0869f15ec71ff9f0cb
+    changeNotes: add autocapture webVitals to configuration and upgrade analytics-browser to 2.27.1
   - sha: cbabd82cf56abb74e8560000aebc24fabb51033b
     changeNotes: upgrade analytics-browser to v2.26.0 add header or body to network tracking template
   - sha: 66ab3949452737e69b9606586343dacc439ac3bd
