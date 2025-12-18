@@ -1571,11 +1571,11 @@ const stringTypeKeys = ['appVersion', 'deviceId', 'partnerId', 'userId'];
 // { key: string, value: string}
 // Return normalized value of the item
 const normalizeItem = item => {
-  if (stringTypeKeys.includes(item.key)) {
-    return normalizeString(item.value)
+  if (stringTypeKeys.indexOf(item.key) !== -1) {
+    return normalizeString(item.value);
   }
-  return normalize(item.value)
-}
+  return normalize(item.value);
+};
 
 // Normalize the input and return it
 // It will convert string to number if it is a number string, otherwise it will return the original value

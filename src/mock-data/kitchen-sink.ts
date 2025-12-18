@@ -31,6 +31,13 @@ const data: GtmParameters = {
   rageClicksCssSelectorAllowlist: '*,*,*',
   deadClicksCssSelectorAllowlist: '*,*,*',
   autocaptureWebVitals: true,
+  initOptions: 'manual',
+  initManualOptions: [
+    {
+      key: 'deviceId',
+      value: '6108573831392975095',
+    },
+  ],
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
   },

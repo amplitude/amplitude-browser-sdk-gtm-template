@@ -10,6 +10,7 @@ const envExamplePath = path.join(rootDir, '.env.example');
 function setupEnv() {
   // Check if .env already exists
   if (fs.existsSync(envPath)) {
+    console.log('✓ .env file already exists');
     return;
   }
 
