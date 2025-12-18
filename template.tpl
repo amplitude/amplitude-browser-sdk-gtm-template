@@ -1559,21 +1559,37 @@ const normalizeOptionsValues = options => {
       options.map(opt => {
         return {
           key: opt.key,
-          value: normalize(opt.value)
+          value: normalizeItem(opt)
         };
       }) : [];
 };
 
+// Should convert string type keys' values to numbers
+const stringTypeKeys = ['appVersion', 'deviceId', 'partnerId', 'userId'];
+
+// Normalize an item in an options array
+// { key: string, value: string}
+// Return normalized value of the item
+const normalizeItem = item => {
+  if (stringTypeKeys.includes(item.key)) {
+    return normalizeString(item.value)
+  }
+  return normalize(item.value)
+}
+
 // Normalize the input and return it
+// It will convert string to number if it is a number string, otherwise it will return the original value
+// Note that JavaScript can only represent numbers up to 2^53 - 1 (9007199254740991)
+// If the number is greater than that, it will lose precision, for example, 6108573831392975095 will be converted to 6108573831392976000
 const normalize = val => {
   if (val === 'null') return null;
+  if (val === 'undefined') return undefined;
   if (val === 'true' || val === true) return true;
   if (val === 'false' || val === false) return false;
   return makeNumber(val) || val;
 };
 
-// Normalize device Id
-const normalizeDeviceId = val => {
+const normalizeString = val => {
   if (val === 'null') return null;
   if (val === 'undefined') return undefined;
   return val;
@@ -1935,8 +1951,8 @@ const onsuccess = () => {
       _amplitude(instanceName, 'revenue', revenueObject);
       break;
 
-    case 'setDeviceId':
-      _amplitude(instanceName, 'setDeviceId', normalizeDeviceId(data.setDeviceId));
+    case 'setDeviceId' || 'setUserId':
+      _amplitude(instanceName, 'setDeviceId', normalizeString(data.setDeviceId));
       break;
 
     default:

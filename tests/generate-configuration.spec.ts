@@ -96,6 +96,27 @@ describe('generateConfiguration', () => {
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
   });
 
+  test('deviceId, userId, partnerId, and appVersion should be converted to numbers', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      initOptions: 'manual',
+      initManualOptions: [{
+        key: 'deviceId',
+        value: '6108573831392975095',
+      }, {
+        key: 'userId',
+        value: '6108573831392975095',
+      }, {
+        key: 'partnerId',
+        value: '6108573831392975095',
+      }, {
+        key: 'appVersion',
+        value: '1.2.3',
+      }],
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
+
   test('eu data disabled', () => {
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
