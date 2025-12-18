@@ -1951,8 +1951,11 @@ const onsuccess = () => {
       _amplitude(instanceName, 'revenue', revenueObject);
       break;
 
-    case 'setDeviceId' || 'setUserId':
+    case 'setDeviceId':
       _amplitude(instanceName, 'setDeviceId', normalizeString(data.setDeviceId));
+      break;
+    case 'setUserId':
+      _amplitude(instanceName, 'setUserId', normalizeString(data.setUserId));
       break;
 
     default:
