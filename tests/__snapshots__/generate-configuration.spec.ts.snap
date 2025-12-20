@@ -441,6 +441,35 @@ exports[`generateConfiguration page history tracking all changes 1`] = `
 }
 `;
 
+exports[`generateConfiguration page url enrichment is disabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageUrlEnrichment": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration page url enrichment is enabled 1`] = `
+{
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
 exports[`generateConfiguration page view tracking disabled 1`] = `
 {
   "autocapture": {
