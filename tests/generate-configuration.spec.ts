@@ -16,6 +16,7 @@ const BASE_DATA: GeneratedGtmParameters = {
   eventType: 'test',
   revenueId: 'test',
   revenuePrice: 'test',
+  pageUrlEnrichment: true,
 };
 
 describe('generateConfiguration', () => {
@@ -223,6 +224,22 @@ describe('generateConfiguration', () => {
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
       autocaptureNetworkTracking: false,
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
+
+  test('page url enrichment is disabled', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      pageUrlEnrichment: false,
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
+
+  test('page url enrichment is enabled', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      pageUrlEnrichment: true,
     };
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
   });

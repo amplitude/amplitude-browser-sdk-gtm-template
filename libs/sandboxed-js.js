@@ -311,6 +311,11 @@ const generateConfiguration = (data) => {
       };
     }
 
+    // pageUrlEnrichment is enabled by default
+    if (!data.pageUrlEnrichment) {
+      initOptions.autocapture.pageUrlEnrichment = false;
+    }
+
   } else {
     initOptions.autocapture = false;
   }

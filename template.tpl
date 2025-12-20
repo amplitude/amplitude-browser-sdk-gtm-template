@@ -1178,6 +1178,14 @@ ___TEMPLATE_PARAMETERS___
                 "simpleValueType": true,
                 "defaultValue": false,
                 "help": "Enable this to track Google Core Web Vitals metrics"
+              },
+              {
+                "type": "CHECKBOX",
+                "name": "pageUrlEnrichment",
+                "checkboxText": "Page url enrichment",
+                "simpleValueType": true,
+                "help": "Enables/disables page url enrichment. \u003ca href\u003d\"https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#page-url-enrichment-plugin\"\u003eRead more here\u003c/a\u003e.",
+                "defaultValue": true
               }
             ],
             "enablingConditions": [
@@ -1809,6 +1817,11 @@ const generateConfiguration = (data) => {
         ignoreHosts: ignoreHosts,
         captureRules: captureRules,
       };
+    }
+
+    // pageUrlEnrichment is enabled by default
+    if (!data.pageUrlEnrichment) {
+      initOptions.autocapture.pageUrlEnrichment = false;
     }
 
   } else {
