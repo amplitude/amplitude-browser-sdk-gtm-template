@@ -220,6 +220,24 @@ exports[`onsuccess setGroup operation with single group 1`] = `
 }
 `;
 
+exports[`onsuccess setUserId operation 1`] = `
+[MockFunction] {
+  "calls": [
+    [
+      "amplitude",
+      "setUserId",
+      "user-456",
+    ],
+  ],
+  "results": [
+    {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
 exports[`onsuccess track operation with comma-separated group names 1`] = `
 [MockFunction] {
   "calls": [

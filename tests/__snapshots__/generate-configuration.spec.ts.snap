@@ -133,6 +133,24 @@ exports[`generateConfiguration default event tracking disabled 1`] = `
 }
 `;
 
+exports[`generateConfiguration deviceId, userId, partnerId, and appVersion should be converted to numbers 1`] = `
+{
+  "appVersion": "1.2.3",
+  "autocapture": {
+    "attribution": false,
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "deviceId": "6108573831392975095",
+  "guidesSurveys": false,
+  "partnerId": "6108573831392975095",
+  "sessionReplay": false,
+  "userId": "6108573831392975095",
+}
+`;
+
 exports[`generateConfiguration element interactions disabled 1`] = `
 {
   "autocapture": {

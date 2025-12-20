@@ -13,6 +13,11 @@ describe('normalize', () => {
     expect(result).toBeNull();
   });
 
+  test('should convert string "undefined" to undefined', () => {
+    const result = win.__EXPORTS__.normalize('undefined');
+    expect(result).toBeUndefined();
+  });
+
   test('should convert string "true" to boolean true', () => {
     const result = win.__EXPORTS__.normalize('true');
     expect(result).toBe(true);

@@ -254,6 +254,18 @@ describe('onsuccess', () => {
     expect(mockAmplitude).toMatchSnapshot();
   });
 
+  test('setUserId operation', () => {
+    win.data = {
+      ...BASE_DATA,
+      type: 'setUserId',
+      setUserId: 'user-456'
+    };
+
+    win.__EXPORTS__.onsuccess();
+
+    expect(mockAmplitude).toMatchSnapshot();
+  });
+
   test('default case for unknown operation type', () => {
     win.data = {
       ...BASE_DATA,
