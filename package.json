@@ -1,5 +1,6 @@
 {
   "name": "amplitude-browser-sdk-gtm-template",
+  "packageManager": "pnpm@4.2.0",
   "private": true,
   "version": "1.0.0",
   "description": "The amplitude GTM template with @amplitude/analytics-browser internal",
