@@ -1,5 +1,5 @@
 // This file is auto-generated from template-parameters.json
-// Do not edit manually - run 'yarn build' to regenerate
+// Do not edit manually - run 'pnpm build' to regenerate
 
 export interface GeneratedGtmParameters {
   type?: 'init' | 'track' | 'identify' | 'setUserId' | 'setGroup' | 'groupIdentify' | 'revenue' | 'flush' | 'setDeviceId' | 'setSessionId' | 'reset' | 'setOptOut';

@@ -134,7 +134,7 @@ function main() {
     // Write to output file
     const outputPath = path.join(__dirname, '../src/generated-types.ts');
     const header = `// This file is auto-generated from template-parameters.json
-// Do not edit manually - run 'yarn build' to regenerate
+// Do not edit manually - run 'pnpm build' to regenerate
 
 `;
     

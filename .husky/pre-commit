@@ -2,10 +2,10 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Lint the code
-yarn lint
+pnpm lint
 
 # Build the template
-yarn build
+pnpm build
 
 # Do not allow unstaged changes (this is so that template is up-to-date before committing)
 if ! git diff --quiet; then
