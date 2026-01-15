@@ -7,8 +7,8 @@ Repository for the Amplitude Analytics Browser SDK google tag manager template. 
 To build the template run install and build
 
 ```
-yarn install
-yarn build
+pnpm install
+pnpm build
 ```
 
 ## Local Dev Testing
@@ -16,7 +16,7 @@ yarn build
 To locally, run the dev server and visit the home page. The Amplitude SDK will be on that page and you can test it manually from Chrome devtools.
 
 ```
-yarn dev
+pnpm dev
 ```
 
 "libs/sandboxed-js.js" is the code that will be used in the template.
@@ -45,7 +45,7 @@ If you wish to make changes to the fields (`___TEMPLATE_PARAMETERS___` in templa
 
 Instructions
 * make sure you don't have any uncommitted changes in "libs/"
-* run `yarn build` to make sure "template.tpl" is the latest
+* run `pnpm build` to make sure "template.tpl" is the latest
 * log into tagmanager.google.com
 * open your container (make a new personal container if you don't have one already)
 * navigate to "Templates"
@@ -56,6 +56,6 @@ Instructions
 * open the options (three dots) and select "Export"
 * download the contents of the ".tpl" file to your local machine
 * take the contents of this exported ".tpl" file and add them to "template.tpl"
-* run `yarn sync`, this will take your changes in "template.tpl" and add them to "libs/"
-* run `yarn build` again
-* test your new changes locally (`yarn test`, `yarn dev`)
+* run `pnpm sync`, this will take your changes in "template.tpl" and add them to "libs/"
+* run `pnpm build` again
+* test your new changes locally (`pnpm test`, `pnpm dev`)

@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/pnpm-lock.yaml') }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -34,11 +34,11 @@ jobs:
 
       - name: Install project dependencies
         run: |
-          yarn install --frozen-lockfile
+          pnpm install --frozen-lockfile
 
       - name: Build all packages
         run: |
-          yarn build
+          pnpm build
 
       - name: Create .env file
         run: |
@@ -47,7 +47,7 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          yarn test:e2e
+          pnpm test:e2e
 
       - name: Upload Playwright Report
         if: always()

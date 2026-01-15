@@ -46,10 +46,10 @@ This is a Google Tag Manager (GTM) template for the Amplitude Analytics Browser 
 ## Build Process
 
 ### Build Scripts
-- `yarn build` - Generates template and types (primary build command)
-- `yarn test` - Runs Jest test suite with coverage
-- `yarn lint` - Runs ESLint on source files
-- `yarn type-check` - TypeScript compilation check
+- `pnpm build` - Generates template and types (primary build command)
+- `pnpm test` - Runs Jest test suite with coverage
+- `pnpm lint` - Runs ESLint on source files
+- `pnpm type-check` - TypeScript compilation check
 
 ### Generated Files
 - `libs/sandboxed-js.js` - Main output, used in GTM template
@@ -80,10 +80,10 @@ This is a Google Tag Manager (GTM) template for the Amplitude Analytics Browser 
 
 ### Making Changes
 1. **Source code changes**: Edit files in `src/`
-2. **Run tests**: `yarn test` to ensure coverage requirements
-3. **Lint code**: `yarn lint` to check code style
-4. **Build**: `yarn build` to generate template
-5. **Test in GTM**: Use `yarn dev` for local testing
+2. **Run tests**: `pnpm test` to ensure coverage requirements
+3. **Lint code**: `pnpm lint` to check code style
+4. **Build**: `pnpm build` to generate template
+5. **Test in GTM**: Use `pnpm dev` for local testing
 
 ### GTM Template Updates
 - Any changes to "template.tpl" need to be tested in tagmanager.google.com; testing locally is not sufficient because it is just a polyfill of the real GTM sandbox
@@ -113,16 +113,16 @@ This is a Google Tag Manager (GTM) template for the Amplitude Analytics Browser 
 ## Common Commands
 ```bash
 # Development workflow
-yarn install          # Install dependencies
-yarn test             # Run tests with coverage
-yarn lint             # Check code style
-yarn lint:fix         # Fix auto-fixable linting issues
-yarn build            # Build template and types
-yarn dev              # Start development server
-yarn type-check       # Check TypeScript compilation
+pnpm install          # Install dependencies
+pnpm test             # Run tests with coverage
+pnpm lint             # Check code style
+pnpm lint:fix         # Fix auto-fixable linting issues
+pnpm build            # Build template and types
+pnpm dev              # Start development server
+pnpm type-check       # Check TypeScript compilation
 
 # Testing in GTM
-yarn dev              # Serves libs/sandboxed-js.js locally
+pnpm dev              # Serves libs/sandboxed-js.js locally
 # Then import template.tpl into GTM for testing
 ```
 

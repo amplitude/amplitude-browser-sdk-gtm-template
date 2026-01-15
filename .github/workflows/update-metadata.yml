@@ -17,12 +17,12 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          yarn install
-          yarn build
+          pnpm install
+          pnpm build
 
       - name: Tests
         run: |
-          yarn test
+          pnpm test
 
         # Quotes in message are not allowed
       - name: Update metadata.yaml

@@ -10,7 +10,7 @@
     "test:e2e:headed": "playwright test --headed",
     "build": "node scripts/build-template.js && node scripts/generate-types.js",
     "sync": "node scripts/sync-template.js",
-    "dev": "yarn setup-env && vite serve",
+    "dev": "pnpm setup-env && vite serve",
     "prepare": "husky",
     "setup-env": "node scripts/setup-env.js",
     "lint": "eslint src --ext .ts",

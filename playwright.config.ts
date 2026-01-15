@@ -38,7 +38,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'yarn setup-env && yarn vite serve',
+    command: 'pnpm setup-env && pnpm vite serve',
     url: 'http://localhost:5173',
     reuseExistingServer: !process.env.CI,
   },
