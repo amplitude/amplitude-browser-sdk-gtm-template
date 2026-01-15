@@ -17,6 +17,7 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
+        version: 4.2.0
 
       - name: Install dependencies and build
         run: |
