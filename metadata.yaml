@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 35629e8b8c0de630f2defe5d45a9b738b89cda8e
+    changeNotes: Upgrade analytics-browser to v2.33.4
   - sha: 0c7443fd98cc55fb1603e700918e5c1c3cbdef5f
     changeNotes: fix device id normalization and add UI support for page url enrichment config 
   - sha: 50a57f46ac95cefae1a3bb0869f15ec71ff9f0cb
