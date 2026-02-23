@@ -39,8 +39,8 @@ const data: GtmParameters = {
     },
   ],
   detAttribution: true,
-  excludeInternalReferrers: true,
-  excludeInternalReferrersCondition: 'ifEmptyCampaign',
+  attributionExcludeInternalReferrers: true,
+  attributionExcludeInternalReferrersCondition: 'always',
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
   },

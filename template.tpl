@@ -825,14 +825,14 @@ ___TEMPLATE_PARAMETERS___
                     "subParams": [
                       {
                         "type": "CHECKBOX",
-                        "name": "excludeInternalReferrers",
+                        "name": "attributionExcludeInternalReferrers",
                         "checkboxText": "(Experimental) Exclude internal referrers",
                         "simpleValueType": true,
                         "help": "When checked, this analytics instance will never start a new campaign if the page that the instance is running on is on the same domain as the referrer.\n\n(This config is currently experimental and could be unstable)",
                         "subParams": [
                           {
                             "type": "RADIO",
-                            "name": "excludeInternalReferrersCondition",
+                            "name": "attributionExcludeInternalReferrersCondition",
                             "displayName": "When \"always\" it will always ignore internal referrers. When \"ifEmptyCampaign\", ignore internal referrers that do not have campaign parameters included.",
                             "radioItems": [
                               {
@@ -1543,7 +1543,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '2.35.0';
+const WRAPPER_VERSION = '2.35.0'; // TODO: DO NOT MERGE THIS PR UNTIL THIS IS UPDATED TO INCLUDE NEW FEATURE
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.min.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1696,8 +1696,8 @@ const generateConfiguration = (data) => {
         initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
       }
 
-      if (!!data.excludeInternalReferrers) {
-        let condition = data.excludeInternalReferrersCondition || 'always';
+      if (!!data.attributionExcludeInternalReferrers) {
+        let condition = data.attributionExcludeInternalReferrersCondition || 'always';
         initOptions.autocapture.attribution.excludeInternalReferrers = {
           condition: condition,
         };

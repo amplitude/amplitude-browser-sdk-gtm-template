@@ -259,8 +259,8 @@ describe('generateConfiguration', () => {
       const data: GeneratedGtmParameters = {
         ...BASE_DATA,
         detAttribution: true,
-        excludeInternalReferrers: true,
-        excludeInternalReferrersCondition: 'always',
+        attributionExcludeInternalReferrers: true,
+        attributionExcludeInternalReferrersCondition: 'always',
       };
       expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
     });
@@ -269,8 +269,8 @@ describe('generateConfiguration', () => {
       const data: GeneratedGtmParameters = {
         ...BASE_DATA,
         detAttribution: true,
-        excludeInternalReferrers: true,
-        excludeInternalReferrersCondition: 'ifEmptyCampaign',
+        attributionExcludeInternalReferrers: true,
+        attributionExcludeInternalReferrersCondition: 'ifEmptyCampaign',
       };
       expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
     });
