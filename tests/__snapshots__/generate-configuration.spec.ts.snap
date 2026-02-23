@@ -193,6 +193,46 @@ exports[`generateConfiguration eu data disabled 1`] = `
 }
 `;
 
+exports[`generateConfiguration exclude internal referrers exclude internal referrers always 1`] = `
+{
+  "autocapture": {
+    "attribution": {
+      "excludeInternalReferrers": {
+        "condition": "always",
+      },
+      "initialEmptyValue": "EMPTY",
+      "resetSessionOnNewCampaign": undefined,
+    },
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
+exports[`generateConfiguration exclude internal referrers exclude internal referrers if empty campaign 1`] = `
+{
+  "autocapture": {
+    "attribution": {
+      "excludeInternalReferrers": {
+        "condition": "ifEmptyCampaign",
+      },
+      "initialEmptyValue": "EMPTY",
+      "resetSessionOnNewCampaign": undefined,
+    },
+    "fileDownloads": false,
+    "formInteractions": false,
+    "pageViews": false,
+    "sessions": false,
+  },
+  "guidesSurveys": false,
+  "sessionReplay": false,
+}
+`;
+
 exports[`generateConfiguration kitchen sink example 1`] = `
 {
   "autocapture": {

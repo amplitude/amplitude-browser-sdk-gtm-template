@@ -33,6 +33,8 @@ export interface GeneratedGtmParameters {
   userPropertyOperationsObject?: Record<string, string>;
   defaultEventTracking?: boolean;
   detAttribution?: boolean;
+  excludeInternalReferrers?: boolean;
+  excludeInternalReferrersCondition?: any;
   attributionInitialEmptyValue?: string;
   attributionExcludeReferrers?: string;
   attributionExcludeReferrersRegex?: string;

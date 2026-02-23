@@ -38,6 +38,9 @@ const data: GtmParameters = {
       value: '6108573831392975095',
     },
   ],
+  detAttribution: true,
+  excludeInternalReferrers: true,
+  excludeInternalReferrersCondition: 'ifEmptyCampaign',
   gtmOnSuccess: function () {
     console.log('gtmOnSuccess');
   },

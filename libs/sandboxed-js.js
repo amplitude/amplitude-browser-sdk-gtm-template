@@ -163,6 +163,13 @@ const generateConfiguration = (data) => {
         initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
       }
 
+      if (!!data.excludeInternalReferrers) {
+        let condition = data.excludeInternalReferrersCondition || 'always';
+        initOptions.autocapture.attribution.excludeInternalReferrers = {
+          condition: condition,
+        };
+      }
+
       initOptions.autocapture.attribution.resetSessionOnNewCampaign = data.attributionResetSession;
       initOptions.autocapture.attribution.initialEmptyValue = data.attributionInitialEmptyValue || 'EMPTY';
     } else {

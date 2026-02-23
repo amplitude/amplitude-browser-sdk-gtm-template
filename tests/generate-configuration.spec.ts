@@ -254,6 +254,28 @@ describe('generateConfiguration', () => {
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
   });
 
+  describe('exclude internal referrers', () => {
+    test('exclude internal referrers always', () => {
+      const data: GeneratedGtmParameters = {
+        ...BASE_DATA,
+        detAttribution: true,
+        excludeInternalReferrers: true,
+        excludeInternalReferrersCondition: 'always',
+      };
+      expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+    });
+
+    test('exclude internal referrers if empty campaign', () => {
+      const data: GeneratedGtmParameters = {
+        ...BASE_DATA,
+        detAttribution: true,
+        excludeInternalReferrers: true,
+        excludeInternalReferrersCondition: 'ifEmptyCampaign',
+      };
+      expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+    });
+  });
+
   test('comma-separated strings for element interactions', () => {
     const data: GeneratedGtmParameters = {
       ...BASE_DATA,
