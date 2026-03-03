@@ -237,6 +237,9 @@ exports[`generateConfiguration kitchen sink example 1`] = `
 {
   "autocapture": {
     "attribution": {
+      "excludeInternalReferrers": {
+        "condition": "ifEmptyCampaign",
+      },
       "excludeReferrersRegex": [
         "test",
       ],
