@@ -46,6 +46,8 @@ describe('generateConfiguration', () => {
       detAttribution: true,
       attributionExcludeReferrers: 'test',
       attributionExcludeReferrersRegex: 'test',
+      attributionExcludeInternalReferrers: true,
+      attributionExcludeInternalReferrersCondition: 'ifEmptyCampaign',
       attributionResetSession: true,
       detPageView: true,
       pageViewLegacy: true,
