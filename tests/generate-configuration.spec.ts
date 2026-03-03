@@ -46,6 +46,8 @@ describe('generateConfiguration', () => {
       detAttribution: true,
       attributionExcludeReferrers: 'test',
       attributionExcludeReferrersRegex: 'test',
+      attributionExcludeInternalReferrers: true,
+      attributionExcludeInternalReferrersCondition: 'ifEmptyCampaign',
       attributionResetSession: true,
       detPageView: true,
       pageViewLegacy: true,
@@ -252,6 +254,28 @@ describe('generateConfiguration', () => {
       attributionExcludeReferrersRegex: '.*\\.ads\\..*,.*\\.marketing\\..*',
     };
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
+
+  describe('exclude internal referrers', () => {
+    test('exclude internal referrers always', () => {
+      const data: GeneratedGtmParameters = {
+        ...BASE_DATA,
+        detAttribution: true,
+        attributionExcludeInternalReferrers: true,
+        attributionExcludeInternalReferrersCondition: 'always',
+      };
+      expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+    });
+
+    test('exclude internal referrers if empty campaign', () => {
+      const data: GeneratedGtmParameters = {
+        ...BASE_DATA,
+        detAttribution: true,
+        attributionExcludeInternalReferrers: true,
+        attributionExcludeInternalReferrersCondition: 'ifEmptyCampaign',
+      };
+      expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+    });
   });
 
   test('comma-separated strings for element interactions', () => {

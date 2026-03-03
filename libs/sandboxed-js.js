@@ -10,7 +10,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '2.35.0';
+const WRAPPER_VERSION = '2.36.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.min.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -161,6 +161,13 @@ const generateConfiguration = (data) => {
 
       if (!!data.attributionExcludeReferrersRegex) {
         initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
+      }
+
+      if (!!data.attributionExcludeInternalReferrers) {
+        let condition = data.attributionExcludeInternalReferrersCondition || 'always';
+        initOptions.autocapture.attribution.excludeInternalReferrers = {
+          condition: condition,
+        };
       }
 
       initOptions.autocapture.attribution.resetSessionOnNewCampaign = data.attributionResetSession;

@@ -824,6 +824,31 @@ ___TEMPLATE_PARAMETERS___
                     "groupStyle": "NO_ZIPPY",
                     "subParams": [
                       {
+                        "type": "CHECKBOX",
+                        "name": "attributionExcludeInternalReferrers",
+                        "checkboxText": "(Experimental) Exclude internal referrers",
+                        "simpleValueType": true,
+                        "help": "When checked, this analytics instance will never start a new campaign if the page that the instance is running on is on the same domain as the referrer.\n\n(This config is currently experimental and could be unstable)",
+                        "subParams": [
+                          {
+                            "type": "RADIO",
+                            "name": "attributionExcludeInternalReferrersCondition",
+                            "displayName": "When \"always\" it will always ignore internal referrers. When \"ifEmptyCampaign\", ignore internal referrers that do not have campaign parameters included.",
+                            "radioItems": [
+                              {
+                                "value": "always",
+                                "displayValue": "Always"
+                              },
+                              {
+                                "value": "ifEmptyCampaign",
+                                "displayValue": "If Empty Campaign"
+                              }
+                            ],
+                            "simpleValueType": true
+                          }
+                        ]
+                      },
+                      {
                         "type": "TEXT",
                         "name": "attributionInitialEmptyValue",
                         "displayName": "Initial Empty Value",
@@ -1518,7 +1543,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '2.35.0';
+const WRAPPER_VERSION = '2.36.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.min.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -1669,6 +1694,13 @@ const generateConfiguration = (data) => {
 
       if (!!data.attributionExcludeReferrersRegex) {
         initOptions.autocapture.attribution.excludeReferrersRegex = getType(data.attributionExcludeReferrersRegex) === 'array' ? data.attributionExcludeReferrersRegex : stringToArrayAndTrim(data.attributionExcludeReferrersRegex);
+      }
+
+      if (!!data.attributionExcludeInternalReferrers) {
+        let condition = data.attributionExcludeInternalReferrersCondition || 'always';
+        initOptions.autocapture.attribution.excludeInternalReferrers = {
+          condition: condition,
+        };
       }
 
       initOptions.autocapture.attribution.resetSessionOnNewCampaign = data.attributionResetSession;

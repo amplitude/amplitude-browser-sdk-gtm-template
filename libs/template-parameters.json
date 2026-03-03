@@ -791,6 +791,31 @@
                     "groupStyle": "NO_ZIPPY",
                     "subParams": [
                       {
+                        "type": "CHECKBOX",
+                        "name": "attributionExcludeInternalReferrers",
+                        "checkboxText": "(Experimental) Exclude internal referrers",
+                        "simpleValueType": true,
+                        "help": "When checked, this analytics instance will never start a new campaign if the page that the instance is running on is on the same domain as the referrer.\n\n(This config is currently experimental and could be unstable)",
+                        "subParams": [
+                          {
+                            "type": "RADIO",
+                            "name": "attributionExcludeInternalReferrersCondition",
+                            "displayName": "When \"always\" it will always ignore internal referrers. When \"ifEmptyCampaign\", ignore internal referrers that do not have campaign parameters included.",
+                            "radioItems": [
+                              {
+                                "value": "always",
+                                "displayValue": "Always"
+                              },
+                              {
+                                "value": "ifEmptyCampaign",
+                                "displayValue": "If Empty Campaign"
+                              }
+                            ],
+                            "simpleValueType": true
+                          }
+                        ]
+                      },
+                      {
                         "type": "TEXT",
                         "name": "attributionInitialEmptyValue",
                         "displayName": "Initial Empty Value",
