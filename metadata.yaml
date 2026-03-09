@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 0282af05716fa98975103b9cec8c72e2f440b035
+    changeNotes: upgrade analytics-browser to v2.36.2
   - sha: ad3768f3f838320c463b23a28ee401c9d8723873
     changeNotes: Upgrade to v2.36.0
   - sha: b202adffb5cd0c83127de161af3246d57afd9b00
