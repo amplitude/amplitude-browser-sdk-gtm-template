@@ -66,6 +66,7 @@ exports[`onsuccess init operation with basic configuration 1`] = `
       null,
       {
         "autocapture": false,
+        "customEnrichment": false,
         "guidesSurveys": false,
         "sessionReplay": false,
       },
