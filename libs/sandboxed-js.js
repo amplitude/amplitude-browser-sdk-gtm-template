@@ -10,7 +10,7 @@ const makeTableMap = require('makeTableMap');
 const JSON = require('JSON');
 
 // Constants
-const WRAPPER_VERSION = '2.36.9';
+const WRAPPER_VERSION = '2.39.0';
 const JS_URL = 'https://cdn.amplitude.com/libs/analytics-browser-gtm-wrapper-'+WRAPPER_VERSION+'.min.js.br';
 const LOG_PREFIX = '[Amplitude / GTM] ';
 const WRAPPER_NAMESPACE = '_amplitude';
@@ -134,6 +134,9 @@ const generateConfiguration = (data) => {
       deviceModel: data.deviceModel,
     };
   }
+
+  // disable custom enrichment until we add a field for it in the UI
+  initOptions.customEnrichment = false;
 
   // Configuration for Session Replay Plugin
   if (!!data.sessionReplay) {

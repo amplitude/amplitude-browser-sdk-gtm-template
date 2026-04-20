@@ -9,6 +9,7 @@ exports[`generateConfiguration attribution tracking disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -26,6 +27,7 @@ exports[`generateConfiguration attribution with custom initial empty value 1`] =
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -40,6 +42,7 @@ exports[`generateConfiguration basic autocapture options 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -65,6 +68,7 @@ exports[`generateConfiguration comma-separated strings for attribution exclude r
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -105,6 +109,7 @@ exports[`generateConfiguration comma-separated strings for element interactions 
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -119,6 +124,7 @@ exports[`generateConfiguration configuration with logLevel 4 to trigger info log
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "logLevel": 4,
   "sessionReplay": false,
@@ -128,6 +134,7 @@ exports[`generateConfiguration configuration with logLevel 4 to trigger info log
 exports[`generateConfiguration default event tracking disabled 1`] = `
 {
   "autocapture": false,
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -143,6 +150,7 @@ exports[`generateConfiguration deviceId, userId, partnerId, and appVersion shoul
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "deviceId": "6108573831392975095",
   "guidesSurveys": false,
   "partnerId": "6108573831392975095",
@@ -160,6 +168,7 @@ exports[`generateConfiguration element interactions disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -174,6 +183,7 @@ exports[`generateConfiguration empty and undefined optional fields 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -188,6 +198,7 @@ exports[`generateConfiguration eu data disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -208,6 +219,7 @@ exports[`generateConfiguration exclude internal referrers exclude internal refer
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -228,6 +240,7 @@ exports[`generateConfiguration exclude internal referrers exclude internal refer
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -302,6 +315,7 @@ exports[`generateConfiguration kitchen sink example 1`] = `
   "cookieOptions": {
     "domain": "test",
   },
+  "customEnrichment": false,
   "guidesSurveys": true,
   "pageViewLegacy": true,
   "serverZone": "EU",
@@ -327,6 +341,7 @@ exports[`generateConfiguration manual configuration options 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "serverUrl": "https://api2.amplitude.com",
   "sessionReplay": false,
@@ -342,6 +357,7 @@ exports[`generateConfiguration network tracking disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -421,6 +437,7 @@ exports[`generateConfiguration network tracking with complex capture rules 1`] =
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -443,6 +460,7 @@ exports[`generateConfiguration network tracking with string ignore amplitude req
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -462,6 +480,7 @@ exports[`generateConfiguration network tracking with string networkTrackingIgnor
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -479,6 +498,7 @@ exports[`generateConfiguration page history tracking all changes 1`] = `
     },
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -494,6 +514,7 @@ exports[`generateConfiguration page url enrichment is disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -508,6 +529,7 @@ exports[`generateConfiguration page url enrichment is enabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -522,6 +544,7 @@ exports[`generateConfiguration page view tracking disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -539,6 +562,7 @@ exports[`generateConfiguration page view with legacy option disabled 1`] = `
     },
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -553,6 +577,7 @@ exports[`generateConfiguration partial user agent enrichment options 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
   "userAgentEnrichmentOptions": {
@@ -573,6 +598,7 @@ exports[`generateConfiguration session replay and guides surveys explicitly disa
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -587,6 +613,7 @@ exports[`generateConfiguration session, file download, and form interaction disa
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
@@ -601,6 +628,7 @@ exports[`generateConfiguration user agent enrichment disabled 1`] = `
     "pageViews": false,
     "sessions": false,
   },
+  "customEnrichment": false,
   "guidesSurveys": false,
   "sessionReplay": false,
 }
