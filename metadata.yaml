@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 0e23e830db9af9dee4c659381e32769d085e81d4
+    changeNotes: upgrade analytics to 2.39.0
   - sha: bfae19b7ed64e81cfef287dfe7dbd52381ed1b6e
     changeNotes: Upgrade session replay to 1.27.6
   - sha: 60536dcf6b9c168c2547ae27227cba74b368fe9e
