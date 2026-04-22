@@ -135,8 +135,12 @@ const generateConfiguration = (data) => {
     };
   }
 
-  // disable custom enrichment until we add a field for it in the UI
-  initOptions.customEnrichment = false;
+  // Configuration for Custom Enrichment Plugin
+  if (!!data.customEnrichment) {
+    initOptions.customEnrichment = true;
+  } else {
+    initOptions.customEnrichment = false;
+  }
 
   // Configuration for Session Replay Plugin
   if (!!data.sessionReplay) {
