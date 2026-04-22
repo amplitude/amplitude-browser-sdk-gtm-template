@@ -87,7 +87,7 @@ ___TEMPLATE_PARAMETERS___
     "defaultValue": "init",
     "simpleValueType": true,
     "name": "type",
-    "help": "This is the tag type selector. See \u003ca href=\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client\"\u003eGoogle Tag Manager docs\u003c/a\u003e for per-tag-type details. See also the \u003ca href=\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/\"\u003eBrowser SDK Reference\u003c/a\u003e.",
+    "help": "This is the tag type selector. See \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sources/google-tag-manager-client\"\u003eGoogle Tag Manager docs\u003c/a\u003e for per-tag-type details. See also the \u003ca href\u003d\"https://www.docs.developers.amplitude.com/data/sdks/browser-2/\"\u003eBrowser SDK Reference\u003c/a\u003e.",
     "type": "SELECT",
     "alwaysInSummary": true
   },
@@ -1365,6 +1365,13 @@ ___TEMPLATE_PARAMETERS___
         "checkboxText": "Enable Guides and Surveys Plugin",
         "simpleValueType": true,
         "defaultValue": false
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "customEnrichment",
+        "checkboxText": "Enable Custom Enrichment Plugin",
+        "simpleValueType": true,
+        "defaultValue": false
       }
     ]
   },
@@ -1525,8 +1532,12 @@ const generateConfiguration = (data) => {
     };
   }
 
-  // disable custom enrichment until we add a field for it in the UI
-  initOptions.customEnrichment = false;
+  // Configuration for Custom Enrichment Plugin
+  if (!!data.customEnrichment) {
+    initOptions.customEnrichment = true;
+  } else {
+    initOptions.customEnrichment = false;
+  }
 
   // Configuration for Session Replay Plugin
   if (!!data.sessionReplay) {

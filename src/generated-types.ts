@@ -75,5 +75,6 @@ export interface GeneratedGtmParameters {
   deviceModel?: boolean;
   sessionReplay?: boolean;
   guidesSurveys?: boolean;
+  customEnrichment?: boolean;
   instanceName?: string;
 }
