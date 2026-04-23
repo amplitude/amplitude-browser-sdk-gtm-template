@@ -330,11 +330,14 @@ const generateConfiguration = (data) => {
     initOptions.autocapture = false;
   }
 
+  const mergedOptions = mergeObject(initOptions, data.initOptionsMore);
+
   if(initOptions.logLevel == 4){
-    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by configuration: " + JSON.stringify(initOptions));
+    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance configuration from tag template: " + JSON.stringify(initOptions));
+    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by merged configuration: " + JSON.stringify(mergedOptions));
   }
 
-  return initOptions;
+  return mergedOptions;
 };
 
 const getAllUserProps = (data) => {
