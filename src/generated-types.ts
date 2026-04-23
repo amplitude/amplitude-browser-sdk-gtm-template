@@ -65,6 +65,7 @@ export interface GeneratedGtmParameters {
   euData?: boolean;
   initUserId?: string;
   initOptions?: 'manual';
+  initOptionsMore?: string;
   initManualOptions?: Array<{key: 'flushIntervalMillis' | 'flushMaxRetries' | 'flushQueueSize' | 'logLevel' | 'minIdLength' | 'serverUrl' | 'useBatch' | 'appVersion' | 'deviceId' | 'identityStorage' | 'partnerId' | 'sessionTimeout' | 'userId' | 'optOut' | 'transport'; value: string}>;
   initTrackingOptions?: Array<{key: 'ipAddress' | 'language' | 'platform'; value: string}>;
   initCookieOptions?: Array<{key: 'domain' | 'expiration' | 'sameSite' | 'secure' | 'upgrade'; value: string}>;
