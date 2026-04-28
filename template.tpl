@@ -1533,11 +1533,7 @@ const generateConfiguration = (data) => {
   }
 
   // Configuration for Custom Enrichment Plugin
-  if (!!data.customEnrichment) {
-    initOptions.customEnrichment = true;
-  } else {
-    initOptions.customEnrichment = false;
-  }
+  initOptions.customEnrichment = !!data.customEnrichment;
 
   // Configuration for Session Replay Plugin
   if (!!data.sessionReplay) {
