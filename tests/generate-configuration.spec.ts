@@ -43,6 +43,7 @@ describe('generateConfiguration', () => {
       deviceModel: true,
       sessionReplay: true,
       guidesSurveys: true,
+      customEnrichment: true,
       detAttribution: true,
       attributionExcludeReferrers: 'test',
       attributionExcludeReferrersRegex: 'test',
@@ -359,8 +360,25 @@ describe('generateConfiguration', () => {
       userAgentEnrichment: undefined,
       sessionReplay: undefined,
       guidesSurveys: undefined,
+      customEnrichment: undefined,
     };
     expect(win.__EXPORTS__.generateConfiguration(data)).toMatchSnapshot();
+  });
+
+  test('custom enrichment enabled', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      customEnrichment: true,
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data).customEnrichment).toBe(true);
+  });
+
+  test('custom enrichment disabled', () => {
+    const data: GeneratedGtmParameters = {
+      ...BASE_DATA,
+      customEnrichment: false,
+    };
+    expect(win.__EXPORTS__.generateConfiguration(data).customEnrichment).toBe(false);
   });
 
   test('network tracking with string networkTrackingIgnoreAmplitudeRequests set to "true"', () => {

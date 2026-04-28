@@ -315,7 +315,7 @@ exports[`generateConfiguration kitchen sink example 1`] = `
   "cookieOptions": {
     "domain": "test",
   },
-  "customEnrichment": false,
+  "customEnrichment": true,
   "guidesSurveys": true,
   "pageViewLegacy": true,
   "serverZone": "EU",
