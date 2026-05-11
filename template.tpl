@@ -1110,7 +1110,16 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "name": "initOptions",
         "type": "SELECT",
-        "subParams": []
+        "subParams": [
+          {
+            "type": "TEXT",
+            "name": "initOptionsMore",
+            "displayName": "New configuration options",
+            "simpleValueType": true,
+            "help": "Use the Amplitude Configuration Variable Template to create a configuration variable for new SDK options. It will be merged with the other configuration options set in this template.",
+            "valueHint": "{{new config options}}"
+          }
+        ]
       },
       {
         "enablingConditions": [
@@ -1727,11 +1736,14 @@ const generateConfiguration = (data) => {
     initOptions.autocapture = false;
   }
 
+  const mergedOptions = mergeObject(initOptions, data.initOptionsMore);
+
   if(initOptions.logLevel == 4){
-    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by configuration: " + JSON.stringify(initOptions));
+    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance configuration from tag template: " + JSON.stringify(initOptions));
+    log(LOG_PREFIX + 'INFO: ' + "Amplitude instance will be initialized by merged configuration: " + JSON.stringify(mergedOptions));
   }
 
-  return initOptions;
+  return mergedOptions;
 };
 
 const getAllUserProps = (data) => {
