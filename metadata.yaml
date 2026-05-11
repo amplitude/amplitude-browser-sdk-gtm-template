@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 16a353a4a4a91c7477de81dfff30ca830c7eedb3
+    changeNotes: update analytics-browser to 2.42.2
   - sha: 83aaf1bf9efc77a1f511342484cc395658e18d33
     changeNotes: upgrade plugin-session-replay-browser to 2.40.0
   - sha: 0e23e830db9af9dee4c659381e32769d085e81d4
