@@ -1122,6 +1122,14 @@ ___TEMPLATE_PARAMETERS___
         ]
       },
       {
+        "type": "TEXT",
+        "name": "initOptionsMore",
+        "displayName": "New configuration options",
+        "simpleValueType": true,
+        "help": "Use the Amplitude Configuration Variable Template to create a configuration variable for new SDK options. It will be merged with the other configuration options set in this template.",
+        "valueHint": "{{new config options}}"
+      },
+      {
         "enablingConditions": [
           {
             "paramName": "initOptions",
