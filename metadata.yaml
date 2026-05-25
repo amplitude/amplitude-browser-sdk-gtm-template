@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: b25a2ba726f2299ad992af57b9ed0704bd0399b9
+    changeNotes: upgrade analytics to 2.42.4 and plugin-session-replay to 1.30.5
   - sha: e985aef5dbff00c584414cdb1552ebb819dfe7ff
     changeNotes: Move init optins more out of sub params
   - sha: 16a353a4a4a91c7477de81dfff30ca830c7eedb3
