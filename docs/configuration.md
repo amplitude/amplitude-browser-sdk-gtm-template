@@ -40,9 +40,12 @@ Assume **Autocapture events is checked** in the UI (so the tag builds its own
 
 ```js
 {
-  newConfigurationOption: value1,
+  deviceId: 'my-device-id',
   autocapture: {
-    newAutocaptureOption: value2
+    attribution: {
+      trackingMethod: ['userProperty', 'eventProperty']
+    },
+    newAutocaptureOption: value
   }
 }
 ```
@@ -50,13 +53,14 @@ Assume **Autocapture events is checked** in the UI (so the tag builds its own
 ### Assigned to 🔴 Configuration (`data.initOptions`)
 
 The variable becomes the **base**. The UI's autocapture block then runs and
-**overwrites** the whole `autocapture` key — so `newAutocaptureOption` is **lost**.
-The top-level `newConfigurationOption` is untouched and survives.
+**overwrites** the whole `autocapture` key — so both `attribution.trackingMethod` and
+`newAutocaptureOption` are **lost**. The top-level `deviceId` is untouched and survives.
 
 ```js
 {
-  newConfigurationOption: value1,        // ✅ kept (UI never touches it)
-  autocapture: { /* UI autocapture */ }, // ❌ your newAutocaptureOption is overwritten
+  deviceId: 'my-device-id',              // ✅ kept (UI never touches it)
+  autocapture: { /* UI autocapture */ }, // ❌ entire object overwritten —
+                                         //    attribution + newAutocaptureOption lost
   customEnrichment: false,
   sessionReplay: false,
   guidesSurveys: false
@@ -67,8 +71,8 @@ The top-level `newConfigurationOption` is untouched and survives.
 
 ### Assigned to 🔵 New configuration options (`data.initOptionsMore`)
 
-The variable is **merged last**. `newConfigurationOption` is added, and because the merge
-is shallow, your `autocapture` **replaces** the UI's autocapture object entirely.
+The variable is **merged last**. `deviceId` is added, and because the merge is shallow,
+your `autocapture` **replaces** the UI's autocapture object entirely.
 
 ```js
 {
@@ -76,9 +80,13 @@ is shallow, your `autocapture` **replaces** the UI's autocapture object entirely
   customEnrichment: false,
   sessionReplay: false,
   guidesSurveys: false,
-  newConfigurationOption: value1,                 // ✅ added
-  autocapture: { newAutocaptureOption: value2 }   // ✅ your value wins, but it REPLACES
-                                                  //    the UI autocapture (shallow merge)
+  deviceId: 'my-device-id',              // ✅ added
+  autocapture: {                         // ✅ your value wins, but it REPLACES
+    attribution: {                       //    the UI autocapture (shallow merge)
+      trackingMethod: ['userProperty', 'eventProperty']
+    },
+    newAutocaptureOption: value
+  }
 }
 ```
 
@@ -86,8 +94,8 @@ is shallow, your `autocapture` **replaces** the UI's autocapture object entirely
 
 | Your value | 🔴 Configuration | 🔵 New configuration options |
 |---|---|---|
-| top-level `newConfigurationOption` | ✅ kept | ✅ kept |
-| nested `autocapture.newAutocaptureOption` | ❌ overwritten by UI autocapture | ✅ kept, but **replaces** the entire UI `autocapture` |
+| top-level `deviceId` | ✅ kept | ✅ kept |
+| nested `autocapture.*` (`attribution`, `newAutocaptureOption`) | ❌ overwritten by UI autocapture | ✅ kept, but **replaces** the entire UI `autocapture` |
 
 **Rule of thumb:** use 🔵 **New configuration options** when you want your value to win.
 Just remember it overwrites a whole top-level key (no deep merge), so include the full
