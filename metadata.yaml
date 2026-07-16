@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 5d7e59ee2b9db9c7298f6b9f082454c4729e32b9
+    changeNotes: upgrade analytics to 2.45.0 for default event property attribution tracking
   - sha: e99f91bd2ec67a1a06ec944e636e9713d1f5f745
     changeNotes: fix guides and surveys problem with multiple inits and missing global config
   - sha: b25a2ba726f2299ad992af57b9ed0704bd0399b9
