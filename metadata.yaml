@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 7629a05dc84d99f590d2cb9bb58496f3eeeb923a
+    changeNotes: exposure events bug fix
   - sha: 3e3330fdbcbd90b6dfb0b02d675cba833e79a9a6
     changeNotes: fix element selector remote config bug
   - sha: 5d7e59ee2b9db9c7298f6b9f082454c4729e32b9
