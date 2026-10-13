@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: 993c5c688bcbf421232c96976538a2460d8c8dfd
+    changeNotes: bump analytics-browser to 2.47.4
   - sha: 19bb7ef08c235f68c208e6a39894c36a1c14ba03
     changeNotes: Improved exposure definition 
   - sha: 7629a05dc84d99f590d2cb9bb58496f3eeeb923a
