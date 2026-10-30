@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      RELEASE_DESCRIPTION: ${{ github.event.inputs.releaseDescription }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
@@ -27,17 +28,20 @@ jobs:
         run: |
           pnpm test
 
-        # Quotes in message are not allowed
       - name: Update metadata.yaml
         id: update-metadata
         run: |
-          SHA=$(git rev-parse HEAD)
-          MESSAGE=$(echo "${{ github.event.inputs.releaseDescription }}" | tr -d ':')
-          NEW_VERSION="  - sha: $SHA\n    changeNotes: $MESSAGE"
-          echo "New version info to be added: \n"
-          echo "$NEW_VERSION"
-          sed -i "s|versions:|versions:\n$NEW_VERSION|" metadata.yaml
-          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          node <<'JS'
+          const fs = require('node:fs');
+          const { execFileSync } = require('node:child_process');
+
+          const sha = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+          const message = JSON.stringify(process.env.RELEASE_DESCRIPTION);
+          const newVersion = `  - sha: ${sha}\n    changeNotes: ${message}`;
+          const metadata = fs.readFileSync('metadata.yaml', 'utf8');
+          fs.writeFileSync('metadata.yaml', metadata.replace(/^versions:\r?$/m, () => `versions:\n${newVersion}`));
+          console.log(`New version info to be added:\n${newVersion}`);
+          JS
 
       - name: Lint metadata.yaml
         id: lint-metadata
@@ -64,7 +68,7 @@ jobs:
           # Create the release using GitHub CLI
           gh release create "$GIT_TAG_NAME" \
             --title "$TITLE" \
-            --notes "${{ github.event.inputs.releaseDescription }}" \
+            --notes "$RELEASE_DESCRIPTION" \
             $IS_DRAFT \
             --repo ${{ github.repository }} \
             "$TEMPLATE_NAME"
