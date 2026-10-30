@@ -61,7 +61,7 @@ jobs:
           
           # Determine if this should be a draft
           IS_DRAFT=""
-          if [ "${{ github.ref }}" != "refs/heads/main" ]; then
+          if [ "$GITHUB_REF" != "refs/heads/main" ]; then
             IS_DRAFT="--draft"
           fi
           
@@ -70,7 +70,7 @@ jobs:
             --title "$TITLE" \
             --notes "$RELEASE_DESCRIPTION" \
             $IS_DRAFT \
-            --repo ${{ github.repository }} \
+            --repo "$GITHUB_REPOSITORY" \
             "$TEMPLATE_NAME"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
