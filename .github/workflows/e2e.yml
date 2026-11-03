@@ -12,7 +12,7 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.55.1
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
 
     steps:
       - name: Check out git repository
@@ -65,4 +65,4 @@ jobs:
         with:
           name: test-results
           path: test-results/
-          retention-days: 30 
+          retention-days: 30
