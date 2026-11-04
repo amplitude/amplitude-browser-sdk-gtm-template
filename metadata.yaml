@@ -1,6 +1,8 @@
 homepage: "https://www.amplitude.com/"
 documentation: "https://www.docs.developers.amplitude.com/data/sdks/marketing-analytics-browser/"
 versions:
+  - sha: ea9c7f033b04ac419fd1cf6a69b2d5035d20d390
+    changeNotes: bump analytics-browser to 2.49.1 with rrweb 2.1.5
   - sha: 993c5c688bcbf421232c96976538a2460d8c8dfd
     changeNotes: bump analytics-browser to 2.47.4
   - sha: 19bb7ef08c235f68c208e6a39894c36a1c14ba03
