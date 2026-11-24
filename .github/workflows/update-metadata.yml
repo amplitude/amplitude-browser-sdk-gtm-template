@@ -9,6 +9,9 @@ on:
 jobs:
   update-metadata:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_DESCRIPTION: ${{ github.event.inputs.releaseDescription }}
@@ -75,10 +78,27 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit and push if changed
+      - name: Open pull request if metadata changed
         run: |
+          SHA=$(git rev-parse --short=5 HEAD)
+          BRANCH="update-metadata-$SHA"
+
           git config --local user.email amplitude-sdk-bot@users.noreply.github.com
           git config --local user.name amplitude-sdk-bot
+          git checkout -b "$BRANCH"
           git add metadata.yaml
-          git commit -m "Update metadata.yaml" || exit 0  # Exit 0 if no changes
-          git push
+          git diff --cached --quiet && exit 0
+          git commit -m "Update metadata.yaml"
+          git push -u origin HEAD
+
+          {
+            echo "Adds the latest template version to \`metadata.yaml\`."
+            echo
+            echo "$RELEASE_DESCRIPTION"
+          } > /tmp/pr-body.md
+
+          gh pr create \
+            --title "Update metadata.yaml ($SHA)" \
+            --body-file /tmp/pr-body.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
